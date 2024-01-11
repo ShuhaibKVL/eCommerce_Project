@@ -1,0 +1,45 @@
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    z-index: 1;
+}
+.Product_Image_Admin{
+    border-radius: 50%;
+}
+.block_button{
+    font-size: 13px;
+    width: 70px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(255, 0, 0);
+    border: 1px solid white;
+    border-radius: 10px;
+    animation-duration: 2s;
+    transition: 2s;
+}
+.block_button :hover{
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 0, 0);
+    transform: rotate3d(5);
+
+}
+
+.Unblock_button{
+    font-size: 13px;
+    font-weight: bolder;
+    width: 70px;
+    height: 30px;
+    background-blend-mode:hue;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(0, 255, 55);
+    border: 1px solid  white;
+    border-radius: 10px;
+}
