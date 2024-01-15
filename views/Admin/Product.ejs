@@ -246,14 +246,12 @@
                           <td>
                             <% for (let j = 0; j<Product[i].Image.length ; j++){ %>
                               
-                            <img class="Product_Image_Admin" src="/assets/uploads/<%= Product[i].Image[0] %>" alt="Loading" width="30" height="30" >
+                            <img class="Product_Image_Admin" src="/assets/uploads/<%= Product[i].Image[j] %>" alt="Loading" width="30" height="30" >
                             <% } %>
                           
                           </td>
                           <td class="tm-product-name"><%= Product[i].Name %></td>
                           <td><%= Product[i].Price %></td>
-                        
-                          
                           
                           <td><%= Product[i].Stock %></td>
                           <td>

@@ -191,6 +191,9 @@
 	
     <div class="content-wrapper">
     <div class="container-fluid">
+    
+
+    
 
     <!--End Row-->
 	
@@ -296,7 +299,9 @@
                   </div>
                   <div class="custom-file mt-3 mb-3">
                     <!-- <input id="fileInput" type="file" name="image" multiple="" style="display:none;" /> -->
-                    <input type="file" name="image" multiple="" type="button"  class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE" />
+                    <input type="file" id="imageInput" name="image" multiple="" type="button" style="display: block; max-width: 100%;"  class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE" />
+
+                    <input type="hidden" id="croppedImageData" name="croppedImageData">
                   </div>
                   <div class="form-group mb-3">
                     <label
@@ -312,7 +317,7 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
+                  <button type="submit" id="cropImageBtn" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
                 </div>
               
                 <% if(typeof data !== 'undefined') { %>
@@ -328,14 +333,12 @@
       </div>
 
 
-    
-
 
 	<!--End Row-->
 
       <!--End Dashboard Content-->
-	  
-	  <!--start overlay-->
+
+    <!--start overlay-->
 		<div class="overlay toggle-menu"></div>
 		<!--end overlay-->
 		
@@ -345,7 +348,7 @@
 
 
     </div><!--End content-wrapper-->
-   <!--Start Back To Top Button-->
+    <!--Start Back To Top Button-->
     <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
     <!--End Back To Top Button-->
 	
@@ -360,7 +363,7 @@
 	<!--End footer-->
 	
   <!--start color switcher-->
-   <div class="right-sidebar">
+  <div class="right-sidebar">
     <div class="switcher-icon">
       <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
     </div>
@@ -393,10 +396,10 @@
         <li id="theme15"></li>
       </ul>
       
-     </div>
-   </div>
+    </div>
+  </div>
   <!--end color switcher-->
-   
+
   </div><!--End wrapper-->
 
   <!-- Bootstrap core JavaScript-->
@@ -404,7 +407,7 @@
   <script src="/Product/js/popper.min.js"></script>
   <script src="/Product/js/bootstrap.min.js"></script>
 	
- <!-- simplebar js -->
+  <!-- simplebar js -->
   <script src="/Product/plugins/simplebar/js/simplebar.js"></script>
   <!-- sidebar-menu js -->
   <script src="/Product/js/sidebar-menu.js"></script>
@@ -415,7 +418,7 @@
   <!-- Chart js -->
   
   <script src="/Product/plugins/Chart.js/Chart.min.js"></script>
- 
+
   <!-- Index js -->
   <script src="/Product/js/index.js"></script>
 
@@ -423,8 +426,8 @@
 
   <script src="/Productjs/jquery-3.3.1.min.js"></script>
 
-   <!-- https://jquery.com/download/ -->
-   <script src="/Product/jquery-ui-datepicker/jquery-ui.min.js"></script>
+  <!-- https://jquery.com/download/ -->
+  <script src="/Product/jquery-ui-datepicker/jquery-ui.min.js"></script>
 
     <!-- https://jquery.com/download/ -->
     <script src="/Product/js/bootstrap.min.js"></script>

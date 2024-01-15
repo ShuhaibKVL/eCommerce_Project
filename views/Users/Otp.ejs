@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Custom CSS  -->
+    <link rel="stylesheet" href="/css/added.css">
 </head>
 
 <body>
@@ -144,11 +146,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_text text-center">
+                        <div  class="login_quote_bg">
                         <div class="login_part_text_iner">
                             <h2>All Ready have a Account?</h2>
                             <p>There are advances being made in science and technology
                                 everyday, and a good example of this is the</p>
                             <a href="login" class="btn_3">Login </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -165,21 +169,32 @@
                             </div>
                             
                             <div class="otpDiv">
-                                <h4>We send a OTP email to our respective email.Please check the email.</h4>
+                                <h4>We send a OTP email to our respective email.<br> check the email.</h4>
                                 <div class="otp-container">
-                                <form action="/Otp" method="post">
-                                    <% if(typeof message !== 'undefined'){ %>
-                                        <p><%= message %></p>
-                                    <% } %>
-                                    <input type="hidden" name="name" value="<%= name %>">
-                                    <input type="hidden" name="email" value="<%= email %> ">
-                                    <input type="hidden" name="phoneNumber" value="<%= phoneNumber %>">
-                                    <input type="hidden" name="password" value="<%= hashedPassword %>">
-                                    <input id="otp-input" type="number" name="otp" maxlength="6" placeholder="Enter OTP">
-                                    <button type="submit" value="submit" class="btn_3" >
-                                        Submit
-                                    </button>
-                                </form>
+                                    <form action="/Otp" method="post">
+                                        <% if(typeof Otpmessage !== 'undefined'){ %>
+                                            <p id="error-message" style="color: green;"><%= Otpmessage %></p>
+                                        <% } %>
+                                    
+                                        <div id="timer" style="color: rgb(0, 159, 13);">Time remaining: <span style="color: rgb(215, 3, 3);" id="countdown">240</span></div>
+
+                                        <input type="hidden" name="name" value="<%= name %>">
+                                        <input type="hidden" name="email" value="<%= email %> ">
+                                        <input type="hidden" name="phoneNumber" value="<%= phoneNumber %>">
+                                        <input type="hidden" name="password" value="<%= hashedPassword %>">
+                                        </td>
+                                        <div style="text-align: center;" class="col-md-12 form-group p_star">
+                                        <input id="otp-input" type="number" name="otp" maxlength="6" placeholder="Enter OTP">
+                                        </div>
+                                        <div class="col-md-12 form-group p_star">
+                                        <button type="submit" value="submit" class="btn_3" >
+                                            Submit
+                                            </button>
+                                        </div>
+                                        <div style="text-align: center;" class="col-md-12 form-group p_star">
+                                        <a style="text-decoration: none;" href="/Signup">Resend OTP ?</a>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             
@@ -195,7 +210,52 @@
         setTimeout(function(){
         document.getElementById("error-message").style.display = "none";
         }, 2000);
+    
     </script>
+
+<!-- <script>
+    var seconds = 60; // Set the initial time in seconds
+    
+    function countdown() {
+        var countdownElement = document.getElementById("countdown");
+    
+        if (seconds > 0) {
+            seconds--;
+            countdownElement.textContent = seconds;
+            setTimeout(countdown, 1000); // Update every second
+        } else {
+            countdownElement.textContent = "Time's up!";
+            // Handle OTP timeout action here
+        }
+    }
+
+    countdown(); // Start the countdown when the page loads
+</script> -->
+
+
+
+    <script>
+        var seconds = 240; // Set the initial time in seconds (4 minutes)
+
+        function countdown() {
+            var countdownElement = document.getElementById("countdown");
+
+            if (seconds > 0) {
+                var minutes = Math.floor(seconds / 60);
+                var remainingSeconds = seconds % 60;
+
+                countdownElement.textContent = minutes + "m " + remainingSeconds + "s";
+                seconds--;
+                setTimeout(countdown, 1000); // Update every second
+            } else {
+                countdownElement.textContent = "Time's up!";
+                // Handle OTP timeout action here
+            }
+        }
+
+        countdown(); // Start the countdown when the page loads
+    </script>
+
 
     <!--================login_part end =================-->
 

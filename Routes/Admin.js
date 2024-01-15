@@ -50,4 +50,8 @@ AdmiNRoute.get('/DeletCategory',Admincontroll.DeletCategory)
 
 AdmiNRoute.get('/UnlistCategory',Admincontroll.UnlistCategory)
 
+AdmiNRoute.get('/Cropper',(req,res) =>{
+    res.render('Cropper')
+})
+
 module.exports = AdmiNRoute;

@@ -7,11 +7,21 @@ const bcrypt =  require('bcrypt')
 
 
 const login =  (req,res) => {
-    res.render('login')
+    try {
+        res.render('login')
+    } catch (error) {
+        console.log("Error Occuerde On Login USER CONTROLL >> ",error);
+    }
+    
 }
 
 const Signup = (req,res) => {
-    res.render('Signup')
+    try {
+        res.render('Signup')
+    } catch (error) {
+        console.log("Error On SIGNUP User Controller >> ",error)
+    }
+    
 }
 
 const LoadOtp = (req,res) => {
@@ -41,22 +51,6 @@ const Home = async(req,res) =>{
     
 }
 
-// const LoadAhome = async(req,res) => {
-
-//     try {
-//         let Profile ;
-//         if(req.session.user_id){
-//             Profile = await User.findById({_id:req.session.user_id})
-//         }
-//         console.log("HERE IN HERE")
-//         // res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-//         res.render('home',{Profile:Profile})
-        
-//     } catch (error) {
-//         console.log(error.message)
-//     }
-    
-// }
 
 const SecurePassword =  async(password) =>{
     try {
@@ -72,24 +66,15 @@ const isLogin = async(req,res) =>{
     console.log("INvoked thr isLogin UserController")
     try {
         
-    const name = req.body.name
+    const Email = req.body.email;
     const password = req.body.password;
+    console.log(Email);
+    const isUserLogin = await User.findOne({email:Email})
+    console.log(isUserLogin)
     
-    const isUserLogin = await User.findOne({name:name})
-    
-    const isBlocked = isUserLogin.isBlocked
-    
-    if(isBlocked == true){
-        res.render('login',{message:"BLOCKED  : Admin Blocked You"})
-    }else{
-    
-        console.log(isUserLogin)
     if(isUserLogin){
-        // const HashBeforeCompare = await SecurePassword(req.body.password)
-        // console.log(HashBeforeCompare)
-        // const userPassword = await User.findOne({password:HashBeforeCompare})
         
-        const userData = await User.findOne({name:req.body.name})
+        const userData = await User.findOne({email:Email})
         console.log("userData : >> ",userData)
 
         const ExsistPassword = userData.password
@@ -97,17 +82,23 @@ const isLogin = async(req,res) =>{
         const passwordMatch = await bcrypt.compare(password,ExsistPassword)
         
         if(passwordMatch){
-                
+
+            const isBlocked = isUserLogin.isBlocked
+        
+            if(isBlocked == true){
+                res.render('login',{message:"BLOCKED  : Admin Blocked You"})
+            }else{
                 req.session.user_id = isUserLogin._id
                 res.redirect('/')
+            }
         }else{
             res.render('login',{message:"Invalid Password"})
         }
         
     }else{
-        res.render('login',{message:"Invalid User"})
+        res.render('login',{message:"Invalid Email"})
     }
-    }
+    
     } catch (error) {
         console.log("Error occurerd isLogin verification  :  ",error.message)
     }
@@ -139,7 +130,7 @@ const OtpCreation =async (req,res) =>{
                         try{
                             
                              // Otp creation Section
-
+                            
                             let otp = otpGenerator.generate(6, {
                                 upperCaseAlphabets: false,
                                 lowerCaseAlphabets: false,
@@ -168,7 +159,7 @@ const OtpCreation =async (req,res) =>{
 
                             const hashedPassword = await SecurePassword(password)
 
-                            res.render('Otp',{message:"otp Created susscesFully",name:name,email:email, phoneNumber:phoneNumber,hashedPassword:hashedPassword})
+                            res.render('Otp',{ Otpmessage:"otp Created susscesFully",name:name,email:email, phoneNumber:phoneNumber,hashedPassword:hashedPassword})
                             
                             
                         }catch(error){
@@ -225,6 +216,18 @@ const logout = async(req,res) => {
     }
 }
 
+const ProductDeatils = async(req,res) => {
+    try {
+        const Product_ID = req.query.id
+        
+        const FindProduct = await ProductModel.findById(Product_ID)
+        console.log(FindProduct);
+        res.render('ProductDetails',{Product:FindProduct})
+    } catch (error) {
+        console.log("Error on ProductDetails Controller",error.message)
+    }
+}
+
 
 
 module.exports = {
@@ -236,5 +239,6 @@ module.exports = {
     OtpCreation,
     LoadOtp,
     OTpVerification,
-    logout
+    logout,
+    ProductDeatils
 }

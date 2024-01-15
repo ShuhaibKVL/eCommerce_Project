@@ -5,6 +5,7 @@ const { v4 :uuidv4} = require('uuid')
 const Usercontrol = require("../control/usercontrol")
 const UserAuth = require('../Midlleware/UserAuth')
 // const nocache = require('nocache')
+// UserRoute.use(nocache())
 
 UserRoute.use(session({secret:uuidv4(),resave:false,saveUninitialized:false}))
 
@@ -27,6 +28,8 @@ UserRoute.get('/Otp',Usercontrol.LoadOtp)
 UserRoute.post('/Otp',Usercontrol.OTpVerification)
 
 UserRoute.get('/logout',Usercontrol.logout)
+
+UserRoute.get('/ProductDetails',Usercontrol.ProductDeatils)
 
 
 

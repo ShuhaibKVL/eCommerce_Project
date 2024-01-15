@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+        <!-- Using Cropper js -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../assets/cropperjs/cropper.css">
+    <script src="../../assets/cropperjs/cropper.js"></script>
+
+<style>
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 100vh;
+    }
+
+    #cropper-container {
+        margin-left: 100px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    #image{
+        width: 300px;
+        height: 400px;
+        margin: auto;
+        vertical-align:auto
+    }
+
+    #app {
+    text-align: center;
+    max-width: 800px;
+    }
+
+    #custom-toolbar {
+        margin-left: 100px;
+        width: 200px;
+        height: auto;
+       
+    }
+
+    #custom-toolbar button {
+    width: 200px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: 5px;
+    }
+
+    #custom-toolbar button:hover {
+        background-color: #2980b9;
+    }
+    #Preview{
+        border: 1px solid rgb(45, 45, 45);
+        width: 200px;
+        height: 184px;
+        margin-top: 20px;
+        margin: auto;
+        vertical-align:auto
+    }
+
+</style>
+
+</head>
+<body>
+    
+    <div class="app">
+        <div id="cropper-container">
+            <img id="image" src="/images/unsplash__y6hMz1pJC0.png" alt="Your Image" />
+        </div>
+    </div>
+    
+    
+    <div id="custom-toolbar">
+        <button id="rotate-left">Rotate Left</button>
+        <button id="rotate-right">Rotate Right</button>
+        <button id="flip-horizontal">Flip Horizontal</button>
+        <button id="flip-vertical">Flip Vertical</button>
+        <button id="zoom-in">Zoom In</button>
+        <button id="zoom-out">Zoom Out</button>
+        <button id="reset">Reset</button>
+        <button id="btn-crop">Crop </button>
+    </div>
+
+    <div>
+        <h2>Preview</h2>
+    <div id="Preview">
+        <img src="" id="output" alt="">
+    </div>
+    </div>
+
+    <script>
+        
+        const image = document.getElementById('image');
+        const cropper = new Cropper(image, {
+            aspectRatio: 0.8214285714285,
+            responsive : true ,
+            viewMode : 2 ,
+            dragMode : 'move',
+            autoCropArea : 0.8
+            
+        })
+
+        document.querySelector('#btn-crop').addEventListener('click', function() {
+            console.log('Hey');
+            var croppedImage = cropper.getCroppedCanvas().toDataURL("image/png")
+            document.getElementById('output').src = croppedImage;
+            document.querySelector('#Preview').style.display = 'flex'
+        })
+
+        // Add event listeners for custom toolbar buttons
+    document.getElementById('rotate-left').addEventListener('click', function () {
+      cropper.rotate(-90);
+    });
+
+    document.getElementById('rotate-right').addEventListener('click', function () {
+      cropper.rotate(90);
+    });
+
+    document.getElementById('flip-horizontal').addEventListener('click', function () {
+      cropper.scaleX(-cropper.getData().scaleX);
+    });
+
+    document.getElementById('flip-vertical').addEventListener('click', function () {
+      cropper.scaleY(-cropper.getData().scaleY);
+    });
+
+    document.getElementById('zoom-in').addEventListener('click', function () {
+      cropper.zoom(0.1);
+    });
+
+    document.getElementById('zoom-out').addEventListener('click', function () {
+      cropper.zoom(-0.1);
+    });
+
+    document.getElementById('reset').addEventListener('click', function () {
+      cropper.reset();
+    });
+    </script>
+    
+</body>
+</html>

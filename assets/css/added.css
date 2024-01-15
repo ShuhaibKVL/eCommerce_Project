@@ -1,9 +1,23 @@
 /* Added  styles */
-/* .feature_btn_img{
+/* .feature_btn_img{4
     width: 25px;
     height: 25px;
     margin-top: -3px;
 } */
+.login_quote_bg{
+    background-color: #0000003c;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 30px 30px 30px 30px ;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.159);
+}
+.zoom_Product{
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+.zoom_Product:hover{
+    transform: scale(1.2);
+}
 .feature_btn{
     text-decoration: none;
     color: #2c0000;
@@ -51,11 +65,13 @@
     padding: 15px;
     text-align: center;
     width: 200px;
+    /* height: 400px; */
 }
 
 .product-image {
+    margin: auto;
     max-width: 100%;
-    height: auto;
+    /* height: 200px; */
 }
 
 .sign{
@@ -64,6 +80,7 @@
     
 }
 .otpDiv{
+    background-color: #e74c3c;
     border-radius: 33px;
     background: #FFF;
     width: 626px;

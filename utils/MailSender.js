@@ -13,7 +13,8 @@ const mailSender = async (email, title , body) => {
             }
         })
 
-            // Send email to USers
+            // Configure email content
+            
         let info = await transporter.sendMail({
             from:"www.mshuhabkvl.me - Muhammed Shuhaib",
             to:email,

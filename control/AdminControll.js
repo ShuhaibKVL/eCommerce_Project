@@ -114,6 +114,9 @@ const Add_Product = async (req,res,next) => {
         
         console.log(req.body.name)
         console.log(req.file)
+
+        const croppedImageData = req.body.croppedImageData;
+        
         
         const newProduct = new ProductSchema({
             Name : req.body.name,
