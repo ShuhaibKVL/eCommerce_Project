@@ -73,11 +73,26 @@
         margin: auto;
         vertical-align:auto
     }
+    #main{
+        
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 100vh;
+    }
+    .hiding_div{
+        display: none;
+    }
 
 </style>
 
 </head>
 <body>
+<div class="hiding_div">
+<div id="main">
     
     <div class="app">
         <div id="cropper-container">
@@ -103,7 +118,8 @@
         <img src="" id="output" alt="">
     </div>
     </div>
-
+</div>
+</div>
     <script>
         
         const image = document.getElementById('image');

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="icon" href="img/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- nice select CSS -->
+    <link rel="stylesheet" href="css/nice-select.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/price_rangs.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>User Profile Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+        }
+        
+        #sidebar {
+            width: 250px;
+            background: #ff0163;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            color: white;
+        }
+
+        #content {
+            
+            padding: 20px;
+            width: 100%;
+            /* border: 1px solid black; */
+            display: flex;
+            justify-content: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #555;
+            cursor: pointer;
+        }
+    
+        li:hover {
+            background: #ffffff;
+            color: #333;
+            border-radius: 30px;
+            box-shadow: 5px 5px 50px rgb(155, 4, 4);
+            box-shadow:inset 3px 3px 10px rgba(66, 66, 66, 0.512);
+        }
+    
+        h2 {
+            color: #333;
+        }
+        .navigation_buttons{
+            text-decoration: none;
+            color: white;
+            font-weight: bolder;
+        }
+        .profileImg{
+            width: 100px; 
+            height: 100px;
+            border-radius: 50%;
+            background-color: #3333337a;
+            margin-bottom: 15px;
+        }
+        .sub{
+            
+            width: fit-content;
+        }
+        .Order{
+            width: 200px;
+            height: 100px;
+            border-radius: 30px;
+            background-color: rgb(135, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .Order.h2{
+            color: white;
+            font-weight: bolder;
+        }
+        .secound_content{
+            /* border: 1px solid black; */
+            display: flex;
+            justify-content:space-evenly;
+            height: fit-content;
+        }
+        .main{
+            display: flex;
+        }
+        .content_main{
+            margin-left: 250px;
+            /* background-color: #ff0163; */
+            width: 90%;
+            height: fit-content;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div id="sidebar">
+        <ul>
+            <a href="/Address" class="navigation_buttons"><li>Address</li></a>
+            <a href="" class="navigation_buttons"><li>Cart</li></a>
+            <a href="" class="navigation_buttons"><li>Orders</li></a>
+            <a href="" class="navigation_buttons"><li>Forgot Password</li></a>
+            
+
+        </ul>
+    </div>
+
+    <div class="content_main">
+        
+          <!--================Cart Area =================-->
+
+<% if (user && user.cart && user.cart.length > 0) { %>
+  <section class="cart_area padding_top">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                <% user.cart.forEach(item => { %>
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="/assets/uploads/<%= item.product.Image[0] %>" alt=""   width="60" height="80" />
+                    </div>
+                    <div class="media-body">
+                      <p><%= item.product.Name %></p>
+                      <p><%= item.product.Description %></p>
+                      <p>Category : <%= item.product.Category %></p>
+                      <p>In Stock : <%= item.product.Stock %></p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>$<%= item.product.Price %></h5>
+                </td>
+                <td>
+                  <div class="product_count">
+                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
+                    <input class="input-number" type="text" value="1" min="0" max="10">
+                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
+                  </div>
+                </td>
+                <td>
+                  <h5>$<%= item.product.Price * item.quantity %></h5>
+                </td>
+                <td>
+                    <form action="remove-from-cart" method="post">
+                        <input type="hidden" name="productId" value="<%= item.product._id %>">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+              </tr>
+              
+
+              <!-- <tr class="shipping_area">
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Shipping</h5>
+                </td>
+                <td>
+                  <div class="shipping_box">
+                    <ul class="list">
+                      <li>
+                        <a href="#">Flat Rate: $5.00</a>
+                      </li>
+                      <li>
+                        <a href="#">Free Shipping</a>
+                      </li>
+                      <li>
+                        <a href="#">Flat Rate: $10.00</a>
+                      </li>
+                      <li class="active">
+                        <a href="#">Local Delivery: $2.00</a>
+                      </li>
+                    </ul>
+                    <h6>
+                      Calculate Shipping
+                      <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </h6>
+                    <select class="shipping_select">
+                      <option value="1">Bangladesh</option>
+                      <option value="2">India</option>
+                      <option value="4">Pakistan</option>
+                    </select>
+                    <select class="shipping_select section_bg">
+                      <option value="1">Select a State</option>
+                      <option value="2">Select a State</option>
+                      <option value="4">Select a State</option>
+                    </select>
+                    <input type="text" placeholder="Postcode/Zipcode" />
+                    <a class="btn_1" href="#">Update Details</a>
+                  </div>
+                </td>
+              </tr> -->
+
+              <% }); %>
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="/">Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <% } else { %>
+    <p>Your cart is empty.</p>
+  <% } %>
+
+
+        
+    </div>
+</div>
+</body>
+</html>

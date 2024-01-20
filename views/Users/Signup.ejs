@@ -166,21 +166,21 @@
                                 <%  } %>
                             </div>
                             <!-- novalidate="novalidate"  -->
-                            <form   class="row contact_form" action="#" id="signupForm" method="post" >
+                            <form   class="row contact_form" action="Signup" id="signupForm" method="post" >
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" pattern="^[^\s]*$" >
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" pattern="^[^\s]*$" required>
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" pattern="^[^\s]*$" >
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" pattern="^[^\s]*$" required>
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="number" class="form-control" id="phoneNumber" name="phoneNumber"placeholder="Phone Number" pattern="^[^\s]*$" >
+                                    <input type="number" class="form-control" id="phoneNumber" name="phoneNumber"placeholder="Phone Number" pattern="^[^\s]*$" required>
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""  placeholder="Password" pattern="^[^\s]*$" >
+                                    <input type="password" class="form-control" id="password" name="password" value=""  placeholder="Password" pattern="^[^\s]*$" required>
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="Confirmpassword" name="ConfirmPassword" placeholder="Confirm Password" pattern="^[^\s]*$" >
+                                    <input type="password" class="form-control" id="Confirmpassword" name="ConfirmPassword" placeholder="Confirm Password" pattern="^[^\s]*$" required>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <!-- <div class="creat_account d-flex align-items-center">
@@ -285,9 +285,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="copyright_text">
-                            <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -345,7 +343,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
               //   << name validation  >>
                 if(/^[a-zA-Z][a-zA-Z0-9]*$/.test(name)){
-                document.getElementById('error-message').innerHTML ="Please Enter a Valid Gmail Address"
+                document.getElementById('error-message').innerHTML ="Please Enter a Valid Name"
                 return false
                 }
             

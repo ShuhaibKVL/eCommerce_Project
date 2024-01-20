@@ -72,7 +72,9 @@ const blockUser = async(req, res) => {
             console.log('update:',update_isBlock);
             
             res.redirect('UserDetails')
+            
         }
+        // res.json({ isBlocked: updateIsBlocked.isBlocked });
 
     } catch (error) {
         console.log("Error Occuered on blockUser Admin Route",error)
@@ -110,26 +112,31 @@ const Load_Add_Product = async(req,res) =>{
 const Add_Product = async (req,res,next) => {
     
     try {
-        console.log("hey its invoking ")
+        const Name = req.body.name
+        const Description = req.body.description
+        if(Name.length > 14 ){
+            res.render('Product',{message:"Name should not excseed more than 14 words"})
+        }else if(Description.length > 14){
+            res.render('Product',{message:"Descriptin should not excseed more than 14 words"})
+        }else{
+            const croppedImageData = req.body.croppedImageData
         
-        console.log(req.body.name)
-        console.log(req.file)
+            const newProduct = new ProductSchema({
+                Name : req.body.name,
+                Price : req.body.price,
+                Category : req.body.category,
+                Size : req.body.size,
+                Stock : req.body.stock,
+                Description :req.body.description,
+                    Image : req.files.map((file)=>file.filename)
+                // Image : croppedImageData.map((file)=>file.filename)
+            })
 
-        const croppedImageData = req.body.croppedImageData;
+        // newProduct.Image = JSON.parse(croppedImageData)
+            await newProduct.save()
         
-        
-        const newProduct = new ProductSchema({
-            Name : req.body.name,
-            Price : req.body.price,
-            Category : req.body.category,
-            Size : req.body.size,
-            Stock : req.body.stock,
-            Description :req.body.description,
-            Image : req.files.map((file)=>file.filename)
-        })
-        await newProduct.save()
-        
-        res.redirect('Product')
+            res.redirect('Product')
+        }
 
     } catch (error) {
         console.log("Error Occuerd  in Addproduct",error)
@@ -206,14 +213,19 @@ const LoadCategory = async(req,res) => {
 
 const CreateCategory = async(req,res) => {
     try {
-        console.log(req.body.name)
-        const NewCategory = new Category({
-            Name : req.body.name,
-            Description : req.body.description
-        })
-        const NewCategoryCreate = await NewCategory.save()
-        res.redirect('Product')
-
+        InputCategory = req.body.name
+        isExict = await Category.findOne({Name:InputCategory})
+        if(isExict){
+            res.render('Category',{message:"Category All ready Exict"})
+        }else{
+            const NewCategory = new Category({
+                Name : req.body.name,
+                Description : req.body.description
+            })
+            const NewCategoryCreate = await NewCategory.save()
+            res.redirect('Product')
+        }
+        
     } catch (error) {
         console.log("Error On CreaateCategory  : >>",error)
     }

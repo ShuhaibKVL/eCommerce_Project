@@ -13,7 +13,7 @@
   <!--favicon-->
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
   <!-- Vector CSS -->
-  <link href="/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
+  <!-- <link href="../../assets/Admin/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/> -->
   <!-- simplebar CSS-->
   <link href="/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
   <!-- Bootstrap core CSS-->
@@ -44,6 +44,13 @@
 <link rel="stylesheet" href="/Product/css/bootstrap.min.css" />
 <!-- https://getbootstrap.com/ -->
 <link rel="stylesheet" href="/Product/css/templatemo-style.css">
+
+    <!-- Using Cropper js -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../assets/cropperjs/cropper.css">
+    <script src="../../assets/cropperjs/cropper.js"></script>
+
   
 </head>
 
@@ -83,31 +90,6 @@
       <!-- <li>
         <a href="tables.html">
           <i class="zmdi zmdi-grid"></i> <span>Tables</span>
-        </a>
-      </li> -->
-
-      <!-- <li>
-        <a href="calendar.html">
-          <i class="zmdi zmdi-calendar-check"></i> <span>Calendar</span>
-          <small class="badge float-right badge-light">New</small>
-        </a>
-      </li> -->
-
-      <!-- <li>
-        <a href="profile.html">
-          <i class="zmdi zmdi-face"></i> <span>Profile</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="login.html" target="_blank">
-          <i class="zmdi zmdi-lock"></i> <span>Login</span>
-        </a>
-      </li>
-
-       <li>
-        <a href="register.html" target="_blank">
-          <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
         </a>
       </li> -->
 
@@ -198,7 +180,7 @@
     <!--End Row-->
 	
 
-    <div class="container tm-mt-big tm-mb-big">
+    <div style="margin-top: 250px !important;" class="container tm-mt-big tm-mb-big">
         <div class="row">
           <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
             <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
@@ -209,6 +191,7 @@
               </div>
               <div class="row tm-edit-product-row">
                 <div class="col-xl-6 col-lg-6 col-md-12">
+
                   <form action="Add_Product" class="tm-edit-product-form" method="post" enctype="multipart/form-data">
                     <div class="form-group mb-3">
                       <label
@@ -299,10 +282,33 @@
                   </div>
                   <div class="custom-file mt-3 mb-3">
                     <!-- <input id="fileInput" type="file" name="image" multiple="" style="display:none;" /> -->
-                    <input type="file" id="imageInput" name="image" multiple="" type="button" style="display: block; max-width: 100%;"  class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE" />
+
+                    <!-- <input type="file" id="imageInput" name="image" multiple="" style="display: none;" />
+                    <button type="button" class="btn btn-primary btn-block mx-auto" onclick="handleImageUpload()">UPLOAD PRODUCT IMAGE</button> -->
+
+                    <input type="file" id="imageInput" name="image" multiple="" type="button" style="display: block; max-width: 100%;" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE" />
 
                     <input type="hidden" id="croppedImageData" name="croppedImageData">
+
+                    <!-- <input type="file" id="imageInput" name="image" style="display: none;" /> -->
+                                                                                      <!-- handleImageUpload() -->
+                    <!-- <button type="button" class="btn btn-primary btn-block mx-auto" onclick="">UPLOAD PRODUCT IMAGE</button> -->
+                                                                                      <!-- hideCropper() -->
+                    <!-- <button type="button" class="btn btn-primary btn-block mx-auto" onclick="">CROP IMAGE</button> -->
+                    
+                    
                   </div>
+                  <div style=" width: fit-content; height: 20px;">
+                    <% if(typeof message !== 'undefined') { %>
+                        <p id="error-message" style="color: red;"><%= message %></p>
+                    <% } %>
+                </div>
+                <script>
+                    document.getElementById("error-message").style.display = "block";
+                        setTimeout(function(){
+                        document.getElementById("error-message").style.display = "none";
+                        }, 2000);
+                </script>
                   <div class="form-group mb-3">
                     <label
                       for="description"
@@ -316,8 +322,43 @@
                     ></textarea>
                   </div>
                 </div>
+
+                
+                <div id="hiding_div">
+                  <div id="main">
+                  
+                      <div class="app">
+                          <div id="cropper-container">
+                            <% if(typeof croppedImageData !== "Undefined" ){ %>
+                              <img id="image" src="/assets/uploads/croppedImageData" alt="croppedImageData" />
+                            <% } %>
+                          </div>
+                      </div>
+                      
+                      
+                      <div id="custom-toolbar">
+                          <button id="rotate-left">Rotate Left</button>
+                          <button id="rotate-right">Rotate Right</button>
+                          <button id="flip-horizontal">Flip Horizontal</button>
+                          <button id="flip-vertical">Flip Vertical</button>
+                          <button id="zoom-in">Zoom In</button>
+                          <button id="zoom-out">Zoom Out</button>
+                          <button id="reset">Reset</button>
+                          <button id="btn-crop">Crop </button>
+                      </div>
+                  </div>
+                  <div>
+                    <h2>Preview</h2>
+                <div id="Preview">
+                    <img src="" id="output" alt="">
+                </div>
+
+                </div>
+                </div>
+
+
                 <div class="col-12">
-                  <button type="submit" id="cropImageBtn" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
+                  <button type="submit" onsubmit="nameVAlidation()" id="cropImageBtn" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
                 </div>
               
                 <% if(typeof data !== 'undefined') { %>
@@ -332,6 +373,26 @@
         </div>
       </div>
 
+
+      <script>
+        function hideCropper() {
+          document.getElementById('hiding_div').style.display = "Block";
+        }
+        
+      </script>
+
+      <script>
+        function nameVAlidation(){
+          console.log("HA HA HA HA AH");
+          if(Name.length > 14 ){
+            res.render('Product',{message:"Name should not excseed more than 14 words"})
+        }else if(Description.length > 14){
+            res.render('Product',{message:"Descriptin should not excseed more than 14 words"})
+        }else{
+        }
+      }
+        
+      </script>
 
 
 	<!--End Row-->
@@ -438,6 +499,246 @@
       $("#expire_date").datepicker();
     });
   </script>
+
+  <!-- cropperJs -->
+
+
+<script>
+
+
+
+// const imageInput = document.getElementById('imageInput');
+// // const imageInput = document.getElementById('hiding_div');
+// const croppedImageDataInput = document.getElementById('croppedImageData');
+// const previewContainer = document.getElementById('Preview');
+// let croppedImgArr = [];
+
+// function handleImageUpload() {
+//   imageInput.click();
+// }
+
+// imageInput.addEventListener('change', function () {
+//   // Clear previous cropped images
+//   console.log("hjasdfhjjdadbjfjh shdgfsgdfj");
+//   croppedImgArr = [];
+//   previewContainer.innerHTML = '';
+
+//   // For each selected file, load the image into the Cropper canvas
+//   Array.from(imageInput.files).forEach(function (file) {
+//     const reader = new FileReader();
+
+//     reader.onload = function (e) {
+//       const img = new Image();
+//       img.src = e.target.result;
+
+//       img.onload = function () {
+//         // Create a container for each image and Cropper
+//         const imageContainer = document.createElement('div');
+//         imageContainer.classList.add('image-container');
+        
+//         // Create an image element
+//         const imgElement = document.createElement('img');
+//         imgElement.src = img.src;
+        
+//         // Create Cropper for the image
+//         const cropper = new Cropper(imgElement, {
+//           aspectRatio: 1, // Adjust as needed
+//           responsive: true,
+//           viewMode: 2,
+//           dragMode: 'move',
+//           autoCropArea: 0.8,
+//         });
+
+//         // Add event listener for Crop button
+//         const cropButton = document.createElement('button');
+//         cropButton.innerText = 'Crop';
+//         cropButton.addEventListener('click', function () {
+//           const croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
+//           croppedImgArr.push(croppedImage);
+
+//           // Display the cropped image in preview
+//           const previewImg = new Image();
+//           previewImg.src = croppedImage;
+//           previewContainer.appendChild(previewImg);
+
+//           // Update hidden input with cropped data
+//           croppedImageDataInput.value = JSON.stringify(croppedImgArr);
+//         });
+
+//         // Append elements to the container
+//         imageContainer.appendChild(imgElement);
+//         imageContainer.appendChild(cropButton);
+
+//         // Append container to the preview container
+//         previewContainer.appendChild(imageContainer);
+//       };
+//     };
+
+//     // Read the selected file as Data URL
+//     reader.readAsDataURL(file);
+//   });
+// });
+
+        // const imageInput = document.getElementById('imageInput');
+        // const croppedImageDataInput = document.getElementById('croppedImageData');
+        // const previewContainer = document.getElementById('Preview');
+        // const cropperCanvas = document.getElementById('image');
+        // const cropper = new Cropper(cropperCanvas, {
+        //     aspectRatio: 1,
+        //     responsive: true,
+        //     viewMode: 2,
+        //     dragMode: 'move',
+        //     autoCropArea: 0.8,
+        // });
+        // let croppedImgArr = [];
+
+        // function handleImageUpload() {
+        //     imageInput.click();
+            
+        // }
+
+        // imageInput.addEventListener('change', function () {
+        //     croppedImgArr = [];
+        //     previewContainer.innerHTML = '';
+
+        //     const file = imageInput.files[0];
+        //     if (file) {
+        //         const reader = new FileReader();
+
+        //         reader.onload = function (e) {
+        //             cropperCanvas.src = e.target.result;
+        //         };
+
+        //         reader.readAsDataURL(file);
+        //     }
+        // });
+
+        // document.getElementById('btn-crop').addEventListener('click', function () {
+        //     const croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
+        //     croppedImgArr.push(croppedImage);
+
+        //     const previewImg = new Image();
+        //     previewImg.src = croppedImage;
+        //     previewContainer.appendChild(previewImg);
+
+        //     croppedImageDataInput.value = JSON.stringify(croppedImgArr);
+        // });
+
+        // // Add event listeners for custom toolbar buttons
+        // document.getElementById('rotate-left').addEventListener('click', function () {
+        //     cropper.rotate(-90);
+        // });
+
+        // document.getElementById('rotate-right').addEventListener('click', function () {
+        //     cropper.rotate(90);
+        // });
+
+        // document.getElementById('flip-horizontal').addEventListener('click', function () {
+        //     cropper.scaleX(-cropper.getData().scaleX);
+        // });
+
+        // document.getElementById('flip-vertical').addEventListener('click', function () {
+        //     cropper.scaleY(-cropper.getData().scaleY);
+        // });
+
+        // document.getElementById('zoom-in').addEventListener('click', function () {
+        //     cropper.zoom(0.1);
+        // });
+
+        // document.getElementById('zoom-out').addEventListener('click', function () {
+        //     cropper.zoom(-0.1);
+        // });
+
+        // document.getElementById('reset').addEventListener('click', function () {
+        //     cropper.reset();
+        // });
+
+    
+    const imageInput = document.getElementById('imageInput');
+    const croppedImageDataInput = document.getElementById('croppedImageData');
+    const previewContainer = document.getElementById('Preview');
+    const cropperCanvas = document.getElementById('image');
+    let cropper;
+
+    // Initialize Cropper when the image is loaded
+    cropperCanvas.onload = function () {
+        cropper = new Cropper(cropperCanvas, {
+            aspectRatio: 1,
+            responsive: true,
+            viewMode: 2,
+            dragMode: 'move',
+            autoCropArea: 0.8,
+        });
+    };
+
+    const croppedImgArr = [];
+
+    function handleImageUpload() {
+        imageInput.click();
+    }
+
+    imageInput.addEventListener('change', function () {
+        croppedImgArr.length = 0; // Clear the array
+        previewContainer.innerHTML = '';
+
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                cropperCanvas.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('btn-crop').addEventListener('click', function () {
+        if (cropper) {
+            const croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
+            croppedImgArr.push(croppedImage);
+
+            const previewImg = new Image();
+            previewImg.src = croppedImage;
+            previewContainer.appendChild(previewImg);
+
+            croppedImageDataInput.value = JSON.stringify(croppedImgArr);
+        } else {
+            console.error('Cropper is not initialized.');
+        }
+    });
+
+    // Add event listeners for custom toolbar buttons
+    document.getElementById('rotate-left').addEventListener('click', function () {
+        cropper && cropper.rotate(-90);
+    });
+
+    document.getElementById('rotate-right').addEventListener('click', function () {
+        cropper && cropper.rotate(90);
+    });
+
+    document.getElementById('flip-horizontal').addEventListener('click', function () {
+        cropper && cropper.scaleX(-cropper.getData().scaleX);
+    });
+
+    document.getElementById('flip-vertical').addEventListener('click', function () {
+        cropper && cropper.scaleY(-cropper.getData().scaleY);
+    });
+
+    document.getElementById('zoom-in').addEventListener('click', function () {
+        cropper && cropper.zoom(0.1);
+    });
+
+    document.getElementById('zoom-out').addEventListener('click', function () {
+        cropper && cropper.zoom(-0.1);
+    });
+
+    document.getElementById('reset').addEventListener('click', function () {
+        cropper && cropper.reset();
+    });
+
+
+</script>
 
   
 </body>

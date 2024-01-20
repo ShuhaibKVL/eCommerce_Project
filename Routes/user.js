@@ -31,6 +31,27 @@ UserRoute.get('/logout',Usercontrol.logout)
 
 UserRoute.get('/ProductDetails',Usercontrol.ProductDeatils)
 
+UserRoute.get('/UserProfile',Usercontrol.UserProfile_Loagin)
+
+UserRoute.get('/Address',Usercontrol.AddressLoad)
+
+UserRoute.get('/Add_Address',Usercontrol.Add_AddressLoad)
+
+UserRoute.post('/Add_Address',Usercontrol.Add_Address)
+
+UserRoute.get('/Edit_Address',Usercontrol.Edit_AddressLoad)
+
+UserRoute.post('/Edit_Address',Usercontrol.Edit_Address)
+
+UserRoute.get('/Cart',Usercontrol.LoadCarts)
+
+UserRoute.get('/UserCart',Usercontrol.UserCart)
+
+UserRoute.get('/AddToCart',Usercontrol.AddnewCart)
+
+UserRoute.post('/remove-from-cart',Usercontrol.remove_from_cart)
+
+
 
 
 

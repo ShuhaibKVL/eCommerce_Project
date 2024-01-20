@@ -93,24 +93,6 @@
         </a>
       </li> -->
 
-      <!-- <li>
-        <a href="profile.html">
-          <i class="zmdi zmdi-face"></i> <span>Profile</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="login.html" target="_blank">
-          <i class="zmdi zmdi-lock"></i> <span>Login</span>
-        </a>
-      </li>
-
-       <li>
-        <a href="register.html" target="_blank">
-          <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
-        </a>
-      </li> -->
-
       <li class="sidebar-header">LABELS</li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
@@ -206,6 +188,11 @@
               </div>
               <div class="row tm-edit-product-row">
                 <div class="col-xl-6 col-lg-6 col-md-12">
+                  <div style=" width: fit-content; height: 20px;">
+                    <% if(typeof message !== 'undefined') { %>
+                        <p id="error-message" style="color: red;"><%= message %></p>
+                    <% } %>
+                </div>
                   <form action="#" class="tm-edit-product-form" method="post">
                     <div class="form-group mb-3">
                       <label for="name" >Category Name </label>
@@ -228,6 +215,14 @@
 
 	<!--End Row-->
 
+
+  <script>
+    document.getElementById("error-message").style.display = "block";
+        setTimeout(function(){
+        document.getElementById("error-message").style.display = "none";
+        }, 2000);
+    </script>
+    
       <!--End Dashboard Content-->
 	  
 	  <!--start overlay-->
