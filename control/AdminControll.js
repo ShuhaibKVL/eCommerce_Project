@@ -46,6 +46,8 @@ const userDetails = async(req,res) =>{
         console.log(error.message)
     }
 }
+
+
 const blockUser = async(req, res) => {
     try {
         const  userId = req.query.id;
@@ -63,6 +65,9 @@ const blockUser = async(req, res) => {
             console.log('update:',update_isBlock);
             
             res.redirect('UserDetails')
+            // res.send('<button class="block-btn" data-user-id="' + userId + '">' +
+                // (/* Update with your logic */) +
+                // '</button>');
         
         }else{
             console.log("else block")
@@ -109,37 +114,52 @@ const Load_Add_Product = async(req,res) =>{
     
 }
 
-const Add_Product = async (req,res,next) => {
+// const Add_Product = async (req,res,next) => {
     
+//     try {
+//         const Name = req.body.name
+//         const Description = req.body.description
+//         if(Name.length > 14 ){
+//             res.render('Product')
+//         }else if(Description.length > 14){
+//             res.redirect('Product')
+//         }else{
+//             const croppedImageData = req.body.croppedImageData
+        
+//             const newProduct = new ProductSchema({
+//                 Name : req.body.name,
+//                 Price : req.body.price,
+//                 Category : req.body.category,
+//                 Size : req.body.size,
+//                 Stock : req.body.stock,
+//                 Description :req.body.description,
+//                 Image : req.files.map((file)=>file.filename)
+//                 // Image : croppedImageData.map((file)=>file.filename)
+//             })
+
+//         // newProduct.Image = JSON.parse(croppedImageData)
+//             await newProduct.save()
+        
+//             res.redirect('Product')
+//         }
+
+//     } catch (error) {
+//         console.log("Error Occuerd  in Addproduct",error)
+//     }
+// }
+
+const  Add_Product =async(req,res) => {
     try {
-        const Name = req.body.name
-        const Description = req.body.description
-        if(Name.length > 14 ){
-            res.render('Product',{message:"Name should not excseed more than 14 words"})
-        }else if(Description.length > 14){
-            res.render('Product',{message:"Descriptin should not excseed more than 14 words"})
-        }else{
-            const croppedImageData = req.body.croppedImageData
-        
-            const newProduct = new ProductSchema({
-                Name : req.body.name,
-                Price : req.body.price,
-                Category : req.body.category,
-                Size : req.body.size,
-                Stock : req.body.stock,
-                Description :req.body.description,
-                    Image : req.files.map((file)=>file.filename)
-                // Image : croppedImageData.map((file)=>file.filename)
-            })
+        // const images = req.files.map(file => file.buffer);
+        // const product = req.body;
+        console.log(req.files);
+        console.log(req.body.name);
+        // console.log(images)
+        console.log("Sussecc fully cropper");
 
-        // newProduct.Image = JSON.parse(croppedImageData)
-            await newProduct.save()
-        
-            res.redirect('Product')
-        }
-
+        res.send('Product uploaded successfully');
     } catch (error) {
-        console.log("Error Occuerd  in Addproduct",error)
+        console.log(error)
     }
 }
 

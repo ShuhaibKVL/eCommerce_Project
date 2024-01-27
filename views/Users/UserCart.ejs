@@ -27,7 +27,9 @@
     <!-- Custom CSS  -->
     <link rel="stylesheet" href="/css/added.css">
 
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </head>
 
 <body>
@@ -43,7 +45,7 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
-                        
+
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
@@ -57,7 +59,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="category.html"> shop category</a>
                                         <a class="dropdown-item" href="single-product.html">product details</a>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -84,7 +86,7 @@
                                         <a class="dropdown-item" href="single-blog.html">Single blog</a>
                                     </div>
                                 </li>
-                                
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
@@ -103,14 +105,14 @@
                                     
                                     </div>
                                 </div> -->
-                                
+
                             </div>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box">
+        <!-- <div class="search_input" id="search_input_box">
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -118,7 +120,7 @@
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-        </div>
+        </div> -->
     </header>
     <!-- Header part end-->
 
@@ -138,64 +140,102 @@
             </div>
         </div>
     </section> -->
-    <!-- breadcrumb start-->
 
+
+
+
+    <!-- breadcrumb start-->
     <!--================Cart_part Area =================-->
-    
-    <% if (user && user.cart && user.cart.length > 0) { %>
-        <section class="cart_area padding_top">
-          <div class="container">
-            <div class="cart_inner">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-      
-                      <% user.cart.forEach(item => { %>
-                    <tr>
-                      <td>
-                        <div class="media">
-                          <div class="d-flex">
-                            <img src="/assets/uploads/<%= item.product.Image[0] %>" alt=""   width="60" height="80" />
-                          </div>
-                          <div class="media-body">
-                            <p><%= item.product.Name %></p>
-                            <p><%= item.product.Description %></p>
-                            <p>Category : <%= item.product.Category %></p>
-                            <p>In Stock : <%= item.product.Stock %></p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <h5>$<%= item.product.Price %></h5>
-                      </td>
-                      <td>
-                        <div class="product_count">
-                          <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                          <input class="input-number" type="text" value="1" min="0" max="10">
-                          <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                        </div>
-                      </td>
-                      <td>
-                        <h5>$<%= item.product.Price * item.quantity %></h5>
-                      </td>
-                      <td>
-                          <form action="remove-from-cart" method="post">
-                              <input type="hidden" name="productId" value="<%= item.product._id %>">
-                              <button type="submit">Remove</button>
-                          </form>
-                      </td>
-                    </tr>
-                    
-      
-                    <!-- <tr class="shipping_area">
+    <div id="reloadDiv">
+        <% if (user && user.cart && user.cart.length> 0 ) { %>
+            <section class="cart_area padding_top">
+                <div class="container">
+                    <div class="cart_inner">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <% user.cart.forEach((item,i = 0)=> { %>
+                                        <!-- <tr data-item-index="<%=  %>"> -->
+                                        <td>
+                                            <div class="media">
+                                                <div class="d-flex">
+                                                    <img src="/assets/uploads/<%= item.product.Image[0] %>" alt=""
+                                                        width="60" height="80" />
+                                                </div>
+                                                <div class="media-body">
+                                                    <p>
+                                                        <%= item.product.Name %>
+                                                    </p>
+                                                    <p>
+                                                        <%= item.product.Description %>
+                                                    </p>
+                                                    <p>Category : <%= item.product.Category %>
+                                                    </p>
+                                                    <p>In Stock : <%= item.product.Stock %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                        <td>
+                                            <h5>$<%= item.product.Price %>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <div class="product_count">
+
+                                                <input type="hidden" id="ProductID" value="<%= item.product._id %>">
+                                                <input type="hidden" id="userId" value="<%=  userId %>">
+                                                <!-- <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
+                            <input class="" type="text" value="1" min="1" max="10">
+                            <span id="incrementButton" class="input-number-increment"> <i class="ti-angle-up"></i></span> -->
+                                                <input type="number" min="1" value="<%= item.quantity %>" max="10"
+                                                    data-product-id="<%= item.product._id %>" data-user-id="<%= userId %>" data-index="<%= i %>"
+                                                    oninput="updateCart(this)" style="width: 70px; height: 30px; ">
+                                            </div>
+                                            <input type="hidden" name="" id="hidden" value="<%= i %>">
+
+
+
+                                            <!-- <div class="product_count">
+                            <span class="input-number-decrement" onclick="updateQuantity('decrement', '<%=  %>')">
+                              <i class="ti-angle-down"></i>
+                            </span>
+                            <input class="input-number" type="text" value="<%=  %>" min="0" max="10" readonly>
+                            <span class="input-number-increment" onclick="updateQuantity('increment', '<%=  %>')">
+                              <i class="ti-angle-up"></i>
+                            </span>
+                          </div> -->
+
+                                        </td>
+                                        <td>
+                                            <h5>$<%= item.product.Price * item.quantity %>
+
+                                                
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <form action="remove-from-cart" method="post">
+                                                <input type="hidden" name="productId" value="<%= item.product._id %>">
+
+                                                <button type="submit">Remove</button>
+                                                
+                                            </form>
+                                        </td>
+                                        </tr>
+
+
+                                         <!-- <tr class="shipping_area">
                       <td></td>
                       <td></td>
                       <td>
@@ -235,32 +275,94 @@
                           <a class="btn_1" href="#">Update Details</a>
                         </div>
                       </td>
-                    </tr> -->
-      
-                    <% }); %>
-                  </tbody>
-                </table>
-                <div class="checkout_btn_inner float-right">
-                  <a class="btn_1" href="/">Continue Shopping</a>
-                  <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
-                </div>
-              </div>
-            </div>
-        </section>
-      
-        <% } else { %>
-          <p>Your cart is empty.</p>
-        <% } %>
+                    </tr>  -->
 
-        
-    <!--================Cart_part end =================-->
-    
+
+                    
+
+                   
+
+                    
+                        <!-- Add this line to display the overall total amount -->
+                        
+                           
+                        
+              
+
+                    <script>
+                        // Assuming you have an API endpoint for updating the cart
+                        const updateCart = (input) => {
+                            console.log("hbjk");
+                            const quantity = input.value;
+                            const productId = input.getAttribute('data-product-id');
+                            const userId = input.getAttribute('data-user-id');
+                            const Index = input.getAttribute('data-index');
+                            
+                            fetch(`http://localhost:5000/update-cart?id=${productId}&pr=${userId}&QA=${quantity}`)
+                                .then(response => response.json())
+                                .then(cartData => {
+                                    console.log('iam response');
+
+                                        // Update UI with new cart data
+                                        // window.location.reload();
+
+                                        $('#reloadDiv').load('/Cart #reloadDiv');
+                                        // $('#reloadDiv').html(cartData)
+
+                                
+                                    // You can also update specific elements or perform other actions here
+                                    console.log("HA HA HA HA ", cartData);
+                                })
+                                .catch(error => console.error("Error:", error));
+                        };
+                    
+                        // Example of calling the function on a button click
+                        document.querySelectorAll('.quantity-input').forEach(input => {
+                            input.addEventListener('input', function () {
+                                // const quantity = this.value;
+                                // const productId = this.dataset.productId;
+                                // const userId = this.dataset.userId;
+                                // updateCart(quantity, productId, userId);
+                                updateCart(this)
+                            });
+                        });
+                    </script>
+                    
+
+
+                                    
+                                        <% }); %>
+                                </tbody>
+                            </table>
+                            
+                            <div class="checkout_btn_inner float-right">
+                                <div style="display: flex; justify-content: end;">
+                                    <h6 style="font-weight: bolder; ">TOTAL PRICE : <span style="color: rgb(0, 28, 36);"><%= Total %></span></h6>
+                                </div>
+                                
+                                    
+                                <br>
+                                
+                                <a class="btn_1" href="/">Continue Shopping</a>
+                                <a class="btn_1 checkout_btn_1" href="/Chekout">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+            <% } else { %>
+                <p>Your cart is empty.</p>
+                <% } %>
+
+
+                    <!--================Cart_part end =================-->
+    </div>
     <script>
         document.getElementById("error-message").style.display = "block";
-            setTimeout(function(){
+        setTimeout(function () {
             document.getElementById("error-message").style.display = "none";
-            }, 2000);
-        </script>
+        }, 2000);
+    </script>
 
 
     <!--::footer_part start::-->
@@ -320,7 +422,8 @@
                             <form target="_blank"
                                 action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                 method="get" class="subscribe_form relative mail_part">
-                                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address" class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = ' Email Address '">
                                 <button type="submit" name="submit" id="newsletter-submit"
                                     class="email_icon newsletter-submit button-contactForm">subscribe</button>
@@ -337,7 +440,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="copyright_text">
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -345,7 +448,8 @@
                             <ul class="list-unstyled">
                                 <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a>
+                                </li>
                                 <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
                             </ul>
                         </div>
@@ -355,6 +459,91 @@
         </div>
     </footer>
     <!--::footer_part end::-->
+
+
+
+    <!-- <script>
+
+        // Assuming you have an API endpoint for updating the cart
+        const updateCart = (quantity) => {
+            //example.com/api/cart/update?quantity=${quantity}
+            console.log("fygh hjhj");
+            let Quantity = document.querySelector('#quantity-input').value
+            const ProductID = document.querySelector('#ProductID').value;
+            const UserId = document.querySelector('#userId').value;
+
+            console.log(Quantity);
+            console.log("hello  ", ProductID, UserId);
+            fetch(`http://localhost:5000/update-cart?id=${ProductID}&pr=${UserId}&QA=${Quantity}`)
+                .then(response => response.json())
+                .then(cartData => {
+
+                    console.log('iam response')
+                    // Update UI with new cart data
+                    window.location.reload()
+
+
+                    // $('#reloadDiv').load('/Cart #reloadDiv');
+                    // $('#reloadDiv').html(cartData)
+
+
+                    console.log("HA HA HA HA ", cartData);
+                })
+                .catch(error => console.error("Error:", error));
+        };
+
+        // Example of calling the function on a button click
+        
+        
+        // let uniqe = document.querySelector('#hidden').value
+        // console.log(uniqe)
+
+        document.getElementById('quantity-input').addEventListener('input', function () {
+            // Increment quantity and update cart
+            // (You may need to fetch the current quantity from the UI)
+            //   const newQuantity = getCurrentQuantity() + 1;
+            console.log('fffffffffffffffff')
+            updateCart();
+        });
+
+    </script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+
+
+    <!-- <script>
+  function updateQuantity(action, index) {
+    // Get the current quantity from the input field
+    const quantityInput = document.querySelector(`tr[data-item-index="${index}"] .input-number`);
+    let currentQuantity = parseInt(quantityInput.value);
+
+    // Update the quantity based on the action
+    if (action === 'increment') {
+      currentQuantity++;
+    } else if (action === 'decrement' && currentQuantity > 0) {
+      currentQuantity--;
+    }
+
+    // Update the UI with the new quantity
+    quantityInput.value = currentQuantity;
+
+    // Get the product ID from the hidden input
+   
+    
+    const productId = document.getElementById("productId").value
+
+    // Send the updated quantity to the server using Axios
+    axios.post('/update-cart', { productId, quantity: currentQuantity })
+      .then(response => {
+        // Handle success if needed
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Handle error if needed
+        console.error('Error:', error);
+      });
+  }
+
+</script> -->
 
     <!-- jquery plugins here-->
     <!-- jquery -->

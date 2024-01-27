@@ -15,6 +15,28 @@ const storageConfig = multer.diskStorage({
 
 const upload = multer({ storage : storageConfig})
 
+// -------------------------------------------
+
+// const upload = multer({
+//     dest: 'uploads/',
+//     limits: {
+//       fileSize: 10000000 // Limit file size to 10MB
+//     },
+//     fileFilter(req, file, cb) {
+//       if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+//         return cb(new Error('Please upload an image (JPG, JPEG or PNG).'));
+//       }
+//       cb(null, true);
+//     }
+//   });
+
+// -------------------------------------------
+
+// const upload = multer({ dest: 'uploads/' });
+
+
+
+
 AdmiNRoute.set("view engine","ejs")
 AdmiNRoute.set('views','./views/Admin')
 
@@ -34,7 +56,9 @@ AdmiNRoute.get('/Product',Admincontroll.Product)
 
 AdmiNRoute.get('/Add_Product',Admincontroll.Load_Add_Product)
 
-AdmiNRoute.post('/Add_Product', upload.array('image',12),Admincontroll.Add_Product)
+// AdmiNRoute.post('/Add_Product', upload.array('image',12),Admincontroll.Add_Product)
+
+AdmiNRoute.post('/Add_Product', upload.array('images'),Admincontroll.Add_Product)
 
 AdmiNRoute.get('/DeletProduct',Admincontroll.DeletProduct)
 
@@ -49,9 +73,5 @@ AdmiNRoute.post('/Category',Admincontroll.CreateCategory)
 AdmiNRoute.get('/DeletCategory',Admincontroll.DeletCategory)
 
 AdmiNRoute.get('/UnlistCategory',Admincontroll.UnlistCategory)
-
-AdmiNRoute.get('/Cropper',(req,res) =>{
-    res.render('Cropper')
-})
 
 module.exports = AdmiNRoute;

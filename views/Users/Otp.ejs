@@ -166,37 +166,48 @@
                                 <% if (typeof message !== 'undefined') { %>
                                     <p id="error-message" style="color: red;"><%= message %></p>
                                 <%  } %>
+
+                                <% if(typeof Otpmessage !== 'undefined'){ %>
+                                    <p id="error-message" style="color: green;"><%= Otpmessage %></p>
+                                <% } %>
                             </div>
                             
                             <div class="otpDiv">
                                 <h4>We send a OTP email to our respective email.<br> check the email.</h4>
-                                <div class="otp-container">
+                                <div class="otp-container" >
                                     <form action="/Otp" method="post">
-                                        <% if(typeof Otpmessage !== 'undefined'){ %>
-                                            <p id="error-message" style="color: green;"><%= Otpmessage %></p>
-                                        <% } %>
-                                    
-                                        <div id="timer" style="color: rgb(0, 159, 13);">Time remaining: <span style="color: rgb(215, 3, 3);" id="countdown">240</span></div>
+                                        <br>
+                                        <div id="timer" style="color: rgb(0, 159, 13); align-self: center;">Time remaining: <span style="color: rgb(215, 3, 3);" id="countdown">240</span></div>
+                                        <br>
+                                        
+                                        <% if(typeof name !== 'undefined'){ %>
 
                                         <input type="hidden" name="name" value="<%= name %>">
                                         <input type="hidden" name="email" value="<%= email %> ">
                                         <input type="hidden" name="phoneNumber" value="<%= phoneNumber %>">
                                         <input type="hidden" name="password" value="<%= hashedPassword %>">
+                                        <% } %>
                                         </td>
                                         <div style="text-align: center;" class="col-md-12 form-group p_star">
-                                        <input id="otp-input" type="number" name="otp" maxlength="6" placeholder="Enter OTP">
+                                        <input id="otp-input" type="text" name="otp" maxlength="6" placeholder="Enter OTP">
+
                                         </div>
                                         <div class="col-md-12 form-group p_star">
                                         <button type="submit" value="submit" class="btn_3" >
                                             Submit
                                             </button>
                                         </div>
-                                        <div style="text-align: center;" class="col-md-12 form-group p_star">
-                                        <a style="text-decoration: none;" href="/Signup">Resend OTP ?</a>
-                                        </div>
+                                        
                                     </form>
                                 </div>
-                            </div>
+                                <div style="text-align: center;" class="col-md-12 form-group p_star">
+                                    <form action="ResendOtp" id="resendOtpForm"  method="post">
+                                        <input type="hidden" name="email" value="<%= email %>" id="email">
+                                        <!-- <button class="none" type="submit" value="submit" class="btn_resend_otp" >Resend OTP</button> -->
+                                        <input type="submit" style="border: none;  color: rgba(48, 48, 48, 0.845);" value="Resend Otp ?">
+                                    </form>
+                                
+                                </div>
                             
                         </div>
                     </div>
@@ -213,16 +224,22 @@
     
     </script>
 
-<!-- <script>
-    var seconds = 60; // Set the initial time in seconds
-    
+<script>
+    var seconds = 240; // Set the initial time in seconds (4 minutes)
+    var countdownTimeout; // Variable to store the timeout ID
+
     function countdown() {
         var countdownElement = document.getElementById("countdown");
-    
+
         if (seconds > 0) {
+            var minutes = Math.floor(seconds / 60);
+            var remainingSeconds = seconds % 60;
+
+            countdownElement.textContent = minutes + "m " + remainingSeconds + "s";
             seconds--;
-            countdownElement.textContent = seconds;
-            setTimeout(countdown, 1000); // Update every second
+
+            // Schedule the next update or reset
+            countdownTimeout = setTimeout(countdown, 1000);
         } else {
             countdownElement.textContent = "Time's up!";
             // Handle OTP timeout action here
@@ -230,32 +247,23 @@
     }
 
     countdown(); // Start the countdown when the page loads
-</script> -->
 
-
-
-    <script>
-        var seconds = 240; // Set the initial time in seconds (4 minutes)
-
-        function countdown() {
-            var countdownElement = document.getElementById("countdown");
-
-            if (seconds > 0) {
-                var minutes = Math.floor(seconds / 60);
-                var remainingSeconds = seconds % 60;
-
-                countdownElement.textContent = minutes + "m " + remainingSeconds + "s";
-                seconds--;
-                setTimeout(countdown, 1000); // Update every second
-            } else {
-                countdownElement.textContent = "Time's up!";
-                // Handle OTP timeout action here
-            }
+    // Add an event listener for the form submission
+    document.getElementById("resendOtpForm").addEventListener("submit", function (event) {
+        // Check if countdown is already running
+        if (!countdownTimeout) {
+            // Restart the countdown after a short delay to allow the form to be submitted
+            setTimeout(function () {
+                
+                seconds = 240; // Reset the countdown to its initial value
+                countdown();
+                
+                // Now you can manually submit the form
+                document.getElementById("resendOtpForm").submit();
+            }, 100);
         }
-
-        countdown(); // Start the countdown when the page loads
-    </script>
-
+    });
+</script>
 
     <!--================login_part end =================-->
 
@@ -334,9 +342,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="copyright_text">
-                            <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+                            -------------------------------
                         </div>
                     </div>
                     <div class="col-lg-4">

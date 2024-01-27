@@ -1,10 +1,12 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
     <title>aranoz</title>
     <link rel="icon" href="images/favicon.png">
     <!-- Bootstrap CSS -->
@@ -26,6 +28,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Custom CSS  -->
     <link rel="stylesheet" href="/css/added.css">
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -110,11 +114,11 @@
         </div>
         <div class="search_input" id="search_input_box">
             <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
+                <!-- <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
                     <button type="submit" class="btn"></button>
                     <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
+                </form> -->
             </div>
         </div>
     </header>
@@ -162,25 +166,34 @@
                                         <p id="error-message" style="color: red;"><%= message %></p>
                                     <% } %>
                                 </div>
-                                
-                            <form class="row contact_form" action="login" method="post" novalidate="novalidate">
+                                <p id="valid-message" style="color: red;"></p>
+                            <form class="row contact_form" action="login" id="Login_form" method="post" onsubmit="return validateForm()" >
                                 <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" id="email" name="email"  placeholder="Enter Your Email" pattern="^[^\s]*$">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
                                     <input type="password" class="form-control" id="password" name="password"  placeholder="Password" pattern="^[^\s]*$">
+                                    <% if(typeof sweet_alert !== "undefined") {%>
+                                        <input type="hidden" value="<%= sweet_alert %>" id="sweet_Assistant">
+                                    <% } %>
+                                    
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <!-- <div class="creat_account d-flex align-items-center">
                                         <input type="checkbox" id="f-option" name="selector">
                                         <label for="f-option">Remember me</label>
                                     </div> -->
-                                    <button type="submit" value="submit" class="btn_3">
+                                    <button type="submit"  value="submit" class="btn_3">
                                         log in
                                     </button>
-                                    <a class="lost_pass" href="#">forget password?</a>
+                                    <!-- <a class="lost_pass"  href="forgoutPassword">forget password?</a> -->
+
+                                    
+
                                 </div>
                             </form>
+                            <!-- id="forgetPasswordLink" -->
+                            <a class="lost_pass"  href="forgoutPassword">Forget password?</a>
                         </div>
                     </div>
                 </div>
@@ -188,6 +201,104 @@
         </div>
     </section>
     <!--================login_part end =================-->
+
+
+
+<script>
+    const swal_Alert = document.getElementById("sweet_Assistant");
+
+    if (swal_Alert) {
+        swal("You have reached the maximum number of login attempts. Please reset your password.", {
+            icon:"warning",
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                },
+                resetPassword: {
+                    text: "Forgout Password ?",
+                    value: "Reset Password",
+                    visible: true,
+                    className: "swal-button--reset-password",
+                    closeModal: false,
+                },
+            },
+            customClass: {
+                confirmButton: 'swal-button--reset-password',
+                cancelButton: 'swal-button--cancel',
+            },
+            buttonsStyling: false,
+        })
+
+        .then((value) => {
+            switch (value) {
+                case "Reset Password":
+                    // Your logic for resetting password
+                    window.location.href = 'forgoutPassword';
+                    break;
+                default:
+                    // Handle other cases or no action
+                    break;
+            }
+        });
+    }
+</script>
+
+
+<script>
+
+    function alert() {
+        swal("Do You Want to reset your password.", {
+            icon:"warning",
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                },
+                resetPassword: {
+                    text: "Forgout Password ?",
+                    value: "Reset Password",
+                    visible: true,
+                    className: "swal-button--reset-password",
+                    closeModal: false,
+                },
+            },
+            customClass: {
+                confirmButton: 'swal-button--reset-password',
+                cancelButton: 'swal-button--cancel',
+            },
+            buttonsStyling: false,
+        })
+
+        .then((value) => {
+            switch (value) {
+                case "Reset Password":
+                    // Your logic for resetting password
+                    window.location.href = 'forgoutPassword';
+                    break;
+                default:
+                    // Handle other cases or no action
+                    break;
+            }
+        });
+    }
+</script>
+
+<style>
+    /* Add these styles to your CSS file */
+    .swal-button--reset-password {
+        background-color: #28a745 !important; /* Green button color */
+        border-radius: 20px !important; /* Border radius */
+        box-shadow: 0 4px 20px rgba(40, 167, 69, 0.2) !important; /* Box shadow */
+    }
+
+</style>
 
     <!--::footer_part start::-->
     <footer class="footer_part">
@@ -243,7 +354,7 @@
                         <p>Heaven fruitful doesn't over lesser in days. Appear creeping
                         </p>
                         <div id="mc_embed_signup">
-                            <form target="_blank"
+                            <!-- <form target="_blank"
                                 action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                 method="get" class="subscribe_form relative mail_part">
                                 <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address" class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
@@ -251,7 +362,8 @@
                                 <button type="submit" name="submit" id="newsletter-submit"
                                     class="email_icon newsletter-submit button-contactForm">subscribe</button>
                                 <div class="mt-10 info"></div>
-                            </form>
+                            </form> -->
+                            <button onclick="loginValidation()">tes</button>
                         </div>
                     </div>
                 </div>
@@ -281,7 +393,100 @@
         </div>
     </footer>
     <!--::footer_part end::-->
+    
 
+    <!-- Login Custom Validation  -->
+
+    <!-- <script>
+            
+        window.localStorage.setItem( "log" , "0")
+        const log = window.localStorage.getItem('log')
+        console.log(log);
+    
+    function loginValidation() {
+
+            // Increment the log value
+            console.log("fghjjfdkfdhfbjhdgfg gfhsgfhjs gfgsdhgf sdhgfjd gfjgdf");
+            let log = parseInt(window.localStorage.getItem("log")) || 0;
+            log++;
+            window.localStorage.setItem("log", log.toString());
+
+            // Check if the log value is greater than or equal to 5
+            if (log >= 2) {
+                alert("You have reached the maximum number of login attempts. Please try again later.");
+                return false;
+            }
+
+            // Continue with the form submission
+            return false;
+            }
+
+        
+
+            const form = document.getElementById('Login_form')
+                form.addEventListener('submit', function(event) {
+                if(!loginValidation()) {
+                    event.preventDefault();
+                }
+            })
+    
+    </script> -->
+    
+    <script>
+
+        function validateForm() {
+            console.log("form sumbmitted succesfully")
+        
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+              //  << email validation >>
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.[a-zA-Z]{2,4}$/;
+
+                if(!emailRegex.test(email)){
+                document.getElementById('valid-message').innerHTML ="Please Enter a Valid Gmail Address"
+                return false
+                }else if(!password){
+                    document.getElementById('valid-message').innerHTML ="Please Enter a Valid Password"
+                    return false
+                } else{
+                    return true
+                }
+        }
+    
+    </script>
+
+
+<script>
+    // Add an event listener to the forget password link
+    document.getElementById('forgetPasswordLink').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default behavior of the link
+
+        // Show a SweetAlert with two buttons
+        Swal.fire({
+            title: 'Forget Password?',
+            text: 'Are you sure you want to forget your password?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Change',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            // If the user clicks "Change," navigate to the forgetPassword route
+            if (result.isConfirmed) {
+                window.location.href = 'forgoutPassword';
+            }
+        });
+    });
+</script>
+    
+    <script>
+        document.getElementById("error-message").style.display = "block";
+            setTimeout(function(){
+            document.getElementById("error-message").style.display = "none";
+            }, 2000);
+    </script>
+    
+    
     <!-- jquery plugins here-->
     <!-- jquery -->
     <script src="js/jquery-1.12.1.min.js"></script>
@@ -309,6 +514,7 @@
     <script src="js/mail-script.js"></script>
     <script src="js/stellar.js"></script>
     <script src="js/price_rangs.js"></script>
+
     <!-- custom js -->
     <script src="js/custom.js"></script>
 </body>

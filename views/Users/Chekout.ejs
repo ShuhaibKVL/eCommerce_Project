@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>aranoz</title>
+    <link rel="icon" href="images/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="css/slick.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Custom CSS  -->
+    <link rel="stylesheet" href="/css/added.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- sweet alert -->
+    <!--  SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+    <!--  SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        /* 
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        } */
+
+        .address-section {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .product-section {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        * h2 {
+            color: #333;
+        }
+
+        .subb {
+            margin: 20px;
+        }
+
+        .AddAddress {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mb-3p {
+            line-height: 0.5;
+
+        }
+
+        .button-address {
+
+            width: 200px;
+        }
+
+        /* Delivery Selection */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            border-radius: 100%;
+        }
+
+        .option {
+            width: 10px;
+            height: 10px;
+            margin: 0px 10px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .option:hover {
+            background-color: #ffcece;
+        }
+
+        .option.selected {
+            background-color: rgb(0, 195, 0);
+        }
+
+        .opti-main {
+
+            display: flex;
+            justify-content: left;
+            align-items: center;
+
+        }
+
+
+        /* Add more styles as needed for responsiveness and attractiveness */
+    </style>
+
+</head>
+
+<body>
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="home.ejs"> <img src="images/Group 7.png" alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Shop
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="category.html"> shop category</a>
+                                        <a class="dropdown-item" href="single-product.html">product details</a>
+
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        pages
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <a class="dropdown-item" href="login.html"> login</a>
+                                        <a class="dropdown-item" href="tracking.html">tracking</a>
+                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
+                                        <a class="dropdown-item" href="cart.html">shopping cart</a>
+                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
+                                        <a class="dropdown-item" href="elements.html">elements</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        blog
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <a class="dropdown-item" href="blog.html"> blog</a>
+                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hearer_icon d-flex">
+                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                            <a href=""><i class="ti-heart"></i></a>
+                            <div class="dropdown cart">
+                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cart-plus"></i>
+                                </a>
+                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <div class="single_product">
+                                    
+                                    </div>
+                                </div> -->
+
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div> -->
+    </header>
+    <!-- Header part end-->
+
+
+
+
+
+
+    <div class="container mt-5" style="margin-top: 16vw !important;">
+        <div class="row">
+            <!-- Address Management Section -->
+            <div class="col-md-6">
+                <div id="AddressSelectionDiv">
+                    <% if(typeof Address !=='Undefined' && Address.length> 0 ) { %>
+
+                        <% Address.forEach((Address, index)=> { %>
+                            <div
+                                style="display: flex; align-items: center; border: 3px solid rgb(23, 73, 255); border-radius: 15px; background-color: rgb(255, 255, 255);">
+
+
+                                <p>
+                                    <%= Address.add1 %>, <%= Address.PinCode %> , <%= Address.Country %> ,<%=
+                                                    Address.Town %>
+                                </p>
+
+                                <button onclick="select('<%= Address._id %>')">Select</button>
+
+                            </div>
+                            <% }) %>
+                </div>
+                <% }else{ %>
+                    <p>No Previous Address</p>
+                    <% } %>
+
+
+
+
+                        <div style=" display: flex; justify-content: space-around; margin-top: 15px;">
+                            <button type="button" onclick="hideAneme()"
+                                class="btn btn-primary btn-block button-address">Add
+                                Address</button>
+                        </div>
+
+
+                        <div class="subb" id="Addressdiv" style="display: none;  ">
+
+                            <form class="row contact_form" style="line-height: 0.5 !important;" action="Add_Address"
+                                method="post" novalidate="novalidate" onsubmit="return refreshfun()">
+                                <!-- Custom Address Input Form -->
+                                <div class="col-md-6 form-group p_star">
+                                    <label for="first">First Name</label>
+                                    <input type="text" class="form-control" id="first" name="firstname" />
+                                </div>
+
+                                <div class="col-md-6 form-group p_star">
+                                    <label for="last">Last Name</label>
+                                    <input type="text" class="form-control" id="last" name="lastname" />
+                                </div>
+
+                                <div class="col-md-6 form-group p_star">
+                                    <label for="number">Phone Number</label>
+                                    <input type="text" class="form-control" id="number" name="number" />
+                                </div>
+
+                                <div class="col-md-6 form-group p_star">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" />
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <label for="country">Country</label>
+                                    <select class="country_select" name="Country">
+                                        <option value="India">India</option>
+                                        <option value="USA">USA</option>
+                                        <option value="Canada">Canada</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <label for="state">State</label>
+                                    <select class="country_select" name="State">
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <label for="district">District</label>
+                                    <select class="country_select" name="District">
+                                        <option value="Palakkad">Palakkad</option>
+                                        <option value="Malappuram">Malappuram</option>
+                                        <option value="Kozhikod">Kozhikod</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <label for="add1">Flat, House no., Building, Company, Apartment</label>
+                                    <input type="text" class="form-control" id="add1" name="add1" />
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <label for="add2">Area, Street, Sector, Village</label>
+                                    <input type="text" class="form-control" id="add2" name="add2" />
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <label for="city">Town / City</label>
+                                    <input type="text" class="form-control" id="city" name="city" />
+                                </div>
+
+                                <div class="col-md-12 form-group">
+                                    <label for="pincode">Pincode</label>
+                                    <input type="text" class="form-control" id="pincode" name="pincode"
+                                        placeholder="Postcode/ZIP" />
+                                </div>
+
+                                <div style="display: flex; justify-content: center;">
+                                    <input type="submit" value="Add Address" class="AddAddress">
+                                </div>
+                            </form>
+                        </div>
+            </div>
+
+            <!-- Product Details Section -->
+            <div class="col-md-6">
+                <div class="card" style="border: 1px solid rgb(0, 0, 0); ">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Details</h5>
+
+                        <% if(user && user.cart && user.cart.length> 0) {%>
+
+                            <% user.cart.forEach((item,i=0)=> { %>
+                                <!-- Add your product details, total price, delivery options, etc. here -->
+                                <div class="mb-3"
+                                    style="display: flex; align-items: center; width: 100%; border-radius: 10px; ">
+                                    <div class="image_container"
+                                        style="width: 100px !important; height: 100px !important;">
+                                        <img class="product-image" src="/assets/uploads/<%= item.product.Image[0] %>"
+                                            alt="" />
+                                    </div>
+                                    <div
+                                        style="border: 1px solid wheat; width: 70%; display: flex;justify-content: left; border-radius: 10px;">
+                                        <div style="margin :10px ">
+                                            <p class="mb-3p"><span style="font-weight:500">
+                                                    <%= item.product.Name %>
+                                                </span> </p>
+                                            <p class="mb-3p"><span style="font-weight:400">Price :</span>
+                                                <%= item.product.Price %>
+                                            </p>
+                                            <p class="mb-3p"><span style="font-weight:400">Quantity :</span>
+                                                <%= item.quantity %>
+                                            </p>
+                                            <p class="mb-3p"><span style="font-weight:400">SubTotal :</span>$<%=
+                                                    item.product.Price * item.quantity %>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <% }); %>
+                                    <h5 class="card-subtitle mb-2 text-muted">Total Price:$ <span
+                                            style="color: rgb(0, 28, 36);">
+                                            <%= Total %>
+                                        </span></h5>
+                                    <div class="form-group">
+                                        <label for="deliveryOption">Delivery Options:</label>
+
+
+                                        <form id="paymentForm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="paymentMethod"
+                                                    value="COD" id="codOption">
+                                                <label class="form-check-label" for="codOption">Cash on Delivery</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="paymentMethod"
+                                                    value="RazorPay" id="razorpayOption">
+                                                <label class="form-check-label" for="razorpayOption">RazorPay</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="paymentMethod"
+                                                    value="OnlinePayment" id="onlinePaymentOption">
+                                                <label class="form-check-label" for="onlinePaymentOption">Online
+                                                    Payment</label>
+                                            </div>
+
+                                            <!-- <button type="button" onclick="placeOrder()">Place Order</button> -->
+                                        </form>
+
+                                    </div>
+                                    <div style="height: 50px;">
+                                        <p id="Msg_fr_COD_Option" style="color: red;"></p>
+                                    </div>
+                                    <button type="button" onclick="placeOrder()" id="placeorder"
+                                        class="btn btn-primary btn-block">Place
+                                        Order</button>
+
+                                    <% } %>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function hideAneme() {
+            var AddressDivSt = document.getElementById('Addressdiv')
+
+            if (AddressDivSt.style.display === 'none') {
+                document.getElementById('Addressdiv').style.display = "block"
+            } else {
+                document.getElementById('Addressdiv').style.display = "none"
+            }
+
+        }
+    </script>
+
+
+    <!--::footer_part start::-->
+    <footer class="footer_part">
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Top Products</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Managed Website</a></li>
+                            <li><a href="">Manage Reputation</a></li>
+                            <li><a href="">Power Tools</a></li>
+                            <li><a href="">Marketing Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Quick Links</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Jobs</a></li>
+                            <li><a href="">Brand Assets</a></li>
+                            <li><a href="">Investor Relations</a></li>
+                            <li><a href="">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Features</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Jobs</a></li>
+                            <li><a href="">Brand Assets</a></li>
+                            <li><a href="">Investor Relations</a></li>
+                            <li><a href="">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Resources</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Guides</a></li>
+                            <li><a href="">Research</a></li>
+                            <li><a href="">Experts</a></li>
+                            <li><a href="">Agencies</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="single_footer_part">
+                        <h4>Newsletter</h4>
+                        <p>Heaven fruitful doesn't over lesser in days. Appear creeping
+                        </p>
+                        <div id="mc_embed_signup">
+                            <form target="_blank"
+                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                method="get" class="subscribe_form relative mail_part">
+                                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = ' Email Address '">
+                                <button type="submit" name="submit" id="newsletter-submit"
+                                    class="email_icon newsletter-submit button-contactForm">subscribe</button>
+                                <div class="mt-10 info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="copyright_part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="copyright_text">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="footer_icon social_icon">
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a>
+                                </li>
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--::footer_part end::-->
+
+
+
+
+    <script>
+        function refreshfun() {
+            console.log("Refresh function invoked");
+            window.location.reload();
+            return false
+        }
+    </script>
+
+    <!-- <script>
+    document.getElementById("Msg_fr_COD_Option").style.display = "block";
+        setTimeout(function(){
+        document.getElementById("Msg_fr_COD_Option").style.display = "none";
+        }, 5000);
+</script> -->
+
+
+
+    </script>
+
+    <!-- jquery plugins here-->
+    <!-- jquery -->
+    <script src="js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- easing js -->
+    <script src="js/jquery.magnific-popup.js"></script>
+    <!-- swiper js -->
+    <script src="js/swiper.min.js"></script>
+    <!-- swiper js -->
+    <script src="js/masonry.pkgd.js"></script>
+    <!-- particles js -->
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <!-- slick js -->
+    <script src="js/slick.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <!-- <script src="js/contact.js"></script> -->
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/stellar.js"></script>
+    <!-- <script src="js/price_rangs.js"></script> -->
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+
+    <!-- Bootstrap JS and dependencies (optional, if needed) -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+
+        var theIDAddress = null;
+
+        function select(Address) {
+            var AddressId = getAdressID(Address)
+        }
+
+        function getAdressID(Address) {
+
+            console.log("Address ID = ", Address);
+            theIDAddress = Address
+            document.getElementById('AddressSelectionDiv').style.display = 'none'
+            return Address;
+        }
+
+
+
+
+        function placeOrder() {
+
+            var selectedPaymentMethod = getSelectedPaymentMethod();
+            var AddressId = theIDAddress
+
+            if (!AddressId) {
+                document.getElementById('Msg_fr_COD_Option').innerHTML = 'Please select a Address or create.'
+                console.log('Please select a Address.');
+            } else {
+                if (selectedPaymentMethod) {
+                    // You can now use 'selectedPaymentMethod' for further processing
+                    console.log('Selected Payment Method:', selectedPaymentMethod);
+                    console.log("ADDRESS ID :", AddressId);
+
+                    // Example: Send the selectedPaymentMethod to the server using AJAX/fetch
+                    sendToServer(selectedPaymentMethod, AddressId);
+                } else {
+                    document.getElementById('Msg_fr_COD_Option').innerHTML = 'Please select a payment method.'
+                    console.log('Please select a payment method.');
+                }
+            }
+
+
+
+
+        }
+
+        function getSelectedPaymentMethod() {
+            var paymentOptions = document.getElementsByName('paymentMethod');
+
+            for (var i = 0; i < paymentOptions.length; i++) {
+                if (paymentOptions[i].checked) {
+                    return paymentOptions[i].value;
+                }
+            }
+
+            return null; // No option selected
+        }
+
+
+
+        function sendToServer(selectedPaymentMethod, AddressId) {
+            // Example: Send a POST request to your server
+            fetch('http://localhost:5000/placeOrder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ paymentMethod: selectedPaymentMethod, addressId: AddressId }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                       
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Order Successful!',
+                            text: 'Your order has been placed successfully.',
+                            timer: 3000, // Show for 3 seconds
+                            showConfirmButton: false,
+                        });
+                        console.log('Data sent to the server:', data)
+                        //  Redirect to confirmation page after 3 seconds
+                        setTimeout(() => {
+                            window.location.href = '/confirmation_Order_page?id='+data; 
+                        }, 3000);
+
+                    }
+                })
+            
+                .catch(error => console.error('Error sending data to the server:', error));
+        }
+    </script>
+
+
+
+</body>
+
+</html>

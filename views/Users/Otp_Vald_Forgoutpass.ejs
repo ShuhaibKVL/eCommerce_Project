@@ -45,7 +45,7 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">Home</a>
+                                    <a class="nav-link" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -146,55 +146,66 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_text text-center">
-                        <div class="login_quote_bg">
-                            <h2>All Ready have a Account?</h2>
+                        <div  class="login_quote_bg">
+                        <div class="login_part_text_iner">
+                            <!-- <h2>All Ready have a Account?</h2>
                             <p>There are advances being made in science and technology
                                 everyday, and a good example of this is the</p>
-                            <a href="login" class="btn_3">Login </a>
+                            <a href="login" class="btn_3">Login </a> -->
+                        </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
-                            <h3>Welcome Back ! <br>
-                                Please Sign in now</h3>
-
+                            <h3>OTP Verification <br>
+                                Please enter the otp</h3>
+                            
                             <div style=" width: fit-content; height: 20px;">
                                 <% if (typeof message !== 'undefined') { %>
                                     <p id="error-message" style="color: red;"><%= message %></p>
                                 <%  } %>
                             </div>
-
-                            <p id="valid-message" style="color: red;"></p>
-                            <!-- novalidate="novalidate"  -->
-                            <form   class="row contact_form" action="Signup" id="signupForm" method="post" onsubmit="return validateForm()" >
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                                </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" pattern="^[^\s]*$">
-                                </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"placeholder="Phone Number" pattern="^[^\s]*$" >
-                                </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""  placeholder="Password" pattern="^[^\s]*$" >
-                                </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="Confirmpassword" name="ConfirmPassword" placeholder="Confirm Password" pattern="^[^\s]*$" >
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <!-- <div class="creat_account d-flex align-items-center">
-                                        <input type="checkbox" id="f-option" name="selector">
-                                        <label for="f-option">Remember me</label>
-                                    </div> -->
-                                    <button type="submit" value="submit" class="btn_3" >
-                                        Sign Up
-                                    </button>
+                            
+                            <div class="otpDiv">
+                                <h4>We send a OTP email to our respective email.<br> check the email.</h4>
+                                <div class="otp-container">
+                                    <form action="Otp_Vald_Forgoutpass" method="post">
+                                        <% if(typeof Otpmessage !== 'undefined'){ %>
+                                            <p id="error-message" style="color: green;"><%= Otpmessage %></p>
+                                        <% } %>
                                     
+                                        <div id="timer" style="color: rgb(0, 159, 13);">Time remaining: <span style="color: rgb(215, 3, 3);" id="countdown">240</span></div>
+                                        
+                                    <!-- FOR PAssing Email To Newpassword Router.. BECUASE emial need to find user from DB -->
+
+                                        <% if(typeof Email !== 'undefined') { %>
+                                        <input type="hidden" name="email" value="<%= Email %>">
+                                        <% } %>
+                                        
+                                    </td>
+                                        <div style="text-align: center;" class="col-md-12 form-group p_star">
+                                        <input id="otp-input" type="text" name="otp" maxlength="6" placeholder="Enter OTP">
+
+                                        </div>
+                                        <div class="col-md-12 form-group p_star">
+                                        <button type="submit" value="submit" class="btn_3" >
+                                            Submit
+                                            </button>
+                                        </div>
+                                        <div style="text-align: center;" class="col-md-12 form-group p_star">
+                                            
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                                <form action="ResendOtp" id="resendOtpForm"  method="post">
+                                    
+                                    <input type="hidden" name="email" id="email" value="<%= Email %>">
+                                    <button type="submit" value="submit" class="btn_resend_otp" >Resend OTP</button>
+                                </form>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -207,14 +218,53 @@
         setTimeout(function(){
         document.getElementById("error-message").style.display = "none";
         }, 2000);
+    
     </script>
 
 <!-- <script>
-    document.getElementById("valid-message").style.display = "block";
-        setTimeout(function(){
-        document.getElementById("valid-message").style.display = "none";
-        }, 2000);
+    var seconds = 60; // Set the initial time in seconds
+    
+    function countdown() {
+        var countdownElement = document.getElementById("countdown");
+    
+        if (seconds > 0) {
+            seconds--;
+            countdownElement.textContent = seconds;
+            setTimeout(countdown, 1000); // Update every second
+        } else {
+            countdownElement.textContent = "Time's up!";
+            // Handle OTP timeout action here
+        }
+    }
+
+    countdown(); // Start the countdown when the page loads
 </script> -->
+
+
+
+    <script>
+        var seconds = 240; // Set the initial time in seconds (4 minutes)
+
+        function countdown() {
+            var countdownElement = document.getElementById("countdown");
+
+            if (seconds > 0) {
+                var minutes = Math.floor(seconds / 60);
+                var remainingSeconds = seconds % 60;
+
+                countdownElement.textContent = minutes + "m " + remainingSeconds + "s";
+                seconds--;
+                setTimeout(countdown, 1000); // Update every second
+            } else {
+                countdownElement.textContent = "Time's up!";
+                // Handle OTP timeout action here
+            }
+        }
+
+        countdown(); // Start the countdown when the page loads
+    </script>
+
+
     <!--================login_part end =================-->
 
     <!--::footer_part start::-->
@@ -292,7 +342,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="copyright_text">
-                            
+                            ------------------------------------
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -310,86 +360,6 @@
         </div>
     </footer>
     <!--::footer_part end::-->
-
-    <script>
-        function validateForm() {
-            console.log("form sumbmitted succesfully")
-
-            var name = document.getElementById('name').value;
-            console.log(name);
-            var email = document.getElementById('email').value;
-            var phoneNumber = document.getElementById('phoneNumber').value;
-            var password = document.getElementById('password').value;
-            var Confirmpassword = document.getElementById('Confirmpassword').value;
-
-              //  << email validation >>
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.[a-zA-Z]{2,4}$/;
-
-              //   << name validation  >>
-                if(!/^[a-zA-Z][a-zA-Z0-9]*$/.test(name)){
-                document.getElementById('valid-message').innerHTML ="Please Enter a Valid Name"
-
-                return false
-                }else if(!emailRegex.test(email)){
-                document.getElementById('valid-message').innerHTML ="Please Enter a Valid Gmail Address"
-                return false
-                }else if(!/^\d+$/.test(phoneNumber)){
-                document.getElementById('valid-message').innerHTML ="Mobile should contain only numbers"
-                return false
-                }else if(!password){
-                    document.getElementById('valid-message').innerHTML ="Please Enter a Strong Password"
-                    return false
-                 //}
-                // else if(password){
-                //     // Check if the password meets the criteria
-
-                //     console.log("yjghj");
-
-                //     if (password.length < 8) {
-                //         // alert('Password must be at least 8 characters long.');
-                //         document.getElementById('valid-message').innerHTML ="Password must be at least 8 characters long."
-                //         return false;
-                //     }
-
-                //    // Check if the password contains at least one uppercase letter
-                //     if (!/[A-Z]/.test(password)) {
-                //         document.getElementById('valid-message').innerHTML ="Password must include One Uppercase characters."
-                //         return false;
-                //     }
-
-                //    // Check if the password contains at least one lowercase letter
-                //     if (!/[a-z]/.test(password)) {
-                //         // alert('Password must contain at least one lowercase letter.');
-                //         document.getElementById('valid-message').innerHTML ="Password must include One Lowercase characters."
-                //         return false;
-                //     }
-
-                //    // Check if the password contains at least one digit
-                //     if (!/\d/.test(password)) {
-                //         // alert('Password must contain at least one digit.');
-                //         document.getElementById('valid-message').innerHTML ="Password contains at least one digit."
-                //         return false;
-                //     }
-
-                //    // Check if the password contains at least one special character
-                //     if (!/[@$!%*?&]/.test(password)) {
-                //         // alert('Password must contain at least one special character (@, $, !, %, *, ?, &).');
-                //         document.getElementById('valid-message').innerHTML ="Password must contain at least one special character (@, $, !, %, *, ?, &).')"
-                //         return false;
-                //     }
-
-                //    // If all criteria are met, the password is valid
-                //     return true;
-
-                // }else if(Confirmpassword !== password){
-                    document.getElementById('valid-message').innerHTML ="Password Missmatch"
-                } else{
-                    return true
-                }
-        }
-
-        
-    </script>
 
     <!-- jquery plugins here-->
     <!-- jquery -->
@@ -420,9 +390,42 @@
     <script src="js/price_rangs.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+    <script>
+        function validateForm() {
+            console.log("form sumbmitted succesfully")
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var password = document.getElementById('password').value;
 
+              //   << name validation  >>
+                if(/^[a-zA-Z][a-zA-Z0-9]*$/.test(name)){
+                document.getElementById('error-message').innerHTML ="Please Enter a Valid Gmail Address"
+                return false
+                }
+            
+              //  << email validation >>
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.[a-zA-Z]{2,4}$/;
+            if (!emailRegex.test(email)){
+                document.getElementById('error-message').innerHTML ="Please Enter a Valid Gmail Address"
+                return false
+            }
 
+              //   << number validation  >>
+            if(!/^\d+$/.test(phoneNumber)){
+                document.getElementById('error-message').innerHTML ="Mobile should contain only numbers"
+                return false
+            }
 
+              //  << Password Validation  >>
+            if(password.includes(' ')){
+                document.getElementById('error-message').innerHTML ="Please Enter a Valid Gmail Address"
+                return false
+            }
+            
+            return true
+        }
+    </script>
 
 
 </body>

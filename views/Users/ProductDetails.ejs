@@ -275,6 +275,9 @@
                                     <div class="pro-qty">
                                         <input type="text" value="1">
                                     </div>
+                                    <% if(typeof cartMSg !== 'undefined') { %>
+                                        <p style="color: green;"><%= cartMSg %></p>
+                                    <% } %>
                                 </div>
                                 <a href="/AddToCart?id=<%= Product._id %>" class="primary-btn">add to cart</a>
                                 <!-- <a href="" class="feature_btn">Add To Cart<img class="feature" src="/assets/images/cart-plus-fill.svg" alt=""></a> -->

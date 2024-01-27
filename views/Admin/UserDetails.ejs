@@ -8,8 +8,8 @@
   <meta name="author" content=""/>
   <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
   <!-- loader-->
-  <link href="/css/pace.min.css" rel="stylesheet"/>
-  <script src="/js/pace.min.js"></script>
+  <!-- <link href="/css/pace.min.css" rel="stylesheet"/>
+  <script src="/js/pace.min.js"></script> -->
   <!--favicon-->
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
   <!-- Vector CSS -->
@@ -28,7 +28,9 @@
   <link href="/css/app-style.css" rel="stylesheet"/>
 
   <link rel="stylesheet" href="/css/addmore.css">
-  
+
+  <!-- Jquery / Ajax -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="bg-theme bg-theme1">
@@ -70,30 +72,11 @@
         </a>
       </li>
 
-      <!-- <li>
-        <a href="calendar.html">
-          <i class="zmdi zmdi-calendar-check"></i> <span>Calendar</span>
-          <small class="badge float-right badge-light">New</small>
-        </a>
-      </li> -->
-
-      <!-- <li>
-        <a href="profile.html">
-          <i class="zmdi zmdi-face"></i> <span>Profile</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="login.html" target="_blank">
-          <i class="zmdi zmdi-lock"></i> <span>Login</span>
-        </a>
-      </li>
-
        <li>
         <a href="register.html" target="_blank">
           <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
         </a>
-      </li> -->
+      </li>
 
       <li class="sidebar-header">LABELS</li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
@@ -223,10 +206,11 @@
                         </div>
                     </td>
                     <td>
+                      
                       <% if (users[i].isBlocked == false) { %>
-                        <a  href="Block?id=<%= users[i]._id %>"><button class="block_button" type="button" value="Unblock">Block</button></a>
+                        <a  href="Block?id=<%= users[i]._id %>"><button id="block-btn" class="block_button" type="button" value="Unblock" data-user-id="<%= users[i]._id %>">Block</button></a>
                       <% } else {%>
-                        <a href="Block?id=<%= users[i]._id %>"><button class="Unblock_button" type="button" value="Unblock">Unblock</button></a>
+                        <a href="Block?id=<%= users[i]._id %>"><button id="block-btn" class="Unblock_button" type="button" value="Unblock" data-user-id="<%= users[i]._id %>">Unblock</button></a>
                       <% } %>
                     </td>
                     <td>
@@ -250,7 +234,7 @@
 
                   
                  </tbody></table>
-               </div>
+          </div>
 	   </div>
 	 </div>
 	</div><!--End Row-->
@@ -262,7 +246,32 @@
 		<!--end overlay-->
 		
     </div>
+    
     <!-- End container-fluid-->
+
+
+// <script>
+//   $(document).ready(function () {
+//     $('#block-btn').on('click', function () {
+//       var userId = $(this).data('user-id');
+
+//       // Send AJAX request to the server
+//       $.ajax({
+//         type: 'POST',
+//         url: '/Block', // Replace with your server route
+//         data: { userId: userId },
+//         success: function (response) {
+//           // Update the specific row containing div
+//           $().html(response);
+//         },
+//         error: function (error) {
+//           console.error('Error:', error);
+//         }
+//       });
+//     });
+//   });
+// </script>
+
     
     </div><!--End content-wrapper-->
    <!--Start Back To Top Button-->

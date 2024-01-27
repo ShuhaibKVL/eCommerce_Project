@@ -17,7 +17,6 @@ const otpSchema = new mongoose.Schema({
     }
 })
 
-console.log("I AM HERE>>>>>")
 async function sendVerificaton(email,otp) {
     console.log("send verification INVOKED")
     try {

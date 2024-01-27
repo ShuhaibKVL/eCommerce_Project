@@ -1,0 +1,112 @@
+          <!--================Cart Area =================-->
+
+          <% if (user && user.cart && user.cart.length > 0) { %>
+            <section class="cart_area padding_top">
+              <div class="container">
+                <div class="cart_inner">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Product</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+          
+                          <% user.cart.forEach(item => { %>
+                        <tr>
+                          <td>
+                            <div class="media">
+                              <div class="d-flex">
+                                <img src="/assets/uploads/<%= item.product.Image[0] %>" alt=""   width="60" height="80" />
+                              </div>
+                              <div class="media-body">
+                                <p><%= item.product.Name %></p>
+                                <p><%= item.product.Description %></p>
+                                <p>Category : <%= item.product.Category %></p>
+                                <p>In Stock : <%= item.product.Stock %></p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <h5>$<%= item.product.Price %></h5>
+                          </td>
+                          <td>
+                            <div class="product_count">
+                              <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
+                              <input class="input-number" type="text" value="1" min="0" max="10">
+                              <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
+                            </div>
+                          </td>
+                          <td>
+                            <h5>$<%= item.product.Price * item.quantity %></h5>
+                          </td>
+                          <td>
+                              <form action="remove-from-cart" method="post">
+                                  <input type="hidden" name="productId" value="<%= item.product._id %>">
+                                  <button type="submit">Remove</button>
+                              </form>
+                          </td>
+                        </tr>
+                        
+          
+                        <!-- <tr class="shipping_area">
+                          <td></td>
+                          <td></td>
+                          <td>
+                            <h5>Shipping</h5>
+                          </td>
+                          <td>
+                            <div class="shipping_box">
+                              <ul class="list">
+                                <li>
+                                  <a href="#">Flat Rate: $5.00</a>
+                                </li>
+                                <li>
+                                  <a href="#">Free Shipping</a>
+                                </li>
+                                <li>
+                                  <a href="#">Flat Rate: $10.00</a>
+                                </li>
+                                <li class="active">
+                                  <a href="#">Local Delivery: $2.00</a>
+                                </li>
+                              </ul>
+                              <h6>
+                                Calculate Shipping
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                              </h6>
+                              <select class="shipping_select">
+                                <option value="1">Bangladesh</option>
+                                <option value="2">India</option>
+                                <option value="4">Pakistan</option>
+                              </select>
+                              <select class="shipping_select section_bg">
+                                <option value="1">Select a State</option>
+                                <option value="2">Select a State</option>
+                                <option value="4">Select a State</option>
+                              </select>
+                              <input type="text" placeholder="Postcode/Zipcode" />
+                              <a class="btn_1" href="#">Update Details</a>
+                            </div>
+                          </td>
+                        </tr> -->
+          
+                        <% }); %>
+                      </tbody>
+                    </table>
+                    <div class="checkout_btn_inner float-right">
+                      <a class="btn_1" href="/">Continue Shopping</a>
+                      <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                    </div>
+                  </div>
+                </div>
+            </section>
+          
+            <% } else { %>
+              <p>Your cart is empty.</p>
+            <% } %>
+          

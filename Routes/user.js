@@ -12,6 +12,12 @@ UserRoute.use(session({secret:uuidv4(),resave:false,saveUninitialized:false}))
 UserRoute.set("view engine","ejs")
 UserRoute.set('views','./views/Users')
 
+UserRoute.use(session({
+    secret: process.env.SESSION_SC,
+    resave: false,
+    saveUninitialized: true
+}))
+
 
 UserRoute.get('/',UserAuth.IsBlocked ,Usercontrol.Home)
 
@@ -50,6 +56,39 @@ UserRoute.get('/UserCart',Usercontrol.UserCart)
 UserRoute.get('/AddToCart',Usercontrol.AddnewCart)
 
 UserRoute.post('/remove-from-cart',Usercontrol.remove_from_cart)
+
+UserRoute.get('/forgoutPassword',Usercontrol.LaodforgoutPassword)
+
+UserRoute.post('/forgoutPassword',Usercontrol.forgoutPassword)
+
+UserRoute.get('/Otp_Vald_Forgoutpass',Usercontrol.load_Otp_Vald_Forgoutpass)
+
+UserRoute.post('/Otp_Vald_Forgoutpass',Usercontrol.Otp_Vald_Forgoutpass)
+
+UserRoute.get('/NewPassword',Usercontrol.LoadNewPassword)
+
+UserRoute.post('/NewPassword',Usercontrol.NewPassword)
+
+UserRoute.post('/ResendOtp',Usercontrol.ResendOTP)
+
+UserRoute.get('/shibili',Usercontrol.shibili)
+
+UserRoute.get('/update-cart',Usercontrol.update_cart)
+
+UserRoute.post('/UpdateProfile',Usercontrol.UpdateProfile)
+
+UserRoute.get('/Chekout',Usercontrol.LoadChekout)
+
+UserRoute.post('/placeOrder',Usercontrol.placeOrder)
+
+UserRoute.get('/confirmation_Order_page',Usercontrol.Load_confirmation_Order_page)
+
+
+
+UserRoute.get('/test',(req,res) => {
+        res.render('test')
+})
+
 
 
 
