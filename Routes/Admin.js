@@ -1,10 +1,23 @@
 const express = require('express')
 const AdmiNRoute = express()
+const session = require('express-session')
+const { v4 :uuidv4} = require('uuid')
 const multer = require("multer")
 const Path = require("path")
+const adminAuth = require('../Midlleware/AdminAuth')
+const nocache = require("nocache")
 
 const Admincontroll = require('../control/AdminControll')
 const { path } = require('./user')
+const { isLogout } = require('../Midlleware/UserAuth')
+
+AdmiNRoute.use(session({secret:uuidv4(),resave:false,saveUninitialized:false}))
+
+AdmiNRoute.use(session({
+    secret: process.env.SESSION_SC_ADMIN,
+    resave: false,
+    saveUninitialized: true
+}))
 
 const storageConfig = multer.diskStorage({
     destination: 'assets/uploads',
@@ -15,63 +28,69 @@ const storageConfig = multer.diskStorage({
 
 const upload = multer({ storage : storageConfig})
 
-// -------------------------------------------
-
-// const upload = multer({
-//     dest: 'uploads/',
-//     limits: {
-//       fileSize: 10000000 // Limit file size to 10MB
-//     },
-//     fileFilter(req, file, cb) {
-//       if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-//         return cb(new Error('Please upload an image (JPG, JPEG or PNG).'));
-//       }
-//       cb(null, true);
-//     }
-//   });
-
-// -------------------------------------------
-
-// const upload = multer({ dest: 'uploads/' });
-
-
-
-
 AdmiNRoute.set("view engine","ejs")
 AdmiNRoute.set('views','./views/Admin')
 
+AdmiNRoute.get('/',nocache(),adminAuth.isLogin,Admincontroll.Login)
 
+AdmiNRoute.post('/',Admincontroll.loginValidation)
 
-AdmiNRoute.get('/',Admincontroll.Login)
+AdmiNRoute.get('/DashBoard',nocache(),adminAuth.isLogout,Admincontroll.DashBoard )
 
-AdmiNRoute.post('/',Admincontroll.isLogin)
+AdmiNRoute.get('/adminLogout',Admincontroll.adminLogout)
 
-AdmiNRoute.get('/DashBoard',Admincontroll.DashBoard )
+AdmiNRoute.get('/UserDetails',adminAuth.isLogout,Admincontroll.userDetails)
 
-AdmiNRoute.get('/UserDetails',Admincontroll.userDetails)
+AdmiNRoute.get('/Block',adminAuth.isLogout,Admincontroll.blockUser)
 
-AdmiNRoute.get('/Block',Admincontroll.blockUser)
+AdmiNRoute.get('/Product',adminAuth.isLogout,Admincontroll.Product)
 
-AdmiNRoute.get('/Product',Admincontroll.Product)
+AdmiNRoute.get('/Add_Product',adminAuth.isLogout,Admincontroll.Load_Add_Product)
 
-AdmiNRoute.get('/Add_Product',Admincontroll.Load_Add_Product)
-
-// AdmiNRoute.post('/Add_Product', upload.array('image',12),Admincontroll.Add_Product)
-
-AdmiNRoute.post('/Add_Product', upload.array('images'),Admincontroll.Add_Product)
+AdmiNRoute.post('/Add_Product', upload.array('image',4),Admincontroll.Add_Product)
 
 AdmiNRoute.get('/DeletProduct',Admincontroll.DeletProduct)
 
-AdmiNRoute.get('/EditProduct',Admincontroll.LoadEditProduct)
+AdmiNRoute.get('/EditProduct',adminAuth.isLogout,Admincontroll.LoadEditProduct)
 
-AdmiNRoute.post('/EditProduct',upload.array('image',12),Admincontroll.EditProduct)
+AdmiNRoute.post('/EditProduct',upload.array('image',4),Admincontroll.EditProduct)
 
-AdmiNRoute.get('/Category',Admincontroll.LoadCategory)
+AdmiNRoute.get('/Category',adminAuth.isLogout,Admincontroll.LoadCategory)
 
 AdmiNRoute.post('/Category',Admincontroll.CreateCategory)
 
-AdmiNRoute.get('/DeletCategory',Admincontroll.DeletCategory)
+AdmiNRoute.get('/DeletCategory',adminAuth.isLogout,Admincontroll.DeletCategory)
 
-AdmiNRoute.get('/UnlistCategory',Admincontroll.UnlistCategory)
+AdmiNRoute.get('/UnlistCategory',adminAuth.isLogout,Admincontroll.UnlistCategory)
+
+AdmiNRoute.get('/OrderManagment',adminAuth.isLogout,Admincontroll.OrderManagment)
+
+AdmiNRoute.get('/RefreshOrderManagement',adminAuth.isLogout,Admincontroll.RefreshOrderManagement)
+
+AdmiNRoute.patch('/Approve_cancel_order',Admincontroll.Approve_cancel_order)
+
+AdmiNRoute.patch('/Delivered',Admincontroll.Delivered)
+
+AdmiNRoute.patch('/Order_Return',Admincontroll.Order_Return)
+
+AdmiNRoute.get('/orderDetails',Admincontroll.orderDetails)
+
+AdmiNRoute.get('/loadCoupon',adminAuth.isLogout,Admincontroll.loadCoupon)
+
+AdmiNRoute.post('/addNewCoupon',Admincontroll.addNewCoupon)
+
+AdmiNRoute.get('/DeleteCoupon',Admincontroll.DeleteCoupon)
+
+AdmiNRoute.get('/getEditCouponDetails',adminAuth.isLogout,Admincontroll.getEditCouponDetails)
+
+AdmiNRoute.post('/editCoupon',Admincontroll.editCoupon)
+
+AdmiNRoute.get('/chart-data',adminAuth.isLogout,Admincontroll.chart_data)
+
+AdmiNRoute.get('/filter-chart',adminAuth.isLogout,Admincontroll.filter_chart)
+
+AdmiNRoute.get('/loadSalesReport',adminAuth.isLogout,Admincontroll.loadSalesReport)
+
+AdmiNRoute.post('/filter-sales_report',adminAuth.isLogout,Admincontroll.filter_sales_report)
 
 module.exports = AdmiNRoute;

@@ -119,3 +119,94 @@
 .otp-input:focus {
     border-color: #e74c3c;
 }
+
+/* ORED PAGE */
+
+.OrdeerSataus{
+    border: none;
+    padding: 0.2vw 2vw;
+    background-color: rgb(0, 181, 9);
+    border-radius: 15px;
+    color: white;
+    transition: 1s;
+}
+.OrdeerSataus:hover{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid green;
+    color: green;
+}
+
+.accordion-header :hover{
+    background-color: #ffeede;
+}
+
+.accordion-header{
+    background-color: #fdf5ee;
+}
+.accordion-button{
+    background-color: #fdf5ee;
+}
+.cancelOrder{
+    /* padding: 0.2vw 2vw;
+    background-color: rgb(19, 93, 255);
+    width: fit-content;
+    transition: 1s; */
+    color: blue;
+    /* border-radius: 15px; */
+    font-size: 12px;
+}
+/* .cancelOrder:hover{
+    color: blue;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid blue;
+} */
+
+  /* Zoom Effect */
+.zoomDiv{
+    background-color: transparent;
+    height: 60vh;
+    width: 41vw;
+    position: absolute;
+    right: 0;
+    display: none;
+    overflow: hidden;
+}
+
+.zoomDiv > img {
+    object-fit: cover;
+    height: 230%;
+    transform: translate3d(0px, 0px, 0px);
+    transition: 5ms;
+}
+
+  /* COUPON */
+
+  .expireDateParagraph{
+    font-size: 10px;
+    color: orange;
+  }
+    /* wallet failed swal fire */
+  /* Define custom styles for error popup */
+.error-popup {
+    border-radius: 10px;
+  }
+  
+  /* Define custom styles for error title */
+  .error-title {
+    color: #ff0000; /* Red color for the title */
+  }
+  
+  /* Define custom styles for error text content */
+  .error-text {
+    color: #ff0000; /* Red color for the text content */
+  }
+
+  #downloadInvoiceBtn{
+    border: none;
+    border-radius: 7px;
+  }
+
+  /* Custom CSS for Swal in Payment Failed */
+  .swal-icon.payment-failed {
+    color: #f44336; /* Red color */
+  }

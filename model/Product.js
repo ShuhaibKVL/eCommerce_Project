@@ -19,8 +19,8 @@ const ProductData = mongoose.Schema ({
         required : true
     },
     Stock : {
-        type : String,
-        required : false
+        type : Number,
+        required : true
     },
     Description : {
         type : String,

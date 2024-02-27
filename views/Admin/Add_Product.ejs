@@ -1,653 +1,639 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-  <meta name="description" content=""/>
-  <meta name="author" content=""/>
-  <title>Dash Admin </title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>veloxAttire</title>
+    <!-- --favicon-- -->
+    <link rel="icon" href="/assets/images/Group 7.png">
   <!-- loader-->
   <!-- <link href="/css/pace.min.css" rel="stylesheet"/>
   <script src="/js/pace.min.js"></script> -->
-  <!--favicon-->
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
   <!-- Vector CSS -->
   <!-- <link href="../../assets/Admin/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/> -->
   <!-- simplebar CSS-->
-  <link href="/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
+  <link href="/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
   <!-- Bootstrap core CSS-->
-  <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
   <!-- animate CSS-->
-  <link href="/css/animate.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/animate.css" rel="stylesheet" type="text/css" />
   <!-- Icons CSS-->
-  <link href="/css/icons.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/icons.css" rel="stylesheet" type="text/css" />
   <!-- Sidebar CSS-->
-  <link href="/css/sidebar-menu.css" rel="stylesheet"/>
+  <link href="/css/sidebar-menu.css" rel="stylesheet" />
   <!-- Custom Style-->
-  <link href="/css/app-style.css" rel="stylesheet"/>
+  <link href="/css/app-style.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="/css/addmore.css">
 
 
-  <link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Roboto:400,700"
-/>
-<!-- https://fonts.google.com/specimen/Roboto -->
-<link rel="stylesheet" href="/Product/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+  <!-- https://fonts.google.com/specimen/Roboto -->
+  <link rel="stylesheet" href="/Product/css/fontawesome.min.css" />
 
-<!-- https://fontawesome.com/ -->
-<link rel="stylesheet" href="/Product/jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
+  <!-- https://fontawesome.com/ -->
+  <link rel="stylesheet" href="/Product/jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
 
-<!-- https://fontawesome.com/ -->
-<link rel="stylesheet" href="/Product/css/bootstrap.min.css" />
-<!-- https://getbootstrap.com/ -->
-<link rel="stylesheet" href="/Product/css/templatemo-style.css">
+  <!-- https://fontawesome.com/ -->
+  <link rel="stylesheet" href="/Product/css/bootstrap.min.css" />
+  <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="/Product/css/templatemo-style.css">
 
-    <!-- Using Cropper js -->
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="../../assets/cropperjs/cropper.css">
-    <script src="../../assets/cropperjs/cropper.js"></script>
+  <!-- Using Cropper js -->
 
-  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="../../assets/cropperjs/cropper.css">
+  <script src="../../assets/cropperjs/cropper.js"></script>
+
+  <!--  SweetAlert2 JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
 </head>
 
 <body class="bg-theme bg-theme1">
- 
-<!-- Start wrapper-->
- <div id="wrapper">
- 
-  <!--Start sidebar-wrapper-->
-   <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
-     <div class="brand-logo">
-      <a href="index.html">
-       <img src="/images/logo-icon.png" class="logo-icon" alt="logo icon">
-       <h5 class="logo-text">Dashtreme Admin</h5>
-     </a>
-   </div>
-   <ul class="sidebar-menu do-nicescrol">
-      <li class="sidebar-header">MAIN NAVIGATION</li>
-      <li>
-        <a href="Admin/index">
-          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+
+  <!-- Start wrapper-->
+  <div id="wrapper">
+
+    <!--Start sidebar-wrapper-->
+    <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
+      <div class="brand-logo">
+        <a href="index.html">
+          <img style="border: 1px solid rgba(255, 166, 0, 0.397);" src="/assets/images/Group 7.png" class="logo-icon" alt="logo icon">
+          <h5 class="logo-text">veloxAttire Admin</h5>
         </a>
-      </li>
-    
-      <li>
-        <a href="Admin/UserDetails">
-          <i class="zmdi zmdi-invert-colors"></i> <span>Users</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="Admin/Product">
-          <i class="zmdi zmdi-format-list-bulleted"></i> <span>Product</span>
-        </a>
-      </li>
-
-      <!-- <li>
-        <a href="tables.html">
-          <i class="zmdi zmdi-grid"></i> <span>Tables</span>
-        </a>
-      </li> -->
-
-      <li class="sidebar-header">LABELS</li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
-
-    </ul>
-   
-   </div>
-   <!--End sidebar-wrapper-->
-
-<!--Start topbar header-->
-<header class="topbar-nav">
- <nav class="navbar navbar-expand fixed-top">
-  <ul class="navbar-nav mr-auto align-items-center">
-    <li class="nav-item">
-      <a class="nav-link toggle-menu" href="javascript:void();">
-       <i class="icon-menu menu-icon"></i>
-     </a>
-    </li>
-    <li class="nav-item">
-      <form class="search-bar">
-        <input type="text" class="form-control" placeholder="Enter keywords">
-         <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-      </form>
-    </li>
-  </ul>
-     
-  <ul class="navbar-nav align-items-center right-nav-link">
-    <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-envelope-open-o"></i></a>
-    </li>
-    <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-bell-o"></i></a>
-    </li>
-    <li class="nav-item language">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
-        </ul>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-        <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-right">
-       <li class="dropdown-item user-details">
-        <a href="javaScript:void();">
-           <div class="media">
-             <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
-            <div class="media-body">
-            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-            <p class="user-subtitle">mccoy@example.com</p>
-            </div>
-           </div>
+      </div>
+      <ul class="sidebar-menu do-nicescrol">
+        <li class="sidebar-header">MAIN NAVIGATION</li>
+        <li>
+          <a href="DashBoard">
+            <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+
+        <li>
+          <a href="UserDetails">
+            <i class="zmdi zmdi-invert-colors"></i> <span>Users</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="Product">
+            <i class="zmdi zmdi-format-list-bulleted"></i> <span>Product</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="OrderManagment">
+            <i class="zmdi zmdi-grid"></i> <span>Order Mangment</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="loadCoupon">
+            <i class="zmdi zmdi-face"></i> <span>Coupon Management</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="loadSalesReport">
+            <i class="zmdi zmdi-face"></i> <span>Sales Report</span>
+          </a>
+        </li>
+
+        <li class="sidebar-header">LABELS</li>
+        <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
+        <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a>
+        </li>
+        <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
+
       </ul>
-    </li>
-  </ul>
-</nav>
-</header>
-<!--End topbar header-->
 
-<div class="clearfix"></div>
-	
+    </div>
+    <!--End sidebar-wrapper-->
+
+    <!--Start topbar header-->
+    <header class="topbar-nav">
+      <nav class="navbar navbar-expand fixed-top">
+        <ul class="navbar-nav mr-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link toggle-menu" href="javascript:void();">
+              <i class="icon-menu menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <form class="search-bar">
+              <input type="text" class="form-control" placeholder="Enter keywords">
+              <a href="javascript:void();"><i class="icon-magnifier"></i></a>
+            </form>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav align-items-center right-nav-link">
+          <li class="nav-item dropdown-lg">
+            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+              href="javascript:void();">
+              <i class="fa fa-envelope-open-o"></i></a>
+          </li>
+          <li class="nav-item dropdown-lg">
+            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+              href="javascript:void();">
+              <i class="fa fa-bell-o"></i></a>
+          </li>
+          <li class="nav-item language">
+            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+              href="javascript:void();"><i class="fa fa-flag"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
+              <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
+              <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
+              <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+              <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
+                  alt="user avatar"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item user-details">
+                <a href="javaScript:void();">
+                  <div class="media">
+                    <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110"
+                        alt="user avatar"></div>
+                    <div class="media-body">
+                      <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
+                      <p class="user-subtitle">mccoy@example.com</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!--End topbar header-->
+
+    <div class="clearfix"></div>
+
     <div class="content-wrapper">
-    <div class="container-fluid">
-    
+      <div class="container-fluid">
 
-    
 
-    <!--End Row-->
-	
+        <!--End Row-->
 
-    <div style="margin-top: 250px !important;" class="container tm-mt-big tm-mb-big">
-        <div class="row">
-          <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-              <div class="row">
-                <div class="col-12">
-                  <h2 class="tm-block-title d-inline-block">Add Product</h2>
+        <div style="margin-top: 90dvh" class="container tm-mt-big tm-mb-big">
+          <div class="row">
+            <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+              <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                <div class="row">
+                  <div class="col-12">
+                    <h2 class="tm-block-title d-inline-block">Add Product</h2>
+                  </div>
                 </div>
-              </div>
-              <div class="row tm-edit-product-row">
-                <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="row tm-edit-product-row">
+                  <div class="col-xl-6 col-lg-6 col-md-12">
+                  <div style="height: 50px;">
+                    <p id="error_message_name" style="color: red;"></p>
+                  </div>
 
 
-                  <form action="Add_Product" method="POST" enctype="multipart/form-data">
-                    <input type="file" id="image-input" name="images" multiple>
-                    
-                    <input type="text" name="name" placeholder="Name">
-                    <input type="text" name="description" placeholder="Description">
-                    <button id="crop-button">Crop</button>
-                    <button type="submit">Upload</button>
-                  </form>
-                  <div id="image-previews"></div>
-                  <div id="cropped-image"></div>
+                  <form action="Add_Product" id="ProductForm" class="tm-edit-product-form" method="post" enctype="multipart/form-data">
+                    <div class="form-group mb-3">
+                      <label for="name">Product Name </label>
+                      <input id="name" name="name" type="text" value=""
+                        class="form-control validate" />
 
-                  <!-- <form action="Add_Product" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" id="cropped-image-data" name="croppedImageData">
-                    <input type="text" name="name" placeholder="Name">
-                    <input type="text" name="description" placeholder="Description">
-                    <button id="crop-button">Crop</button>
-                    <button type="submit">Upload</button>
-                    <div id="cropped-image"></div>
-                  </form> -->
+                      <!-- For Only Passing The Respective Product Id  -->
+                      <input type="hidden" name="id" value="">
 
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="name">Price </label>
+                      <input id="price" name="price" type="text" value=""
+                        class="form-control validate"  />
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="category">Category</label>
+                      <select class="custom-select tm-select-accounts" value="" id="category"
+                        name="category">
 
+                        <option selected>Select category</option>
+                        <% Category.forEach(item => {  %>
+                          <% if(!item.IsList){ %>
+                            <option value="<%= item.Name %>"><%= item.Name %> </option>
+                            <% } %>
+                        <% }) %>
+                        
+                      </select>
+                    </div>
+                  
+
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+
+                  <div style="height: 50px;">
+                    <p id="error_message" style="color: red;"></p>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label for="size">Size </label>
+                      <input id="Size" name="size" value="" type="text"
+                        class="form-control validate" data-large-mode="true" />
+                    </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label for="stock">Units In Stock </label>
+                      <input id="stock" name="stock" type="text" value=""
+                        class="form-control validate" />
+                    </div>
+                  </div>
+                  
+                  <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <textarea id="description" class="form-control validate" name="description" value=""
+                      rows="5" ></textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+
+                  <div class="tm-product-img-dummy mx-auto" style="background-color: rgba(240, 248, 255, 0.214);">
+                    <!-- <i
+                    class="fas fa-cloud-upload-alt tm-upload-icon"
+                    onclick="document.getElementById('fileInput').click();"
+                  ></i> -->
+                    <!-- <img src="" alt="Loading" width="100" height="100"> -->
+
+                    <!-- Inside the <div class="tm-product-img-dummy mx-auto"> -->
+                      <div class="tm-product-img-dummy mx-auto" style="background: transparent;" id="imagePreviews"></div>
+
+                    <!-- <input id="fileInput" type="file" name="image" style="display:none;" multiple/> -->
+
+                  </div>
+                  <div class="custom-file mt-3 mb-3 ">
+                    <input id="fileInput"  type="file" name="image" style="display:none;" multiple maxlength="4" accept="image/*" />
+                    <input type="button" class="btn btn-primary btn-block mx-auto" style="align-self: center; width: fit-content; border-radius: 10px;" value="UPLOAD PRODUCT IMAGES"
+                      onclick="document.getElementById('fileInput').click();" />
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Product</button>
+                  
+                </div>
+                </form>
+                  
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
+          <script>
+            function hideCropper() {
+              document.getElementById('hiding_div').style.display = "Block";
+            }
+
+          </script>
+
+          <script>
+            document.getElementById("error-message").style.display = "block";
+            setTimeout(function () {
+              document.getElementById("error-message").style.display = "none";
+            }, 2000);
+          </script>
+
+          
+
+          <!--End Row-->
+
+          <!--End Dashboard Content-->
+
+          <!--start overlay-->
+          <div class="overlay toggle-menu"></div>
+          <!--end overlay-->
+
+        </div>
+        <!-- End container-fluid-->
+
+
+
+      </div><!--End content-wrapper-->
+      <!--Start Back To Top Button-->
+      <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+      <!--End Back To Top Button-->
+
+      <!--Start footer-->
+      <footer class="footer">
+        <div class="container">
+          <div class="text-center">
+            ----------------------
+          </div>
+        </div>
+      </footer>
+      <!--End footer-->
+
+      <!--start color switcher-->
+      <div class="right-sidebar">
+        <div class="switcher-icon">
+          <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+        </div>
+        <div class="right-sidebar-content">
+
+          <p class="mb-0">Gaussion Texture</p>
+          <hr>
+
+          <ul class="switcher">
+            <li id="theme1"></li>
+            <li id="theme2"></li>
+            <li id="theme3"></li>
+            <li id="theme4"></li>
+            <li id="theme5"></li>
+            <li id="theme6"></li>
+          </ul>
+
+          <p class="mb-0">Gradient Background</p>
+          <hr>
+
+          <ul class="switcher">
+            <li id="theme7"></li>
+            <li id="theme8"></li>
+            <li id="theme9"></li>
+            <li id="theme10"></li>
+            <li id="theme11"></li>
+            <li id="theme12"></li>
+            <li id="theme13"></li>
+            <li id="theme14"></li>
+            <li id="theme15"></li>
+          </ul>
+
         </div>
       </div>
+      <!--end color switcher-->
 
-      <script>
-        function hideCropper() {
-          document.getElementById('hiding_div').style.display = "Block";
-        }
-        
-      </script>
+    </div><!--End wrapper-->
 
-      <script>
-        document.getElementById("error-message").style.display = "block";
-            setTimeout(function(){
-            document.getElementById("error-message").style.display = "none";
-            }, 2000);
-      </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
-      <script>
-        function validateForm(){
-          const name = document.getElementById('name').value
-          const description = document.getElementById('descripton').value
-          
-          if(name.length > 12){
-            document.getElementById('error_message_name').innerHTML = "Name Should not exceed more than 14 letter"
+    <!-- simplebar js -->
+    <script src="/plugins/simplebar/js/simplebar.js"></script>
+    <!-- sidebar-menu js -->
+    <script src="/js/sidebar-menu.js"></script>
+    <!-- loader scripts -->
+    <!-- <script src="/jquery.loading-indicator.js"></script> -->
+    <!-- Custom scripts -->
+    <script src="/js/app-script.js"></script>
+    <!-- Chart js -->
 
-            setTimeout(function () {
-              document.getElementById('error_message_name').innerHTML =''
-            },5000)
+    <script src="/plugins/Chart.js/Chart.min.js"></script>
 
-            return false
-
-          }else if(description.length > 14){
-            document.getElementById('error_message').innerHTML ='Description Should not exceed more than 14 letter';
-            
-            setTimeout(function () {
-              document.getElementById('error_message').innerHTML =''
-            },5000)
-
-            return false
-          }else{
-            document.getElementById('error_message').innerHTML = '';
-            return true
-          }
-          
-        }
-
-        const forms = document.getElementById('ProductForm')
-        forms.addEventListener('submit', function(event) {
-          if(!validateForm()) {
-            event.preventDefault();
-          }
-        })
-      </script>
+    <!-- Index js -->
+    <!-- <script src="/js/index.js"></script> -->
 
 
 
-	<!--End Row-->
-
-      <!--End Dashboard Content-->
-
-    <!--start overlay-->
-		<div class="overlay toggle-menu"></div>
-		<!--end overlay-->
-		
-    </div>
-    <!-- End container-fluid-->
-    
-
-
-    </div><!--End content-wrapper-->
-    <!--Start Back To Top Button-->
-    <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-    <!--End Back To Top Button-->
-	
-	<!--Start footer-->
-	<footer class="footer">
-        <div class="container">
-        <div class="text-center">
-            ----------------------
-        </div>
-        </div>
-    </footer>
-	<!--End footer-->
-	
-  <!--start color switcher-->
-  <div class="right-sidebar">
-    <div class="switcher-icon">
-      <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
-    </div>
-    <div class="right-sidebar-content">
-
-      <p class="mb-0">Gaussion Texture</p>
-      <hr>
-      
-      <ul class="switcher">
-        <li id="theme1"></li>
-        <li id="theme2"></li>
-        <li id="theme3"></li>
-        <li id="theme4"></li>
-        <li id="theme5"></li>
-        <li id="theme6"></li>
-      </ul>
-
-      <p class="mb-0">Gradient Background</p>
-      <hr>
-      
-      <ul class="switcher">
-        <li id="theme7"></li>
-        <li id="theme8"></li>
-        <li id="theme9"></li>
-        <li id="theme10"></li>
-        <li id="theme11"></li>
-        <li id="theme12"></li>
-		<li id="theme13"></li>
-        <li id="theme14"></li>
-        <li id="theme15"></li>
-      </ul>
-      
-    </div>
-  </div>
-  <!--end color switcher-->
-
-  </div><!--End wrapper-->
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="/Product/js/jquery.min.js"></script>
-  <script src="/Product/js/popper.min.js"></script>
-  <script src="/Product/js/bootstrap.min.js"></script>
-	
-  <!-- simplebar js -->
-  <script src="/Product/plugins/simplebar/js/simplebar.js"></script>
-  <!-- sidebar-menu js -->
-  <script src="/Product/js/sidebar-menu.js"></script>
-  <!-- loader scripts -->
-  <script src="/Product/js/jquery.loading-indicator.js"></script>
-  <!-- Custom scripts -->
-  <script src="/Product/js/app-script.js"></script>
-  <!-- Chart js -->
-  
-  <script src="/Product/plugins/Chart.js/Chart.min.js"></script>
-
-  <!-- Index js -->
-  <script src="/Product/js/index.js"></script>
-
-
-
-  <script src="/Productjs/jquery-3.3.1.min.js"></script>
-
-  <!-- https://jquery.com/download/ -->
-  <script src="/Product/jquery-ui-datepicker/jquery-ui.min.js"></script>
+    <!-- <script src="/js/jquery-3.3.1.min.js"></script> -->
 
     <!-- https://jquery.com/download/ -->
-    <script src="/Product/js/bootstrap.min.js"></script>
+    <!-- <script src="/jquery-ui-datepicker/jquery-ui.min.js"></script> -->
 
-  <!-- https://getbootstrap.com/ -->
-  <script>
-    $(function() {
-      $("#expire_date").datepicker();
-    });
-  </script>
+    <!-- https://jquery.com/download/ -->
+    <!-- <script src="/js/bootstrap.min.js"></script> -->
 
-
-
-<script>
-      
-const input = document.getElementById('image-input');
-const previews = document.getElementById('image-previews');
-
-input.addEventListener('change', () => {
-previews.innerHTML = '';
-for (const file of input.files) {
-const image = document.createElement('img');
-const reader = new FileReader();
-
-reader.onload = (event) => {
-  image.src = event.target.result;
-  image.style.width = '200px';
-  image.style.height = 'auto';
-  const cropper = new Cropper(image, { aspectRatio: 1 });
-  previews.appendChild(image);
-};
-
-reader.readAsDataURL(file);
-}
-});
-
-
-// const image = document.getElementById('image-input');
-// const cropper = new Cropper(image, {
-//   aspectRatio: 16 / 9,
-//   cropBoxMovable: false,
-//   cropBoxResizable: false,
-//   guides: false,
-//   highlight: false,
-//   crop: function(event) {
-//     console.log("Crop data: " + JSON.stringify(event.detail));
-//   },
-// });
-
-
-// const cropButton = document.getElementById('crop-button');
-// cropButton.addEventListener('click', function() {
-//   const croppedImage = cropper.getCroppedCanvas();
-//   const imageData = croppedImage.toDataURL();
-//   const croppedImageElement = document.getElementById('cropped-image');
-//   croppedImageElement.src = imageData;
-// });
-//  // ---------------------------------- \\
-
-//  cropButton.addEventListener('click', function() {
-//   const croppedImage = cropper.getCroppedCanvas();
-//   const imageData = croppedImage.toDataURL();
-//   const croppedImageElement = document.getElementById('cropped-image');
-//   croppedImageElement.src = imageData;
-
-//   // Set the cropped image data as a hidden input field value
-//   const croppedImageInput = document.getElementById('cropped-image-data');
-//   croppedImageInput.value = imageData;
-// });
-
-
-
-const form = document.querySelector('form');
-
-form.addEventListener('submit', (event) => {
-event.preventDefault();
-
-const formData = new FormData();
-for (const file of input.files) {
-const image = document.querySelector(`img[src="${URL.createObjectURL(file)}"]`);
-const cropper = new Cropper(image);
-const croppedCanvas = cropper.getCroppedCanvas();
-const croppedBlob = new Blob([croppedCanvas.toDataURL('image/jpeg')], { type: 'image/jpeg' });
-formData.append('images', croppedBlob, file.name);
-}
-formData.append('name', form.name.value);
-formData.append('description', form.description.value);
-
-fetch('/upload', { method: 'POST', body: formData });
-});
-  </script>
-
-
-
-
-
-<!-- <script>
-const imageInput = document.getElementById('image-input');
-const uploadButton = document.getElementById('upload-button');
-const imageContainer = document.getElementById('image-container');
-const cropButton = document.getElementById('crop-button');
-const uploadForm = document.getElementById('upload-form');
-
-let croppedImage;
-
-imageInput.addEventListener('change', () => {
-  const file = imageInput.files[0];
-  const reader = new FileReader();
-
-  reader.onload = (event) => {
-    const img = new Image();
-    img.onload = () => {
-      imageContainer.innerHTML = '';
-      imageContainer.appendChild(img);
-      const cropper = new Cropper(img, { aspectRatio: 1 });
-
-      cropButton.addEventListener('click', () => {
-        croppedImage = cropper.getCroppedCanvas().toDataURL();
-        document.getElementById('cropped-image').value = croppedImage;
+    <!-- https://getbootstrap.com/ -->
+    <script>
+      $(function () {
+        $("#expire_date").datepicker();
       });
-    };
+    </script>
 
-    img.src = event.target.result;
-  };
 
-  reader.readAsDataURL(file);
-});
-
-uploadButton.addEventListener('click', () => {
-  imageInput.click();
-});
-
-uploadForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const formData = new FormData();
-  formData.append('image', croppedImage);
-
-  // Send the form data to the server using Multer
-}); -->
-
-  <!-- cropperJs -->
-<!-- 
- const imageInputs = [document.getElementById('image-input-1'), document.getElementById('image-input-2'), document.getElementById('image-input-3'), document.getElementById('image-input-4')];
-const uploadButtons = [document.getElementById('upload-button-1'), document.getElementById('upload-button-2'), document.getElementById('upload-button-3'), document.getElementById('upload-button-4')];
-const imageContainers = [document.getElementById('image-container-1'), document.getElementById('image-container-2'), document.getElementById('image-container-3'), document.getElementById('image-container-4')];
-const cropButtons = [document.getElementById('crop-button-1'), document.getElementById('crop-button-2'), document.getElementById('crop-button-3'), document.getElementById('crop-button-4')];
-const croppedImages = [document.getElementById('cropped-image-1'), document.getElementById('cropped-image-2'), document.getElementById('cropped-image-3'), document.getElementById('cropped-image-4')];
-
-let croppedImagesArray = [];
-
-imageInputs.forEach((imageInput, index) => {
-  uploadButtons[index].addEventListener('click', () => {
-    imageInput.click();
-  }); 
-
-  imageInput.addEventListener('change', () => {
-    const file = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        imageContainers[index].innerHTML = '';
-        imageContainers[index].appendChild(img);
-        const cropper = new Cropper(img, { aspectRatio: 1 });
-
-        cropButtons[index].addEventListener('click', () => {
-          croppedImagesArray[index] = cropper.getCroppedCanvas().toDataURL();
-          croppedImages[index].value = croppedImagesArray[index];
-        });
-      };
-
-      img.src = event.target.result;
-    };
-
-    reader.readAsDataURL(file);
-  });
-});
-
-uploadForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const formData = new FormData();
-
-  croppedImagesArray.forEach((croppedImage, index) => {
-    formData.append(`images[${index}]`, croppedImage);
-  });
-
-  // Send the form data to the server using Multer
-}); -->
-
-</script>
 <script>
-  
-//     const imageInput = document.getElementById('imageInput');
-//     const croppedImageDataInput = document.getElementById('croppedImageData');
-//     const previewContainer = document.getElementById('Preview');
-//     const cropperCanvas = document.getElementById('image');
-//     let cropper;
+  function validateForm() {
+    const name = document.getElementById('name').value;
+    const description = document.getElementById('description').value;
+    const price = document.getElementById('price').value;
+    const Size = document.getElementById('Size').value;
+    const stock = document.getElementById('stock').value;
+    const category = document.getElementById('category').value;
+    const fileInput = document.getElementById('fileInput')
 
-//     // Initialize Cropper when the image is loaded
-//     cropperCanvas.onload = function () {
-//         cropper = new Cropper(cropperCanvas, {
-//             aspectRatio: 1,
-//             responsive: true,
-//             viewMode: 2,
-//             dragMode: 'move',
-//             autoCropArea: 0.8,
-//         });
-//     };
+    // Check the number of selected images
+    const selectedImagesCount = fileInput.files.length;
+    
 
-//     const croppedImgArr = [];
+    if (name.length > 12  || name.length < 2 ) {
+      console.log("name validated ");
+      document.getElementById('error_message_name').innerHTML = "Name Should contain at least 2 character, and should  not exceed more than 14 letter"
 
-//     function handleImageUpload() {
-//         imageInput.click();
-//     }
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
 
-//     imageInput.addEventListener('change', function () {
-//         croppedImgArr.length = 0; // Clear the array
-//         previewContainer.innerHTML = '';
+      return false
 
-//         const file = imageInput.files[0];
-//         if (file) {
-//             const reader = new FileReader();
+    } else if(description.length > 14 || description.length < 5){
+      console.log("Description validated ");
+      document.getElementById('error_message_name').innerHTML = "Description Should contain at least 5 character, and should not exceed more than 28 letter";
 
-//             reader.onload = function (e) {
-//                 cropperCanvas.src = e.target.result;
-//             };
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
 
-//             reader.readAsDataURL(file);
-//         }
-//     });
+      return false
 
-//     document.getElementById('btn-crop').addEventListener('click', function () {
-//         if (cropper) {
-//             const croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
-//             croppedImgArr.push(croppedImage);
+    }else if(price.length < 1) {
+      document.getElementById('error_message_name').innerHTML = 'Price must contain the product Price';
 
-//             const previewImg = new Image();
-//             previewImg.src = croppedImage;
-//             previewContainer.appendChild(previewImg);
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
 
-//             croppedImageDataInput.value = JSON.stringify(croppedImgArr);
-//         } else {
-//             console.error('Cropper is not initialized.');
-//         }
-//     });
+      return false
+    }else if(Size.length == 0 ) {
+      document.getElementById('error_message_name').innerHTML = 'Please Insert The product Size';
 
-//     // Add event listeners for custom toolbar buttons
-//     document.getElementById('rotate-left').addEventListener('click', function () {
-//         cropper && cropper.rotate(-90);
-//     });
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
 
-//     document.getElementById('rotate-right').addEventListener('click', function () {
-//         cropper && cropper.rotate(90);
-//     });
+      return false
+    }else if (stock.length == 0 ) {
+      document.getElementById('error_message_name').innerHTML = 'Please enter The product stock';
 
-//     document.getElementById('flip-horizontal').addEventListener('click', function () {
-//         cropper && cropper.scaleX(-cropper.getData().scaleX);
-//     });
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
 
-//     document.getElementById('flip-vertical').addEventListener('click', function () {
-//         cropper && cropper.scaleY(-cropper.getData().scaleY);
-//     });
+      return false
+    }else if (category === 'Select category' ) {
+      document.getElementById('error_message_name').innerHTML = 'Please Select any Category';
 
-//     document.getElementById('zoom-in').addEventListener('click', function () {
-//         cropper && cropper.zoom(0.1);
-//     });
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
 
-//     document.getElementById('zoom-out').addEventListener('click', function () {
-//         cropper && cropper.zoom(-0.1);
-//     });
+      return false
+    }else if (selectedImagesCount < 3 ) {
+      document.getElementById('error_message_name').innerHTML = 'Please select at least 3 images ';
 
-//     document.getElementById('reset').addEventListener('click', function () {
-//         cropper && cropper.reset();
-//     });
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
+
+      return false
+    }else {
+      document.getElementById('error_message_name').innerHTML = '';
+      return true
+    }
+
+  }
+
+  const forms = document.getElementById('ProductForm')
+  forms.addEventListener('submit', function (event) {
+    console.log("Validation form invoked >>> on ADD PRODUCT :");
+    if (!validateForm()) {
+      event.preventDefault();
+    }
+  })
+</script>
 
 
-// </script>
+<script>
+  document.getElementById('fileInput').addEventListener('change', handleFileSelect);
 
-  
+  function handleFileSelect(event) {
+      const fileInput = document.getElementById('fileInput');
+      const selectedFiles = fileInput.files;
+
+      // Check if the number of selected files exceeds 4 or is less than 3
+      if (selectedFiles.length > 4 || selectedFiles.length < 3) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Please select at least 3 images and only up to 4 images.',
+          });
+
+          // Clear the file input to prevent exceeding the limit
+          fileInput.value = '';
+          return;
+      }
+
+      const previewContainer = document.getElementById('imagePreviews');
+      previewContainer.innerHTML = '';
+
+      const files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+          createPreview(files[i], i);
+      }
+  }
+
+  function createPreview(file, index) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+          const preview = document.createElement('div');
+          preview.classList.add('preview');
+          preview.innerHTML = `
+              <img src="${e.target.result}" alt="Image Preview" width="100" height="100">
+              <button type="button" class="btn btn-danger mt-2" onclick="removeImage(${index})"  style="border: none; background-color:#dc3545 ; color: white; font-size: 12px; padding: 5px 10px;">Remove</button>
+              <input type="file" style="display:none;" onchange="updateImage(${index}, this)" />
+              <button type="button" class="btn mt-2" onclick="addNewImage(${index})" style="border: none; background-color: #01557ce2; color: white; font-size: 12px; padding: 5px 10px;">Add New Image</button>
+          `;
+          document.getElementById('imagePreviews').appendChild(preview);
+      };
+      reader.readAsDataURL(file);
+  }
+
+  function removeImage(index) {
+      const previewContainer = document.getElementById('imagePreviews');
+      const previewToRemove = previewContainer.querySelector(`.preview:nth-child(${index + 1})`);
+      previewToRemove.parentNode.removeChild(previewToRemove);
+  }
+
+  function updateImage(index, input) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+          const previewContainer = document.getElementById('imagePreviews');
+          const previewToUpdate = previewContainer.querySelector(`.preview:nth-child(${index + 1})`);
+          const image = previewToUpdate.querySelector('img');
+          image.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+  }
+
+  function addNewImage(index) {
+      const previewContainer = document.getElementById('imagePreviews');
+      const previewToAddNewImage = previewContainer.querySelector(`.preview:nth-child(${index + 1})`);
+      const inputElement = previewToAddNewImage.querySelector('input[type="file"]');
+      inputElement.click();
+  }
+</script>
+
+
+    <script>
+
+      const input = document.getElementById('image-input');
+      const previews = document.getElementById('image-previews');
+
+      input.addEventListener('change', () => {
+        previews.innerHTML = '';
+        for (const file of input.files) {
+          const image = document.createElement('img');
+          const reader = new FileReader();
+
+          reader.onload = (event) => {
+            image.src = event.target.result;
+            image.style.width = '200px';
+            image.style.height = 'auto';
+            const cropper = new Cropper(image, { aspectRatio: 1 });
+            previews.appendChild(image);
+          };
+
+          reader.readAsDataURL(file);
+        }
+      });
+
+
+      const image = document.getElementById('image-input');
+      const cropper = new Cropper(image, {
+        aspectRatio: 16 / 9,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        guides: false,
+        highlight: false,
+        crop: function(event) {
+          console.log("Crop data: " + JSON.stringify(event.detail));
+        },
+      });
+
+
+      const cropButton = document.getElementById('crop-button');
+      cropButton.addEventListener('click', function() {
+        const croppedImage = cropper.getCroppedCanvas();
+        const imageData = croppedImage.toDataURL();
+        const croppedImageElement = document.getElementById('cropped-image');
+        croppedImageElement.src = imageData;
+      });
+      //  // ---------------------------------- \\
+
+    </script>
+
 </body>
+
 </html>

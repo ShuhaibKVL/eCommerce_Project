@@ -29,4 +29,10 @@ const UserSchema = mongoose.Schema({
 
 })
 
+   // Method to clear the user's cart
+    UserSchema.methods.clearCart = function() {
+        this.cart = []
+        return this.save()
+}
+
 module.exports = mongoose.model('User',UserSchema)

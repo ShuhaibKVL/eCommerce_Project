@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Custom CSS  -->
     <link rel="stylesheet" href="/css/added.css">
+    <!-- jQuery for ajax -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -83,40 +85,15 @@
                                     </div>
                                 </li>
                                 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
-                                </li>
+                                
                             </ul>
                         </div>
-                        <div class="hearer_icon d-flex">
-                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <a href=""><i class="ti-heart"></i></a>
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> -->
-                                
-                            </div>
-                        </div>
+                        
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box">
-            <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
-                    <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
-            </div>
-        </div>
+        
     </header>
     <!-- Header part end-->
 
@@ -142,27 +119,27 @@
 
     <!--================login_part Area =================-->
     <section class="login_part padding_top">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-md-6">
+        <div class="container" style="display: flex; align-items: center; justify-content: center;">
+            <!-- <div class="row align-items-center"> -->
+                <!-- <div class="col-lg-6 col-md-6">
                     <div class="login_part_text text-center">
                         <div  class="login_quote_bg">
                         <div class="login_part_text_iner">
                             <h2>All Ready have a Account?</h2>
-                            <p>There are advances being made in science and technology
-                                everyday, and a good example of this is the</p>
+                            <p>Not need to Sign up again.Login with your existing email and password </p>
                             <a href="login" class="btn_3">Login </a>
                         </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
                             <h3>OTP Verification <br>
-                                Please enter the otp</h3>
+                                Please enter the OTP</h3>
+                                
                             
-                            <div style=" width: fit-content; height: 20px;">
+                            <div id="error_otp_validation" style=" width: fit-content; height: 50px; position: relative; margin-bottom: 1vw;">
                                 <% if (typeof message !== 'undefined') { %>
                                     <p id="error-message" style="color: red;"><%= message %></p>
                                 <%  } %>
@@ -170,12 +147,13 @@
                                 <% if(typeof Otpmessage !== 'undefined'){ %>
                                     <p id="error-message" style="color: green;"><%= Otpmessage %></p>
                                 <% } %>
+                                <p id="err-otp" style="color: red;"></p>
                             </div>
                             
                             <div class="otpDiv">
                                 <h4>We send a OTP email to our respective email.<br> check the email.</h4>
                                 <div class="otp-container" >
-                                    <form action="/Otp" method="post">
+                                    <form  id="otpValaidationForm">
                                         <br>
                                         <div id="timer" style="color: rgb(0, 159, 13); align-self: center;">Time remaining: <span style="color: rgb(215, 3, 3);" id="countdown">240</span></div>
                                         <br>
@@ -185,7 +163,7 @@
                                         <input type="hidden" name="name" value="<%= name %>">
                                         <input type="hidden" name="email" value="<%= email %> ">
                                         <input type="hidden" name="phoneNumber" value="<%= phoneNumber %>">
-                                        <input type="hidden" name="password" value="<%= hashedPassword %>">
+                                        <input type="hidden" name="hashedPassword" value="<%= hashedPassword %>">
                                         <% } %>
                                         </td>
                                         <div style="text-align: center;" class="col-md-12 form-group p_star">
@@ -193,7 +171,7 @@
 
                                         </div>
                                         <div class="col-md-12 form-group p_star">
-                                        <button type="submit" value="submit" class="btn_3" >
+                                        <button  type="button" onclick="sumbitform()"  class="btn_3" >
                                             Submit
                                             </button>
                                         </div>
@@ -204,7 +182,7 @@
                                     <form action="ResendOtp" id="resendOtpForm"  method="post">
                                         <input type="hidden" name="email" value="<%= email %>" id="email">
                                         <!-- <button class="none" type="submit" value="submit" class="btn_resend_otp" >Resend OTP</button> -->
-                                        <input type="submit" style="border: none;  color: rgba(48, 48, 48, 0.845);" value="Resend Otp ?">
+                                        <input type="submit" id="stopButton" style="border: none;  color: rgba(48, 48, 48, 0.845);" value="Resend Otp ?">
                                     </form>
                                 
                                 </div>
@@ -212,7 +190,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
     </section>
 
@@ -228,41 +206,37 @@
     var seconds = 240; // Set the initial time in seconds (4 minutes)
     var countdownTimeout; // Variable to store the timeout ID
 
-    function countdown() {
-        var countdownElement = document.getElementById("countdown");
+function countdown() {
+    var countdownElement = document.getElementById("countdown");
 
-        if (seconds > 0) {
-            var minutes = Math.floor(seconds / 60);
-            var remainingSeconds = seconds % 60;
+    if (seconds > 0) {
+        var minutes = Math.floor(seconds / 60);
+        var remainingSeconds = seconds % 60;
 
-            countdownElement.textContent = minutes + "m " + remainingSeconds + "s";
-            seconds--;
+        countdownElement.textContent = minutes + "m " + remainingSeconds + "s";
+        seconds--;
 
-            // Schedule the next update or reset
-            countdownTimeout = setTimeout(countdown, 1000);
-        } else {
-            countdownElement.textContent = "Time's up!";
-            // Handle OTP timeout action here
-        }
+        // Schedule the next update or reset
+        countdownTimeout = setTimeout(countdown, 1000);
+    } else {
+        countdownElement.textContent = "Time's up!";
+        // Handle OTP timeout action here
     }
+}
 
-    countdown(); // Start the countdown when the page loads
+// Call the countdown function to start the timer
+countdown();
 
-    // Add an event listener for the form submission
-    document.getElementById("resendOtpForm").addEventListener("submit", function (event) {
-        // Check if countdown is already running
-        if (!countdownTimeout) {
-            // Restart the countdown after a short delay to allow the form to be submitted
-            setTimeout(function () {
-                
-                seconds = 240; // Reset the countdown to its initial value
-                countdown();
-                
-                // Now you can manually submit the form
-                document.getElementById("resendOtpForm").submit();
-            }, 100);
-        }
-    });
+// Function to stop the countdown
+function stopCountdown() {
+    clearTimeout(countdownTimeout);
+    seconds = 240
+    countdown()
+}
+
+// Example: Assuming you have a button with id "stopButton"
+document.getElementById("stopButton").addEventListener("click", stopCountdown);
+
 </script>
 
     <!--================login_part end =================-->
@@ -424,6 +398,37 @@
             }
             
             return true
+        }
+    </script>
+
+    <script>
+        function sumbitform(){
+            const err = document.getElementById('err-otp')
+            var formData = $("#otpValaidationForm").serialize();
+            console.log("invoked :  >>>  ",formData);
+            $.ajax({
+                type: "POST",
+                url: "/Otp",
+                data: formData,
+                contentType: "application/x-www-form-urlencoded",
+                success:function(response) {
+                    console.log(response);
+                    if(response.success){
+                        //Update error msg divd
+                        console.log("respond reached");
+                        // $("#error-otp-validation").html(response.error_otp_validation)
+                        err.innerHTML="incorect Otp"
+                    }else{
+                        console.log(("Otp ValidION sUCCESS"));
+                        window.location.href = response.redirectUrl;
+                    }
+                    
+                    
+                },
+                error:function () {
+                    console.error("Error sumbitting form")
+                }
+            })
         }
     </script>
 

@@ -3,8 +3,8 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const multer = require('multer')
-const nocache = require('nocache')
-app.use(nocache())
+// const nocache = require('nocache')
+// app.use(nocache())
 
 // const morgan = require('morgan')
 // app.use(morgan('tiny'))s

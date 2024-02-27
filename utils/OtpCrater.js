@@ -3,7 +3,7 @@ const OTP = require('../model/OTP')
 
  // Otp creation Section
                             
- const otp_Gen_Fun = async(req,res) => {
+const otp_Gen_Fun = async(req,res) => {
 
 
         let otp = otpGenerator.generate(6, {

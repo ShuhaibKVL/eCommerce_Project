@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>veloxAttire</title>
+    <!-- --favicon-- -->
+    <link rel="icon" href="/assets/images/Group 7.png">
+    <!-- loader-->
+    <!-- <link href="/css/pace.min.css" rel="stylesheet"/>
+    <script src="/js/pace.min.js"></script> -->
+    <!-- Vector CSS -->
+    <link href="/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- simplebar CSS-->
+    <link href="/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- animate CSS-->
+    <link href="/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Icons CSS-->
+    <link href="/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- Sidebar CSS-->
+    <link href="/css/sidebar-menu.css" rel="stylesheet" />
+    <!-- Custom Style-->
+    <link href="/css/app-style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/addmore.css">
+
+    <!-- Jquery / Ajax -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesom css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- sweet alert -->
+    <!--  SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+    <!--  SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</head>
+
+<body class="bg-theme bg-theme1">
+
+    <!-- Start wrapper-->
+    <div id="wrapper">
+
+        <!--Start sidebar-wrapper-->
+        <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <img style="border: 1px solid rgba(255, 166, 0, 0.397);" src="/assets/images/Group 7.png" class="logo-icon" alt="logo icon">
+                    <h5 class="logo-text">veloxAttire Admin</h5>
+                </a>
+            </div>
+            <ul class="sidebar-menu do-nicescrol">
+                <li class="sidebar-header">MAIN NAVIGATION</li>
+                <li>
+                    <a href="DashBoard">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Users</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="Product">
+                        <i class="zmdi zmdi-format-list-bulleted"></i> <span>Product</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="Category">
+                        <i class="zmdi zmdi-grid"></i> <span>Categories</span>
+                    </a>
+                </li>
+
+
+                <li style="border:2px solid white ;">
+                    <a href="" target="_blank">
+                        <i class="zmdi zmdi-account-circle"></i> <span>Order Managment</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="loadCoupon">
+                        <i class="zmdi zmdi-face"></i> <span>Coupon Management</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="loadSalesReport">
+                        <i class="zmdi zmdi-face"></i> <span>Sales Report</span>
+                    </a>
+                </li>
+
+
+
+                <li class="sidebar-header">LABELS</li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
+                </li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i>
+                        <span>Warning</span></a></li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
+                </li>
+
+            </ul>
+
+        </div>
+        <!--End sidebar-wrapper-->
+
+        <!--Start topbar header-->
+        <header class="topbar-nav">
+            <nav class="navbar navbar-expand fixed-top">
+                <ul class="navbar-nav mr-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link toggle-menu" href="javascript:void();">
+                            <i class="icon-menu menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="search-bar">
+                            <input type="text" class="form-control" placeholder="Enter keywords">
+                            <a href="javascript:void();"><i class="icon-magnifier"></i></a>
+                        </form>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav align-items-center right-nav-link">
+                    <li class="nav-item dropdown-lg">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                            href="javascript:void();">
+                            <i class="fa fa-envelope-open-o"></i></a>
+                    </li>
+                    <li class="nav-item dropdown-lg">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                            href="javascript:void();">
+                            <i class="fa fa-bell-o"></i></a>
+                    </li>
+                    <li class="nav-item language">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                            href="javascript:void();"><i class="fa fa-flag"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+                            <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
+                                    alt="user avatar"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item user-details">
+                                <a href="javaScript:void();">
+                                    <div class="media">
+                                        <div class="avatar"><img class="align-self-start mr-3"
+                                                src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                        <div class="media-body">
+                                            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
+                                            <p class="user-subtitle">mccoy@example.com</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <!-- End topbar header -->
+
+        <div class="clearfix"></div>
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="row" style="margin-top: 50dvh; ">
+                    <div class="col-12 col-lg-12" style="background-color: transparent;">
+                        <div class="card" style="background-color: transparent;">
+                            <div class="table-responsive">
+                                <div class="container d-flex justify-content-center">
+                                    <p style="font-size: 2rem; color: white;">Your Orders</p>
+                                </div>
+                                <!--================Order Area =================-->
+                                <div id="reloadDiv">
+                                    <section class="cart_area padding_top">
+                                        <div class="container">
+                                            <div class="cart_inner">
+                                                <div class="table-responsive">
+                                                    <% if ( Order ) { %>
+                                                        <table class="table" id="orderTable" >
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col" style="color: red;">Order Date</th>
+                                                                    <th scope="col" style="color: rgb(85, 196, 0);">
+                                                                        Order ID</th>
+                                                                    <th scope="col">Amount</th>
+                                                                    <th scope="col">Orders Products</th>
+                                                                    <th scope="col">Order Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="usersContainer">
+                                                                <% for (let i=0; i < Order.length; i++) { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <p style="color: red;">
+                                                                                        <%= Order[i].Orderdate.toLocaleDateString() %>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <h5 style="color: rgb(85, 196, 0);">
+                                                                                <%= Order[i].OderId %>
+                                                                            </h5>
+                                                                        </td>
+                                                                        <td>
+                                                                            <h5> $ <%= Order[i].totalAmount %>
+                                                                            </h5>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="media-body">
+                                                                                <% for (let j=0; j <
+                                                                                    product[i].OrderItems.length; j++) {
+                                                                                    %>
+                                                                                    <p style="font-size: 14px;"><span
+                                                                                            style="color: orange;">
+                                                                                            <%= j + 1 %> :
+                                                                                        </span>
+                                                                                        <%= product[i].OrderItems[j].ProductId.Name
+                                                                                            %>
+                                                                                    </p>
+                                                                                    <% } %>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="media-body"
+                                                                                id="refreshAccordingToBtnAction">
+                                                                                <% for (let j=0; j < product[i].OrderItems.length; j++) { %>
+                                                                                    <% if(Order[i].OrderItems[j].OrderStatus=='Request: cancel Order'){ %>
+                                                                                        <button
+                                                                                            onclick="approveCancelRequest('<%= Order[i].OrderItems[j].ProductId._id %>','<%= Order[i].OderId %>','<%= Order[i].UserId._id %>','<%= page %>')"
+                                                                                            class="OrdeerSataus"
+                                                                                            style="display: block; font-size: 12px; margin-bottom: 10px;">
+                                                                                            Cancel order
+                                                                                        </button>
+                                                                                <% }else if(Order[i].OrderItems[j].OrderStatus=='Placed'){ %>
+                                                                                    <button
+                                                                                        onclick="Delivered('<%= Order[i].OrderItems[j].ProductId._id %>','<%= Order[i].OderId %>','<%= Order[i].UserId._id %>','<%= page %>')"
+                                                                                        class="Deliverede"
+                                                                                        style="display: block; font-size: 12px; margin-bottom: 10px;">
+                                                                                        Delivered
+                                                                                    </button>
+                                                                                <% }else if(Order[i].OrderItems[j].OrderStatus=='Request: Return Order'){ %>
+                                                                                    <button
+                                                                                        onclick="Order_Return('<%= Order[i].OrderItems[j].ProductId._id %>','<%= Order[i].OderId %>','<%= Order[i].UserId._id %>','<%= page %>')"
+                                                                                        class="returnRq"
+                                                                                        style="display: block; font-size: 12px; margin-bottom: 10px;">
+                                                                                        Accept Return
+                                                                                        request
+                                                                                    </button>
+                                                                                <% }else if(Order[i].OrderItems[j].OrderStatus=='Canceled'){ %>
+                                                                                        <p style="color: red;"> Canceled</p>
+                                                                                <% }else if(Order[i].OrderItems[j].OrderStatus=='Delivered'){ %>
+                                                                                    <p style="color: rgb(0, 255, 13);">
+                                                                                        Delivered
+                                                                                    </p>
+                                                                                <% }else if(Order[i].OrderItems[j].OrderStatus=='Returned'){ %>
+                                                                                    <p
+                                                                                        style="color: rgb(255, 80, 80);">
+                                                                                        Returned
+                                                                                    </p>
+                                                                                    <% } %>
+                                                                            <% } %>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <% console.log( Order[i]._id ) %>
+                                                                                <a href="/admin/orderDetails?id=<%= Order[i]._id %>"
+                                                                                    style="text-decoration: none;"><i
+                                                                                        class="fa-solid fa-angles-right"></i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% } %>
+                                                            </tbody>
+                                                        </table>
+                                                        <% } else{%>
+                                                            <div class="text-center d-flex justify-content-center">
+                                                                <h2 style="font-family:serif">Empty Orders...! </h2>
+                                                            </div>
+                                                            <% } %>
+
+                                                </div>
+                                            </div>
+                                    </section>
+                                </div>
+                                <!--================End Cart Area =================-->
+                            </div>
+                        </div>
+
+                        <!-- PAGINATION -->
+                        <% if(totalPages) { %>
+                            <div class="col-lg-12">
+                                <div class="pageination">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <i class="ti-angle-double-left"></i>
+                                                </a>
+                                            </li>
+                                            <% for(let i=1; i <=totalPages ; i++ ){ %>
+                                                <li class="page-item"><a href="/admin/OrderManagment?page=<%= i %>" class="page-link">
+                                                        <%= i %>
+                                                    </a></li>
+                                                <% } %>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Next">
+                                                            <i class="ti-angle-double-right"></i>
+                                                        </a>
+                                                    </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div><!--End Row-->
+
+                <!--End Dashboard Content-->
+
+                <!--start overlay-->
+                <div class="overlay toggle-menu"></div>
+                <!--end overlay-->
+
+            </div>
+
+            <!-- End container-fluid-->
+
+        </div>
+        <!--End content-wrapper-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+
+        <!--Start footer-->
+        <footer class="footer">
+            <div class="container">
+                <div class="text-center">
+                    ----------------------
+                </div>
+            </div>
+        </footer>
+        <!--End footer-->
+
+        <!--start color switcher-->
+        <div class="right-sidebar">
+            <div class="switcher-icon">
+                <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+            </div>
+            <div class="right-sidebar-content">
+
+                <p class="mb-0">Gaussion Texture</p>
+                <hr>
+
+                <ul class="switcher">
+                    <li id="theme1"></li>
+                    <li id="theme2"></li>
+                    <li id="theme3"></li>
+                    <li id="theme4"></li>
+                    <li id="theme5"></li>
+                    <li id="theme6"></li>
+                </ul>
+
+                <p class="mb-0">Gradient Background</p>
+                <hr>
+
+                <ul class="switcher">
+                    <li id="theme7"></li>
+                    <li id="theme8"></li>
+                    <li id="theme9"></li>
+                    <li id="theme10"></li>
+                    <li id="theme11"></li>
+                    <li id="theme12"></li>
+                    <li id="theme13"></li>
+                    <li id="theme14"></li>
+                    <li id="theme15"></li>
+                </ul>
+
+            </div>
+        </div>
+        <!--end color switcher-->
+
+    </div>
+    <!--End wrapper-->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- simplebar js -->
+    <script src="/plugins/simplebar/js/simplebar.js"></script>
+    <!-- sidebar-menu js -->
+    <script src="/js/sidebar-menu.js"></script>
+    <!-- loader scripts -->
+    <script src="/js/jquery.loading-indicator.js"></script>
+    <!-- Custom scripts -->
+    <script src="/js/app-script.js"></script>
+    <!-- Chart js -->
+
+    <script src="/plugins/Chart.js/Chart.min.js"></script>
+
+    <!-- Index js -->
+    <script src="/js/index.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function approveCancelRequest(ProductId, OderId, UserId) {
+            console.log(ProductId);
+
+            fetch(`http://localhost:5000/admin/Approve_cancel_order?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+            })
+                .then(response => response.json())
+                .then(data => {
+                    
+                    const currentPage = data.CurrentPage
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Confirmation Cancel Oder',
+                        text: 'The Order Canceled ',
+                        timer: 3000, // Show for 3 seconds
+                        showConfirmButton: false,
+                    });
+
+                    //  Redirect to confirmation page after 3 seconds
+                    setTimeout(() => {
+
+                        $('#reloadDiv').load(`/admin/OrderManagment?page=${currentPage} #reloadDiv`)
+
+                    }, 3000);
+
+                })
+
+
+                .catch(error => console.log("Error :", error));
+        };
+    </script>
+
+
+
+    <script>
+        function Delivered(ProductId, OderId, UserId, page) {
+            console.log(ProductId);
+
+            fetch(`http://localhost:5000/admin/Delivered?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+
+            })
+                .then(response => response.json())
+                .then(data => {
+                
+                    const currentPage = data.CurrentPage
+                    console.log("The page to reload in DLELIVERED fetch API : ",currentPage);
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Order Delivered',
+                        text: 'The Order Delivered successfully ',
+                        timer: 3000, // Show for 3 seconds
+                        showConfirmButton: false,
+                    });
+
+                    //  Redirect to confirmation page after 3 seconds
+                    setTimeout(() => {
+                        $('#reloadDiv').load(`/admin/OrderManagment?page=${currentPage} #reloadDiv`)
+                    }, 3000);
+
+                })
+
+
+                .catch(error => console.log("Error :", error));
+        };
+    </script>
+
+
+
+    <script>
+        function Order_Return(ProductId, OderId, UserId) {
+            console.log(ProductId);
+
+            fetch(`http://localhost:5000/admin/Order_Return?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const currentPage = data.CurrentPage
+
+                    Swal.fire({
+                        icon: 'danger',
+                        title: 'Return Order Request !',
+                        text: 'The Order return request accepted ',
+                        timer: 3000, // Show for 3 seconds
+                        showConfirmButton: false,
+                    });
+
+                    //  Redirect to confirmation page after 3 seconds
+                    setTimeout(() => {
+                        $('#reloadDiv').load(`/admin/OrderManagmen?page=${currentPage}t #reloadDiv`)
+
+                    }, 3000);
+
+                })
+
+
+                .catch(error => console.log("Error :", error));
+        };
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

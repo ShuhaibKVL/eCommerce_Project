@@ -4,8 +4,14 @@ const session = require('express-session')
 const { v4 :uuidv4} = require('uuid')
 const Usercontrol = require("../control/usercontrol")
 const UserAuth = require('../Midlleware/UserAuth')
-// const nocache = require('nocache')
-// UserRoute.use(nocache())
+const Whishlist = require("../model/Whishlist")
+const WhishlistController = require('../control/whishListController')
+const filterProductController = require('../control/filterProductController')
+const walletController = require('../control/walletController')
+const flash = require('connect-flash')
+const nocache = require('nocache')
+const Razorpay = require('razorpay')
+
 
 UserRoute.use(session({secret:uuidv4(),resave:false,saveUninitialized:false}))
 
@@ -18,70 +24,118 @@ UserRoute.use(session({
     saveUninitialized: true
 }))
 
+UserRoute.use(flash())
 
-UserRoute.get('/',UserAuth.IsBlocked ,Usercontrol.Home)
+UserRoute.get('/',nocache(),Usercontrol.Home)
 
-UserRoute.get('/login',UserAuth.isLogout,Usercontrol.login)
+UserRoute.get('/login',nocache(),UserAuth.isLogout,Usercontrol.login)
 
 UserRoute.post('/login',Usercontrol.isLogin)
 
-UserRoute.get('/Signup',UserAuth.isLogout,Usercontrol.Signup)
+UserRoute.get('/Signup',nocache(),UserAuth.isLogout,Usercontrol.Signup)
 
 UserRoute.post('/Signup',Usercontrol.OtpCreation)
 
-UserRoute.get('/Otp',Usercontrol.LoadOtp)
+UserRoute.get('/Otp',nocache(),Usercontrol.LoadOtp)
 
 UserRoute.post('/Otp',Usercontrol.OTpVerification)
 
 UserRoute.get('/logout',Usercontrol.logout)
 
-UserRoute.get('/ProductDetails',Usercontrol.ProductDeatils)
+UserRoute.get('/ProductDetails',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.ProductDeatils)
 
-UserRoute.get('/UserProfile',Usercontrol.UserProfile_Loagin)
+UserRoute.get('/UserProfile',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.UserProfile_Loagin)
 
-UserRoute.get('/Address',Usercontrol.AddressLoad)
+UserRoute.get('/Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.AddressLoad)
 
-UserRoute.get('/Add_Address',Usercontrol.Add_AddressLoad)
+UserRoute.get('/Add_Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Add_AddressLoad)
 
-UserRoute.post('/Add_Address',Usercontrol.Add_Address)
+UserRoute.post('/Add_Address',UserAuth.IsBlocked,Usercontrol.Add_Address)
 
-UserRoute.get('/Edit_Address',Usercontrol.Edit_AddressLoad)
+UserRoute.delete('/DeleteAddress',UserAuth.IsBlocked,Usercontrol.DeleteAddress)
 
-UserRoute.post('/Edit_Address',Usercontrol.Edit_Address)
+UserRoute.get('/Edit_Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Edit_AddressLoad)
 
-UserRoute.get('/Cart',Usercontrol.LoadCarts)
+UserRoute.post('/Edit_Address',UserAuth.IsBlocked,Usercontrol.Edit_Address)
 
-UserRoute.get('/UserCart',Usercontrol.UserCart)
+UserRoute.get('/Cart',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.LoadCarts)
 
-UserRoute.get('/AddToCart',Usercontrol.AddnewCart)
+UserRoute.get('/UserCart',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.UserCart)
 
-UserRoute.post('/remove-from-cart',Usercontrol.remove_from_cart)
+UserRoute.get('/AddToCart',UserAuth.IsBlocked,Usercontrol.AddnewCart)
 
-UserRoute.get('/forgoutPassword',Usercontrol.LaodforgoutPassword)
+UserRoute.post('/remove-from-cart',UserAuth.IsBlocked,Usercontrol.remove_from_cart)
 
-UserRoute.post('/forgoutPassword',Usercontrol.forgoutPassword)
+UserRoute.get('/forgoutPassword',UserAuth.IsBlocked,Usercontrol.LaodforgoutPassword)
 
-UserRoute.get('/Otp_Vald_Forgoutpass',Usercontrol.load_Otp_Vald_Forgoutpass)
+UserRoute.post('/forgoutPassword',UserAuth.IsBlocked,Usercontrol.forgoutPassword)
 
-UserRoute.post('/Otp_Vald_Forgoutpass',Usercontrol.Otp_Vald_Forgoutpass)
+UserRoute.get('/Otp_Vald_Forgoutpass',UserAuth.IsBlocked,Usercontrol.load_Otp_Vald_Forgoutpass)
 
-UserRoute.get('/NewPassword',Usercontrol.LoadNewPassword)
+UserRoute.post('/Otp_Vald_Forgoutpass',UserAuth.IsBlocked,Usercontrol.Otp_Vald_Forgoutpass)
 
-UserRoute.post('/NewPassword',Usercontrol.NewPassword)
+UserRoute.get('/NewPassword',UserAuth.IsBlocked,Usercontrol.LoadNewPassword)
 
-UserRoute.post('/ResendOtp',Usercontrol.ResendOTP)
+UserRoute.post('/NewPassword',UserAuth.IsBlocked,Usercontrol.NewPassword)
 
-UserRoute.get('/shibili',Usercontrol.shibili)
+UserRoute.post('/ResendOtp',UserAuth.IsBlocked,Usercontrol.ResendOTP)
 
-UserRoute.get('/update-cart',Usercontrol.update_cart)
+UserRoute.get('/update-cart',UserAuth.IsBlocked,Usercontrol.update_cart)
 
 UserRoute.post('/UpdateProfile',Usercontrol.UpdateProfile)
 
-UserRoute.get('/Chekout',Usercontrol.LoadChekout)
+UserRoute.get('/Chekout',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.LoadChekout)
 
-UserRoute.post('/placeOrder',Usercontrol.placeOrder)
+UserRoute.get('/loadCouponDetails',UserAuth.IsBlocked,Usercontrol.loadCouponDetails)
 
-UserRoute.get('/confirmation_Order_page',Usercontrol.Load_confirmation_Order_page)
+UserRoute.get('/useCoupon',UserAuth.IsBlocked,Usercontrol.useCoupon)
+
+UserRoute.get('/direct_buy',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.direct_buy)
+
+UserRoute.post('/checkout_add_address',UserAuth.IsBlocked,Usercontrol.Add_Address)
+
+UserRoute.post('/placeOrder',UserAuth.IsBlocked,Usercontrol.placeOrder)
+
+UserRoute.post("/verifyPayment",UserAuth.IsBlocked,Usercontrol.verifyRazorpayPayment)
+
+UserRoute.get('/confirmation_Order_page',UserAuth.isLogin,Usercontrol.Load_confirmation_Order_page)
+
+UserRoute.get('/LoadOrderManagment',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.LoadOrderManagment)
+
+UserRoute.patch('/cancelOrder',UserAuth.IsBlocked,Usercontrol.cancel_Order)
+
+UserRoute.patch('/ReturnOrder',UserAuth.IsBlocked,Usercontrol.ReturnOrder)
+
+UserRoute.get('/orderDetails',UserAuth.IsBlocked,Usercontrol.orderDetails)
+
+UserRoute.get('/addToWhishList',UserAuth.isLogin,UserAuth.IsBlocked,WhishlistController.addToWhishList)
+
+UserRoute.get('/loadWhishList',UserAuth.isLogin,UserAuth.IsBlocked,WhishlistController.loadWhishList)
+
+UserRoute.post('/remove-from-whishlist',UserAuth.IsBlocked,WhishlistController.remove_from_whish_list)
+
+UserRoute.post('/searchFromNavbar',UserAuth.IsBlocked,filterProductController.redirectTOloadFilterPage)
+
+UserRoute.get('/loadSearchProduct',UserAuth.IsBlocked,filterProductController.LoadfilterProduct)
+
+UserRoute.get('/searchInput',UserAuth.IsBlocked,filterProductController.searchInput)
+
+UserRoute.post('/filterProducts',UserAuth.IsBlocked,filterProductController.filterProducts)
+
+    // wallet
+
+UserRoute.get('/LoadWallet',UserAuth.isLogin,UserAuth.IsBlocked,walletController.LoadWallet)
+
+   // INvoice download
+UserRoute.get('/download-invoice',Usercontrol.download_invoice)
+
+UserRoute.get('/loadSalesReport',Usercontrol.loadSalesReport)
+
+
+
+UserRoute.get('/Prd',(req,res) => {
+    res.render('PrD')
+})
 
 
 

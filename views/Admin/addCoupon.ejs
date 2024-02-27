@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>veloxAttire</title>
+    <!-- --favicon-- -->
+    <link rel="icon" href="/assets/images/Group 7.png">
+    <!-- loader-->
+    <!-- <link href="/css/pace.min.css" rel="stylesheet"/>
+    <script src="/js/pace.min.js"></script> -->
+    <!-- Vector CSS -->
+    <link href="/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- simplebar CSS-->
+    <link href="/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- animate CSS-->
+    <link href="/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Icons CSS-->
+    <link href="/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- Sidebar CSS-->
+    <link href="/css/sidebar-menu.css" rel="stylesheet" />
+    <!-- Custom Style-->
+    <link href="/css/app-style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/addmore.css">
+
+    <!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css"
+        integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="/Product/css/fontawesome.min.css" />
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/Product/css/bootstrap.min.css" />
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/Product/css/templatemo-style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+        <style>
+            #bg-table {
+                background: transparent;
+                color: white;
+            }
+
+            .addCoupon{
+                color: white;
+                border: 1px solid white;
+                background-color: #00225191;
+            }
+
+        </style>
+</head>
+
+<body class="bg-theme bg-theme1">
+
+
+
+
+    <!-- Start wrapper-->
+    <div id="wrapper">
+
+        <!--Start sidebar-wrapper-->
+        <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <img style="border: 1px solid rgba(255, 166, 0, 0.397);" src="/assets/images/Group 7.png" class="logo-icon" alt="logo icon">
+                    <h5 class="logo-text">veloxAttire Admin</h5>
+                </a>
+            </div>
+            <ul class="sidebar-menu do-nicescrol">
+                <li class="sidebar-header">MAIN NAVIGATION</li>
+                <li>
+                    <a href="DashBoard">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="UserDetails">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Users</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="Product">
+                        <i class="zmdi zmdi-format-list-bulleted"></i> <span>Product</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="Category">
+                        <i class="zmdi zmdi-grid"></i> <span>Category</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="OrderManagment">
+                        <i class="zmdi zmdi-grid"></i> <span>Order Mangment</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href=""  style="border:2px solid white ;">
+                        <i class="zmdi zmdi-face"></i> <span>Coupon Management</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="loadSalesReport">
+                        <i class="zmdi zmdi-face"></i> <span>Sales Report</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-header">LABELS</li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
+                </li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i>
+                        <span>Warning</span></a></li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
+                </li>
+
+            </ul>
+
+        </div>
+        <!--End sidebar-wrapper-->
+
+        <!--Start topbar header-->
+        <header class="topbar-nav">
+            <nav class="navbar navbar-expand fixed-top">
+                <ul class="navbar-nav mr-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link toggle-menu" href="javascript:void();">
+                            <i class="icon-menu menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="search-bar">
+                            <input type="text" class="form-control" placeholder="Enter keywords">
+                            <a href="javascript:void();"><i class="icon-magnifier"></i></a>
+                        </form>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav align-items-center right-nav-link">
+                    <li class="nav-item dropdown-lg">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                            href="javascript:void();">
+                            <i class="fa fa-envelope-open-o"></i></a>
+                    </li>
+                    <li class="nav-item dropdown-lg">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                            href="javascript:void();">
+                            <i class="fa fa-bell-o"></i></a>
+                    </li>
+                    <li class="nav-item language">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                            href="javascript:void();"><i class="fa fa-flag"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
+                            <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+                            <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
+                                    alt="user avatar"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item user-details">
+                                <a href="javaScript:void();">
+                                    <div class="media">
+                                        <div class="avatar"><img class="align-self-start mr-3"
+                                                src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                        <div class="media-body">
+                                            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
+                                            <p class="user-subtitle">mccoy@example.com</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <!--End topbar header-->
+
+        <div class="clearfix"></div>
+
+        <div class="content-wrapper">
+            <div class="container-fluid" style="margin-top: 71dvh;">
+
+                <!-- Pop UP MEssage -->
+
+                <% if (typeof successMessage !=='undefined' ) { %>
+
+                    <div class="popup" id="successPopup">
+                        <p>
+                            <%= successMessage %>
+                        </p>
+                    </div>
+
+                    <script>
+                        // JavaScript to show the pop-up and hide it after 5 seconds
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const successPopup = document.getElementById('successPopup');
+
+                            // Function to show the pop-up
+                            function showPopup() {
+                                successPopup.style.display = 'block';
+
+                                // Hide the pop-up after 5 seconds
+                                setTimeout(function () {
+                                    successPopup.style.display = 'none';
+                                }, 5000);
+                            }
+
+                            // Call the function when the page is loaded
+                            showPopup();
+                        });
+                    </script>
+                    <% } %>
+
+
+                        <!--End Row-->
+
+                        <div class="container mt-5" id="reloadDiv">
+                            <div class="row tm-content-row">
+                                <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+                                    <div class="tm-bg-primary-dark tm-block tm-block-products" >
+                                        <div class="tm-product-table-container">
+                                            <table class="table table-hover tm-table-small tm-product-table" id="coupenDetails" >
+                                                <thead >
+                                                    <tr>
+                                                        <th id="bg-table" scope="col">&nbsp;</th>
+                                                        <th id="bg-table" scope="col">COUPON</th>
+                                                        <th id="bg-table" scope="col">COUPON ID</th>
+                                                        <th id="bg-table" scope="col">Discount</th>
+                                                        <th id="bg-table" scope="col">Discount Type</th>
+                                                        <th id="bg-table" scope="col">&nbsp;</th>
+                                                        <th id="bg-table" scope="col">&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <% if(typeof coupon !=='undefined' ) { %>
+
+                                                        <% for(let i=0 ; i <coupon.length ; i++) { %>
+                                                            <tr>
+                                                                <td id="bg-table">
+
+                                                                </td>
+
+                                                                <td id="bg-table" class="tm-product-name">
+                                                                    <%= coupon[i].name %>
+                                                                </td>
+                                                                <td id="bg-table">
+                                                                    <%= coupon[i].couponCode %>
+                                                                </td>
+
+                                                                <td id="bg-table">
+                                                                    <%= coupon[i].discount %>
+                                                                </td>
+
+                                                                <td id="bg-table">
+                                                                    <%= coupon[i].discountType %>
+                                                                </td>
+
+                                                                <td id="bg-table">
+                                                                    <a id="deleteCoupon"
+                                                                        data-coupon-id="<%= coupon[i]._id %>"
+                                                                        class="tm-product-delete-link dlete-coupon">
+                                                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                                                    </a>
+                                                                </td>
+                                                                <td id="bg-table">
+                                                                    <a href="#" class="tm-product-delete-link edit-coupon-button"
+                                                                    data-coupon-id="<%= coupon[i]._id %>">
+                                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                                    </a>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                            <% }; %>
+                                                                <% } %>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- table container -->
+                                        <!-- <a
+                                                href="Add_Product"
+                                                class="btn btn-primary btn-block text-uppercase mb-3">Add new coupon</a> -->
+                                        <button type="button" class="btn btn-block text-uppercase mb- addCoupon"
+                                            data-bs-toggle="modal" data-bs-target="#addCouponModal">
+                                            Add Coupon
+                                        </button>
+
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!-- Modal for add coupon-->
+
+                        <div class="modal fade" id="addCouponModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="addCouponModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content" style="background-color: transparent; border: none;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addCouponModalLabel" style="color: white;">Add
+                                            Coupon</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="padding: 10px;">
+                                        <form action="addNewCoupon" id="editCouponForm" method="post">
+                                            <div class="mb-3">
+                                                <label for="couponName" class="form-label" style="color: white;">Coupon
+                                                    Name</label>
+                                                <input type="text" class="form-control" id="couponName" name="name"
+                                                    required style="background-color: #5c81b6; color: white;">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="discountType" class="form-label"
+                                                    style="color: white;">Discount Type</label>
+                                                <select class="form-select" id="discountType" name="discountType"
+                                                    required style="background-color: #5c81b6; color: white;">
+                                                    <option value="">Select Discount Type</option>
+                                                    <option value="percentage">Percentage</option>
+                                                    <option value="fixed">Fixed Amount</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="discount" class="form-label"
+                                                    style="color: white;">Discount</label>
+                                                <input type="number" class="form-control" id="discount" name="discount"
+                                                    required style="background-color: #5c81b6; color: white;">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="instruction" class="form-label"
+                                                    style="color: white;">Instruction</label>
+                                                <textarea class="form-control" id="instruction" name="instruction" required
+                                                    style="background-color: #5c81b6; color: white;"></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="expireDate" class="form-label"
+                                                    style="color: white;">Expire Date</label>
+                                                <input type="date" class="form-control" id="expireDate" name="expireDate"
+                                                    required style="background-color: #5c81b6; color: white;">
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button type="submit" class="btn btn-primary">Add Coupon</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Modal For Edit Coupon-->
+
+                        <div class="modal fade" id="editCouponModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="addCouponModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content" style="background-color: transparent; border: none;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addCouponModalLabel" style="color: white;">Edit
+                                            Coupon</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="padding: 10px;">
+                                        <form action="editCoupon" id="editCouponForm" method="post">
+                                            <div class="mb-3">
+                                                
+                                                <!-- for sendind coupon id to server -->
+                                                <input type="hidden" name="_id" id="_id">
+
+                                                <input type="hidden" name="editCoupenCode" id="editCoupenCode">
+
+                                                <label for="couponName" class="form-label" style="color: white;">Coupon
+                                                    Name</label>
+                                                <input type="text" class="form-control" id="editcouponName" name="editname"
+                                                    required style="background-color: #5c81b6; color: white;" value="">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="discountType" class="form-label"
+                                                    style="color: white;">Discount Type</label>
+                                                <select class="form-select" id="editdiscountType" name="editdiscountType"
+                                                    required style="background-color: #5c81b6; color: white;">
+                                                    <option value="">Select Discount Type</option>
+                                                    <option value="percentage">Percentage</option>
+                                                    <option value="fixed">Fixed Amount</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="discount" class="form-label"
+                                                    style="color: white;">Discount</label>
+                                                <input type="number" class="form-control" id="editdiscount" name="editdiscount"
+                                                    required style="background-color: #5c81b6; color: white;">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="instruction" class="form-label"
+                                                    style="color: white;">Instruction</label>
+                                                <textarea class="form-control" id="editinstruction" name="editinstruction"
+                                                    style="background-color: #5c81b6; color: white;"></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="expireDate" class="form-label"
+                                                    style="color: white;">Expire Date</label>
+                                                <input type="date" class="form-control" id="editExpireDate" name="editExpireDate"
+                                                    required style="background-color: #5c81b6; color: white;">
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button type="submit" class="btn btn-primary">Update Coupon</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- End Edit Modal -->
+
+
+                        <!--start overlay-->
+                        <div class="overlay toggle-menu"></div>
+                        <!--end overlay-->
+
+            </div>
+            <!-- End container-fluid-->
+
+
+
+        </div><!--End content-wrapper-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+
+        <!--Start footer-->
+        <footer class="footer">
+            <div class="container">
+                <div class="text-center">
+                    ----------------------
+                </div>
+            </div>
+        </footer>
+        <!--End footer-->
+
+        <!--start color switcher-->
+        <div class="right-sidebar">
+            <div class="switcher-icon">
+                <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+            </div>
+            <div class="right-sidebar-content">
+
+                <p class="mb-0">Gaussion Texture</p>
+                <hr>
+
+                <ul class="switcher">
+                    <li id="theme1"></li>
+                    <li id="theme2"></li>
+                    <li id="theme3"></li>
+                    <li id="theme4"></li>
+                    <li id="theme5"></li>
+                    <li id="theme6"></li>
+                </ul>
+
+                <p class="mb-0">Gradient Background</p>
+                <hr>
+
+                <ul class="switcher">
+                    <li id="theme7"></li>
+                    <li id="theme8"></li>
+                    <li id="theme9"></li>
+                    <li id="theme10"></li>
+                    <li id="theme11"></li>
+                    <li id="theme12"></li>
+                    <li id="theme13"></li>
+                    <li id="theme14"></li>
+                    <li id="theme15"></li>
+                </ul>
+
+            </div>
+        </div>
+        <!--end color switcher-->
+
+    </div><!--End wrapper-->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/Product/js/jquery.min.js"></script>
+    <script src="/Product/js/popper.min.js"></script>
+    <script src="/Product/js/bootstrap.min.js"></script>
+
+    <!-- simplebar js -->
+    <script src="/Product/plugins/simplebar/js/simplebar.js"></script>
+    <!-- sidebar-menu js -->
+    <script src="/Product/js/sidebar-menu.js"></script>
+    <!-- loader scripts -->
+    <script src="/Product/js/jquery.loading-indicator.js"></script>
+    <!-- Custom scripts -->
+    <script src="/Product/js/app-script.js"></script>
+    <!-- Chart js -->
+
+    <script src="/Product/plugins/Chart.js/Chart.min.js"></script>
+
+    <!-- Index js -->
+    <script src="/Product/js/index.js"></script>
+
+    <script src="/Productjs/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="/Productjs/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $(".tm-product-name").on("click", function () {
+                window.location.href = "edit-product.html";
+            });
+        });
+    </script>
+
+    <script>
+        function DeleteCoupon(couponId){
+            console.log(couponId);
+
+            fetch(`http://localhost:5000/admin/DeleteCoupon?id=${couponId}`)
+            .then(Response => Response.json())
+            .then(data => {
+                console.log(data);
+
+                $('#reloadDiv').load('/admin/loadCoupon #reloadDiv');
+
+            })
+            .catch(error => console.error("Error on fetch API of deleteCoupon :",error))
+        }
+
+
+
+    document.querySelectorAll('.dlete-coupon').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            const couponId = this.getAttribute('data-coupon-id');
+            DeleteCoupon(couponId)
+        })
+    })
+
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function openEditCouponModal(couponId) {
+            fetch(`http://localhost:5000/admin/getEditCouponDetails?id=${couponId}`)
+            .then(response => {
+                if(!response.ok){
+                    throw new Error('Failed to fetch coupon details')
+                }
+                return response.json()
+            })
+            .then(data => {
+                populateEditCouponForm(data)
+                // document.getElementById('editCouponModal').style.display = 'block'
+                console.log("ugsdfdsgfjhdgbfh");
+                $('#editCouponModal').modal('show');
+            })
+            .catch(error => console.error('Error fetching coupon details:', error))
+        }
+
+        function populateEditCouponForm(couponDetails) {
+            // Populate the form fields with the fetched coupon details
+            document.getElementById('editcouponName').value = couponDetails.name;
+            document.getElementById('editdiscountType').value = couponDetails.discountType;
+            document.getElementById('editdiscount').value = couponDetails.discount;
+            document.getElementById('editinstruction').value = couponDetails.instruction;
+            document.getElementById('_id').value = couponDetails._id;
+            document.getElementById('editCoupenCode').value = couponDetails.couponCode;
+            document.getElementById('editExpireDate').value = couponDetails.expireDate;
+            console.log(couponDetails.expireDate);
+            
+
+            console.log("couponDetails reached on client side populateEditCouponForm FUNCTION : ",couponDetails);
+            
+        }
+        document.querySelectorAll('.edit-coupon-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault()
+                const couponId = this.getAttribute('data-coupon-id')
+                openEditCouponModal(couponId)
+            })
+        })
+    });
+    </script>
+</body>
+
+</html>

@@ -12,12 +12,17 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cli-color": "^2.0.3",
+    "connect-flash": "^0.1.1",
     "cropperjs": "^1.6.1",
+    "crypto": "^1.0.1",
     "dotenv": "^16.3.1",
+    "easyinvoice": "^3.0.47",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.0",
     "morgan": "^1.10.0",
@@ -26,8 +31,9 @@
     "nodemailer": "^6.9.8",
     "nodemon": "^3.0.2",
     "otp-generator": "^4.0.1",
+    "razorpay": "^2.9.2",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.10.4",
+    "sweetalert2": "^11.6.13",
     "uuid": "^9.0.1"
   }
 }

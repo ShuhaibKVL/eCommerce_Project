@@ -5,16 +5,16 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>aranoz</title>
-    <link rel="icon" href="images/favicon.png">
+    <title>veloxAttire</title>
+    <link rel="icon" href="/assets/images/Group 7.png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
     <!-- animate CSS -->
     <link rel="stylesheet" href="css/animate.css">
     <!-- owl carousel CSS -->
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="/assets/css/all.css">
     <!-- flaticon CSS -->
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/themify-icons.css">
@@ -30,6 +30,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+        <!-- font awesom  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- sweet alert -->
+    <!--  SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+    <!--  SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
 </head>
 
 <body>
@@ -50,6 +63,7 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="home.ejs">Home</a>
+                                    
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -114,11 +128,13 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
 
                                         <% if(typeof Profile !== 'undefined'){ %>
-                                            <a class="dropdown-item" href="login">
+                                            <a class="dropdown-item" href="UserProfile">
                                                 <%= Profile.name %>
                                             </a>
 
                                             <a class="dropdown-item" href="logout">Logout</a>
+                                            <a class="dropdown-item" href="LoadWallet">Wallet</a>
+
 
                                         <% }else{ %>
                                             
@@ -133,50 +149,60 @@
                                 </li>
                             </ul>.
                         </div>
-                        <div class="hearer_icon d-flex">
+                        <div class="hearer_icon d-flex" style="justify-content: space-between;">
                             <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <a href=""><i class="ti-heart"></i></a>
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                            <a href="/loadWhishList"><i class="ti-heart"></i></a>
+                            <div class="dropdown car">
+                                <!-- <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
+                                    
+                                </a> -->
+                                <a href="/Cart"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: rgb(255, 106, 0);"></i></a>
                                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div class="single_product">
-                                
+                                        <a href="/Cart">Cart</a>
                                     </div>
                                 </div> -->
-                                
+
                             </div>
-                                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" >
-                                    <img src="/assets/images/person-lines-fill.svg" alt="">
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <% if(typeof Profile !== 'undefined'){ %>
-                                        <li style="background-color: rgb(255, 14, 78); border-radius: 15px;"><a style=" text-decoration: none; padding: 0px 15px;" href="/UserProfile"><img src="/assets/images/person-lines-fill.svg" alt=""><button class="dropdown-item" type="button" style="color: white;">Profile</button></a></li>
-                                    <% }else{ %>
-                                        <li style="background-color: red; border-radius: 15px;"><a href="/Signup" style="text-decoration: none; "><button class="dropdown-item" type="button" style="color: white;">Sign Up</button></a></li>
-                                    <% } %>
-                                </ul>
                         </div>
+                        <div class="div" style=" margin-left: 1.5vw;">
+                        <% if(typeof Profile !== 'undefined'){ %>
+                            
+                            <a href="/UserProfile"><i  style="color: rgb(255, 118, 94);" class="fa-solid fa-user fa-flip"></i></a>
+                        <% }else{ %>
+                            
+                            <a href="/Signup"><i  style="color: rgb(255, 118, 94);" class="fa-solid fa-user fa-flip"></i></a>
+                        <% } %>
+                        
+                        </div>
+                        </div>
+                        
                     </nav>
                 </div>
             </div>
         </div>
         <div class="search_input" id="search_input_box">
             <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
+                <form id="searchForm" class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
+                    <button  type="submit" class="btn"><i class="ti-search" style="color: white;"></i></button>
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
         </div>
+        <% if (error && error.length > 0) { %>
+                <p style="font-size: 5px;" id="error_msg_isBlock_middleware"> <%= error %></p>
+                <% console.log("ha ha h ah a a") %>
+        <% } %>
+            
     </header>
     <!-- Header part end-->
 
+    
+
     <!-- banner part start-->
-    <section class="banner_part">
+    <section class="banner_part" >
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -189,7 +215,9 @@
                                             <h1>Stay Stylish, Stay You.</h1>
                                             <p style="font-family: Ink Free;" class="Banner_Head">Discover fashion that reflects the truest version of yourself.
                                                 Embrace the power of style to tell your unique story every day</p>
-                                            <a href="#" class="btn_2">buy now</a>
+                                            <!-- <p class="btn_2" >buy now</p> -->
+                                            <a href="/loadSearchProduct" class="btn_2" style="z-index: 950; position: relative;">buy now</a>
+                                        
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +233,8 @@
                                             <h1>Stay With Trend.</h1>
                                             <p style="font-family: Ink Free;" class="Banner_Head">Discover fashion that reflects the truest version of yourself.
                                                 Embrace the power of style to tell your unique story every day</p>
-                                            <a href="#" class="btn_2">buy now</a>
+                                            <a href="/loadSearchProduct" class="btn_2" >buy now</a>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +250,7 @@
                                             <h1>Stay Stylish, Stay You.</h1>
                                             <p style="font-family: Ink Free;" class="Banner_Head">Discover fashion that reflects the truest version of yourself.
                                                 Embrace the power of style to tell your unique story every day</p>
-                                            <a href="#" class="btn_2">buy now</a>
+                                            <a href="/loadSearchProduct" class="btn_2" >buy now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -230,56 +259,157 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="single_banner_slider">
-                            <div class="row">
-                                <div class="col-lg-5 col-md-8">
-                                    <div class="banner_text">
-                                        <div class="banner_text_iner">
-                                            <h1>Cloth $ Wood Sofa</h1>
-                                            <p>Incididunt ut labore et dolore magna aliqua quis ipsum
-                                                suspendisse ultrices gravida. Risus commodo viverra</p>
-                                            <a href="#" class="btn_2">buy now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="banner_img d-none d-lg-block">
-                                    <img src="img/banner_img.png" alt="">
-                                </div>
-                            </div>
-                        </div> -->
+                        
                     </div>
                     <div class="slider-counter"></div>
+                    
                 </div>
             </div>
         </div>
     </section>
     <!-- banner part start-->
 
+    <script>
+        function BuyNoww(){
+            console.log("fhjdgf dhfksdfhks hfkkfdgfgsd fdsg fs f sdgfd");
+        }
+    </script>
+
+
+
+    <!-- Ladies start-->
+    <section class="product_list best_seller" style="">
+        <div class="container" style=" padding: 20px; box-shadow: 3px 5px 27px rgb(255, 237, 203); border-radius: 10px;">
+            <div class="row justify-content-center" style="">
+                <h1 style="font-size: 2rem;">Best Sellers <span>shop</span></h1>
+            </div>
+            <div class="row align-items-center justify-content-between" >
+                <div class="col-lg-12" >
+                    <div class="best_product_slider owl-carousel" >
+                        <% if(Product){ %>
+                            <% Product.forEach(product => { %> <!-- Change 'item' to 'product' -->
+                                
+                                    <div class="single_product_item" >
+                                        <% if (!product.Stock > 0) { %>
+                                            <p style="padding: 0px 7px; border-radius: 14px 0px; background-color: red; color: white; font-weight: 200; font-size: 10px; position: absolute;">Out Of Stock</p>
+                                        <% } %>
+                                        <a href="/ProductDetails?id=<%= product._id %>" >
+                                        <img class="product-image"  src="/assets/uploads/<%= product.Image[0] %>" alt=""></a>
+                                        <div class="single_product_text" >
+                                            <h4><%= product.Name %></h4>
+                                            <h3>$<%= product.Price %></h3>
+                                            <a  href="/AddToCart?id=<%= product._id %>" class="add_cart">+ add to cart</a>
+                                            <a id="heart" href="/addToWhishList?id=<%= product._id %>"><i  class="ti-heart"></i></a>
+                                        </div>
+                                    </div>
+                                
+                            <% }) %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Best sellers end-->
+
+        <!--  start-->
+        <section class="product_list best_seller mt-5" >
+            <div class="container" style=" padding: 20px; box-shadow: 3px 5px 27px rgb(255, 237, 203); border-radius: 10px;">
+                <div class="row justify-content-center" style="">
+                    <h1 style="font-size: 1.5rem;">Women </h1>
+                </div>
+                <div class="row align-items-center justify-content-between" >
+                    <div class="col-lg-12" >
+                        <div class="best_product_slider owl-carousel" >
+                            <% if(Women){ %>
+                                <% Women.forEach(product => { %> <!-- Change 'item' to 'product' -->
+                                    
+                                        <div class="single_product_item" >
+                                            <% if (!product.Stock > 0) { %>
+                                                <p style="padding: 0px 7px; border-radius: 14px 0px; background-color: red; color: white; font-weight: 200; font-size: 10px; position: absolute;">Out Of Stock</p>
+                                            <% } %>
+                                            <a href="/ProductDetails?id=<%= product._id %>" >
+                                            <img class="product-image"  src="/assets/uploads/<%= product.Image[0] %>" alt=""></a>
+                                            <div class="single_product_text" >
+                                                
+                                                <h4><%= product.Name %></h4>
+                                                <h3>$<%= product.Price %></h3>
+                                                
+                                                <a href="/AddToCart?id=<%= product._id %>" class="add_cart">+ add to cart </a>
+                                                <a id="heart" href="/addToWhishList?id=<%= product._id %>"><i class="ti-heart"></i></a>
+                                                
+                                            </div>
+                                        </div>
+                                    
+                                <% }) %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Best sellers end-->
+
+
+
     <!-- feature_part start-->
-    <section class="feature_part padding_top">
+    <!-- <section class="feature_part padding_top" id="productDetails">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="section_tittle text-center">
-                        <h2>Featured Category</h2>
+                        <h2>All Category</h2>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="row align-items-center justify-content-between"> -->
                 
-            <div class="product-container">
-                <% Product.forEach(product => { %>
-                    <div class="product-card">
-                        <div class="image_container">
-                            <img class="product-image" src="/assets/uploads/<%= product.Image[0] %>" alt="<%= product.Name %>">
+                <!-- <div class="product-container">
+                    <% Product.forEach((product, index) => { %>
+                        <div class="product-card">
+
+                            <a href="/addToWhishList?id=<%= product._id %>"><i class="whishlist-icon fa-solid fa-heart fa-bounce" style="color: orange; font-size: 20px; display: none; position: absolute;"></i></a>
+
+                            <div class="image_container">
+                                <% if (!product.Stock > 0) { %>
+                                    <p style="padding: 0px 7px; border-radius: 14px 0px; background-color: red; color: white; font-weight: 200; font-size: 10px; position: absolute;">Out Of Stock</p>
+                                <% } %>
+                                <img class="product-image" src="/assets/uploads/<%= product.Image[0] %>" alt="<%= product.Name %>">
+
+                                
+                            </div>
+                            
+                            <h6><%= product.Name %></h6>
+                            <p><%= product.Description %></p>
+                            <p>$<%= product.Price %></p>
+                
+                            <div >
+                                
+                                
+                            </div>
+                            
+                            <a href="/ProductDetails?id=<%= product._id %>" class="feature_btn">EXPLORE NOW<img class="feature" src="/assets/icons/arrow-right-short.svg" alt=""></a>
                         </div>
-                        <h6><%= product.Name %></h6>
-                        <p><%= product.Description %></p>
-                        <p>$<%= product.Price %></p>
-                        <a href="/ProductDetails?id=<%= product._id %>" class="feature_btn">EXPLORE NOW<img class="feature" src="/assets/icons/arrow-right-short.svg" alt=""></a>
-                    </div>
-                <% }); %>
-            </div>
+                    <% }); %>
+                </div> -->
+                
+                <!-- <script>
+                    // Add event listeners for wishlist icon display
+                    document.querySelectorAll('.product-card').forEach((card, index) => {
+                        const wishlistIcon = card.querySelector('.whishlist-icon');
+                        
+                        card.addEventListener('mouseover', () => {
+                            wishlistIcon.style.display = 'block';
+                        });
+                
+                        card.addEventListener('mouseout', () => {
+                            wishlistIcon.style.display = 'none';
+                        });
+                    });
+                </script> -->
+                
+                
                 <!-- <div class="col-lg-5 col-sm-6">
                     <div class="single_feature_post_text">
                         <p>hhhhhhhhhhhhhh</p>
@@ -290,11 +420,11 @@
                 </div>
                 
             </div> -->
-        </div>
-    </section>
+        <!-- </div>
+    </section> -->
     <!-- upcoming_event part start-->
     
-    <section class="feature_part padding_top">
+    <!-- <section class="feature_part padding_top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -302,10 +432,10 @@
                         <h2>MEN</h2>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="row align-items-center justify-content-between"> -->
                 
-            <div class="product-container">
+            <!-- <div class="product-container">
                 
                 <% Men.forEach(product => { %>
                     <div class="product-card">
@@ -320,9 +450,9 @@
                 <% }); %>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    <section class="feature_part padding_top">
+    <!-- <section class="feature_part padding_top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -330,10 +460,10 @@
                         <h2>Women</h2>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="row align-items-center justify-content-between"> -->
                 
-            <div class="product-container">
+            <!-- <div class="product-container">
                 <% Women.forEach(product => { %>
                     <div class="product-card">
                         <div class="image_container">
@@ -347,9 +477,9 @@
                 <% }); %>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    <section class="feature_part padding_top">
+    <!-- <section class="feature_part padding_top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -357,10 +487,10 @@
                         <h2>Kids</h2>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="row align-items-center justify-content-between"> -->
                 
-            <div class="product-container">
+            <!-- <div class="product-container">
                 <% Kids.forEach(product => { %>
                     <div class="product-card">
                         <div class="image_container">
@@ -374,91 +504,13 @@
                         <a href="/ProductDetails?id=<%= product._id %>" class="feature_btn">EXPLORE NOW <img class="feature" src="/assets/icons/arrow-right-short.svg" alt=""></a>
                     </div>
                 <% }); %>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- product_list start-->
-    <!-- <section class="product_list section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>awesome <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="product_list_slider owl-carousel">
-                        <div class="single_product_list_slider">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="images/product/product_1.png" alt="">
-                                        <div class="single_product_text">
-                                            <h4>Quartz Belt Watch</h4>
-                                            <h3>$150.00</h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="images/product/product_2.png" alt="">
-                                        <div class="single_product_text">
-                                            <h4>Quartz Belt Watch</h4>
-                                            <h3>$150.00</h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="images/product/product_8.png" alt="">
-                                        <div class="single_product_text">
-                                            <h4>Quartz Belt Watch</h4>
-                                            <h3>$150.00</h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_product_list_slider">
-                            <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="images/product/product_1.png" alt="">
-                                        <div class="single_product_text">
-                                            <h4>Quartz Belt Watch</h4>
-                                            <h3>$150.00</h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="images/product/product_8.png" alt="">
-                                        <div class="single_product_text">
-                                            <h4>Quartz Belt Watch</h4>
-                                            <h3>$150.00</h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div>
     </section> -->
-    <!-- product_list part start-->
+
+
+
+    
 
     <!-- awesome_shop start-->
     <section class="our_offer section_padding">
@@ -708,9 +760,7 @@
     </footer>
     <!--::footer_part end::-->
     
-    <!-- Bootstrap Script link -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+    
     <!-- jquery plugins here-->
     <script src="js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
@@ -737,6 +787,72 @@
     <script src="js/mail-script.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+
+    <!-- Bootstrap Script link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+        const buyNowButton = document.getElementById('buyNow')
+        const productDetailsSection = document.getElementById('productDetails')
+
+        buyNowButton.addEventListener('click',function(){
+            productDetailsSection.scrollIntoView({ behavior: 'smooth' });
+            console.log("invoked the buyNow buttun");
+        })
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('error_msg_isBlock_middleware')
+
+            if(button){
+                setTimeout(function(){
+                    button.style.display = 'none'
+                },3000)
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Admin restricted your actions ..!',
+                        text: 'Please contact with the our customer service.',
+                        timer: 3000, // Show for 3 seconds
+                        showConfirmButton: false,
+                    });
+            }
+        })
+        
+    </script>
+    <script>
+
+    function handleSearchFormSubmit(event) {
+        console.log("The search input function invoked ");
+        const searchInput = document.getElementById('search_input').value;
+
+        fetch('/searchFromNavbar', {
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({query:searchInput})
+        })
+        .then(Response => Response.json())
+        .then(data => {
+            console.log(data);
+        
+            // Redirect to the product page with the search results
+        
+            window.location.href = '/loadSearchProduct?query='+ encodeURIComponent(data.searchInput)
+        
+        })
+        .catch(error => {
+            console.log("Error on handleSearchFormSubmit",error);
+        })
+
+    }
+
+    const searchForm = document.getElementById('searchForm');
+    searchForm.addEventListener('submit', handleSearchFormSubmit);
+
+    </script>
+
 </body>
 
 </html>

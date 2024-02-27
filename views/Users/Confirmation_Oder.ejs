@@ -27,6 +27,11 @@
     <link rel="stylesheet" href="css/price_rangs.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+        <!-- font awesom  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -89,19 +94,20 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="hearer_icon d-flex">
+                        <div class="hearer_icon d-flex" style="width: 180px; justify-content: space-between; align-items: center;">
                             <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
                             <a href=""><i class="ti-heart"></i></a>
                             <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                                <!-- <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
+                                    
+                                </a> -->
+                                <a href="/Cart"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: rgb(255, 106, 0);"></i></a>
                                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div class="single_product">
-
-                                </div>
-                            </div> -->
+                                    <div class="single_product">
+                                        <a href="/Cart">Cart</a>
+                                    </div>
+                                </div> -->
 
                             </div>
                         </div>
@@ -123,7 +129,7 @@
 
     <!--================Home Banner Area =================-->
     <!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
+    <!-- <section class="breadcrumb breadcrumb_bg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -136,12 +142,12 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- breadcrumb start-->
 
     <!--================ confirmation part start =================-->
     <section class="confirmation_part padding_top">
-        <% if(typeof OrderDetails !=='undefined' ) { %>
+        <% if(typeof OrderDetails !== 'undefined' ) { %>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -158,10 +164,10 @@
                                     <p>order id</p><span>: <%= OrderDetails.OderId %></span>
                                 </li>
                                 <li>
-                                    <p>date</p><span>: <%= OrderDetails.Orderdate %></span>
+                                    <p>date</p><span>: <%= OrderDetails.createdAt.toLocaleDateString() %></span>
                                 </li>
                                 <li>
-                                    <p>total</p><span>: INR <%= OrderDetails.totalAmount %></span>
+                                    <p>total</p><span>: $<%= OrderDetails.totalAmount %>.00</span>
                                 </li>
                                 <li>
                                     <p>Payment Method</p><span>: <%= OrderDetails.PaymentMethod  %></span>
@@ -174,16 +180,16 @@
                             <h4>Billing Address</h4>
                             <ul>
                                 <li>
-                                    <p>Name </p><span>:<%= UserData.UserId.name %> </span>
+                                    <p>Name </p><span>: <%= OrderDetails.UserId.name %></span>
                                 </li>
                                 <li>
-                                    <p>city</p><span>: <%  %></span>
+                                    <p>Phone Number</p><span>: <%= OrderDetails.UserId.phoneNumber %></span>
                                 </li>
                                 <li>
-                                    <p>country</p><span>: United States</span>
+                                    <p>Payment Id </p><span>: <%= OrderDetails.PaymentId  %></span>
                                 </li>
                                 <li>
-                                    <p>postcode</p><span>: 36952</span>
+                                    <p>Email</p><span>: <%= OrderDetails.UserId.email  %></span>
                                 </li>
                             </ul>
                         </div>
@@ -191,18 +197,19 @@
                     <div class="col-lg-6 col-lx-4">
                         <div class="single_confirmation_details">
                             <h4>shipping Address</h4>
+                            
                             <ul>
                                 <li>
-                                    <p>Street</p><span>: 56/8</span>
+                                    <p>Street</p><span>: <%= OrderDetails.Deliver_Address.add1 %> </span>
                                 </li>
                                 <li>
-                                    <p>city</p><span>: Los Angeles</span>
+                                    <p>city</p><span>: <%= OrderDetails.Deliver_Address.add2 %></span>
                                 </li>
                                 <li>
-                                    <p>country</p><span>: United States</span>
+                                    <p>country</p><span>: <%= OrderDetails.Deliver_Address.Country %></span>
                                 </li>
                                 <li>
-                                    <p>postcode</p><span>: 36952</span>
+                                    <p>postcode</p><span>:  <%= OrderDetails.Deliver_Address.PinCode %></span>
                                 </li>
                             </ul>
                         </div>
@@ -221,42 +228,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                                        <th>x02</th>
-                                        <th> <span>$720.00</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                                        <th>x02</th>
-                                        <th> <span>$720.00</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                                        <th>x02</th>
-                                        <th> <span>$720.00</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3">Subtotal</th>
-                                        <th> <span>$2160.00</span></th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3">shipping</th>
-                                        <th><span>flat rate: $50.00</span></th>
-                                    </tr>
+                                    <% OrderDetails.OrderItems.forEach(item => { %>
+                                        <tr>
+                                            <th colspan="2"><span><%= item.ProductId.Name %></span></th>
+                                            <th>x <%= item.quantity %></th>
+                                            <th> <span>$<%= item.Price %>.00</span></th>
+                                        </tr>
+                                    <% }) %>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th scope="col" colspan="3">Quantity</th>
-                                        <th scope="col">Total</th>
+                                        <th scope="col" colspan="3">Total</th>
+                                        <th scope="col">$<%= OrderDetails.totalAmount %>.00</th>
                                     </tr>
                                 </tfoot>
                             </table>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         <% } %>
+        <div class="container" style="width: 100%; display: flex; justify-content: end; align-items: center; flex-wrap: wrap; margin-top: 1vw;">
+            <a href="/download-invoice?oderId=<%= OrderDetails.OderId %>"><button style="border: none; color: blue; " id="downloadInvoiceBtn">Download Invoice  <i class="fa-solid fa-cloud-arrow-down fa-beat"></i></button></a>
+            <a class="btn_1 checkout_btn_1" style=" background-color: rgb(255, 47, 134);" href="/LoadOrderManagment">See Orders</a>
+        </div>
+
     </section>
     <!--================ confirmation part end =================-->
 
@@ -383,16 +380,26 @@
     <script src="js/price_rangs.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+    <!-- <script>
+        document.getElementById('downloadInvoiceBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/download-invoice');
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'invoice.pdf';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error downloading invoice:', error);
+            }
+        });
+    </script> -->
+
+
+
 </body>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
 
 </html>

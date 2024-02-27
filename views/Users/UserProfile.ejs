@@ -176,18 +176,57 @@
             font-weight: bolder;
         }
         .Edibuttton{
+            border: none;
             padding: 10px 20px;
             border-radius: 15px;
-            background-color: rgb(0, 183, 37);
-            color: white;
+            border: 1px solid rgb(0, 183, 37);
+            color: rgb(0, 183, 37);
             margin-bottom: 5px;
         }
+        .Edibuttton:hover{
+            background-color: rgb(0, 183, 37);
+            color: rgb(255, 255, 255);
+        }
         .addbuttton{
+            margin-top: 1vw;
             padding: 10px 20px;
             border-radius: 15px;
-            background-color: rgb(197, 0, 0);
-            color: white;
+            border: 1px solid  rgb(0, 119, 255);
+            color: rgb(0, 119, 255);
             margin-left: 40px;
+            transition: 3ms;
+            position: relative;
+            overflow: hidden;
+        }
+        .addbuttton::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent 0%, rgb(0, 38, 255) 100%);
+            transition: left 0.3s ease-in-out;
+            
+        }
+        .addbuttton:hover::before{
+            
+            left: 0;
+        }
+        .delete{
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            border: 1px solid rgb(238, 0, 0);
+            color: rgb(238, 0, 0);
+            margin-bottom: 5px;
+            transition: 0.5s;
+            /* transition: left 3s ease-in-out; */
+            
+        }
+        .delete:hover{
+            background-color: rgb(238, 0, 0);
+            color: rgb(255, 255, 255);
         }
         </style>
 
@@ -298,17 +337,22 @@
                         <div class="hearer_icon d-flex">
                             <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
                             <a href=""><i class="ti-heart"></i></a>
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-                                
-                                    </div>
-                                </div> -->
-                                
+                            <div class="hearer_icon d-flex" style="justify-content: space-around; width: 180px;">
+                                <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                                <a href=""><i class="ti-heart" style="color: orange;"></i></a>
+                                <div class="dropdown cart">
+                                    <!-- <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        
+                                    </a> -->
+                                    <a href="/Cart"><i class="fa-solid fa-cart-shopping fa-bounce" style="color: rgb(255, 106, 0);"></i></a>
+                                    <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <div class="single_product">
+                                            <a href="/Cart">Cart</a>
+                                        </div>
+                                    </div> -->
+    
+                                </div>
                             </div>
                                 <!-- <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" >
                                     <img src="/assets/images/person-lines-fill.svg" alt="">
@@ -353,6 +397,7 @@
                             <a class="list-group-item list-group-item-action " href="/Cart">CART</a>
                             <a id="bt3" class="list-group-item list-group-item-action" onclick="loadContent('Address')" >MANAGE ADDRESS</a>
                             <a id="bt2" class="list-group-item list-group-item-action"  onclick="loadContent('Edit_Profile')">Edit Profile</a>
+                            <a id="bt2" class="list-group-item list-group-item-action"href="/LoadOrderManagment" >Orderes</a>
                             <!-- href="/Address" -->
                             <!-- <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('user-details')">User Details</li>
                             <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('addresses')">Addresses</li> -->
@@ -378,17 +423,18 @@
                                 <img  src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80">
                                 <h5 style="font-weight: bolder; padding-top: 1rem;"><%= User.name %></h5>
                                 <p><%= User.email %></p>
-                                <p><%= User.phoneNumber %></p>
+                                <p>Ph No : <%= User.phoneNumber %></p>
                             </div>
                         </div>
                     </div>
 
-
-                    <% if(typeof Address !== 'Undefined') { %>
+                <div id="address" style="display: none;  border: 3px solid rgb(255, 243, 219);" class="col-md-9">
+                    <a href="/Add_Address"><button class="addbuttton">Add Addrss</button></a>
+                    <% if(typeof Address !== 'Undefined'){ %>
                     
                         <% Address.forEach(Address => { %>
-                        <div id="address" style="display: none;  border: 3px solid rgb(255, 243, 219);" class="col-md-9">
-                            <div class="min_sub" style="padding: 2vw;">
+                        
+                            <div class="min_sub" style="padding: 2vw; ">
                                 <p> <span class="Address_span"> First Name :</span> <%= Address.FirstName %> </p>
                                 <p> <span class="Address_span"> Last Name :</span> <%= Address.LastName %> </p>
                                 <p> <span class="Address_span">Phone Number :</span> <%= Address.PhoneNumber %> </p>
@@ -401,18 +447,21 @@
                                 <p> <span class="Address_span"> Town :</span> <%= Address.Town %> </p>
                                 <p> <span class="Address_span"> Pin Code :</span> <%= Address.PinCode %> </p>
                                 <br>
-                                
-                                <a href="/Edit_Address"><button class="Edibuttton">Edit Address</button></a>
-                                <a href="/Add_Address"><button class="addbuttton">Add Addrss</button></a>
                             </div>
-                           
-                        </div>
+                            
+                        
+                        
+                        <a href="/Edit_Address?id=<%= Address._id %>"><button class="Edibuttton">Edit Address</button></a>
+                        <button class="delete Editbuttton" data-address-id="<%= Address._id %>" >Delete Address</button>
+
                         <% }) %>
             
                     <% }else{ %>
                         <h3>No Address Added</h3>
+                        
                     <% } %>
-
+                    
+                </div>
                         
 
 
@@ -447,16 +496,16 @@
                                             <label class="form-label">Phone</label>
                                             <input type="text" class="form-control mb-1" name="mobileNumber" value="">
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <a class="list-group-item list-group-item-action form-control w-25 text-center "
                                                 data-toggle="list" href="#account-change-password">Change Password?</a>
-                                        </div>
+                                        </div> -->
                                         <!-- <div class="form-group">
 
                                     <button type="submit" class="btn btn-primary">edit</button>&nbsp;
                                 </div> -->
                                         <div class="text-right mt-3">
-                                            <button type="submit" class="feature_btn" style="border-radius: 10;">Save changes</button>
+                                            <button type="submit" class="btn_3" style="border-radius: 10;">Save changes</button>
                                         </div>
                                     </form>
                                 </div>
@@ -788,6 +837,39 @@
                     contentDiv.innerHTML = '<h2>Welcome to Your User Dashboard</h2><p>Select an option from the left to view details.</p>';
             }
         }
+    </script>
+
+    <script>
+         function handleDeleleteClick(addressId){
+            console.log("fghjdfjf gfd jfhj ffd fg",addressId);
+            
+            fetch(`http://localhost:5000/DeleteAddress?id=${addressId}`,{
+                method:'DELETE',
+                header:{
+                    'Content-Type':'application/json'
+                }
+            })
+                .then(response => response.json)
+                .then(data =>{
+                    console.log(data)
+                    // $('#address').load('/UserProfile #address');
+                    location.reload();
+                    
+                })
+                .catch(error => console.log("Error on DleleteAdress",error))
+        }
+
+        // Example of calling the function on a button click
+        document.querySelectorAll('.Editbuttton').forEach(button => {
+            button.addEventListener('click', function () {
+                const addressId = button.getAttribute('data-address-id')
+                
+
+                handleDeleleteClick(addressId)
+            });
+        });
+
+      
     </script>
     
     

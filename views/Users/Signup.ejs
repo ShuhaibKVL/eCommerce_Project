@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Custom CSS  -->
     <link rel="stylesheet" href="/css/added.css">
+
+    <!-- ..Font Awesom -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -91,18 +96,7 @@
                         <div class="hearer_icon d-flex">
                             <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
                             <a href=""><i class="ti-heart"></i></a>
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> -->
-                                
-                            </div>
+                            
                         </div>
                     </nav>
                 </div>
@@ -160,13 +154,14 @@
                             <h3>Welcome Back ! <br>
                                 Please Sign in now</h3>
 
-                            <div style=" width: fit-content; height: 20px;">
+                            <div style=" width: fit-content; height: 20px; display: flex; align-items: center;">
                                 <% if (typeof message !== 'undefined') { %>
                                     <p id="error-message" style="color: red;"><%= message %></p>
                                 <%  } %>
+                                <p id="valid-message" style="color: red;"></p>
                             </div>
 
-                            <p id="valid-message" style="color: red;"></p>
+                            
                             <!-- novalidate="novalidate"  -->
                             <form   class="row contact_form" action="Signup" id="signupForm" method="post" onsubmit="return validateForm()" >
                                 <div class="col-md-12 form-group p_star">
@@ -176,13 +171,13 @@
                                     <input type="text" class="form-control" id="email" name="email" placeholder="Email" pattern="^[^\s]*$">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"placeholder="Phone Number" pattern="^[^\s]*$" >
+                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"placeholder="Phone Number" autocomplete="username" pattern="^[^\s]*$" maxlength="10" >
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""  placeholder="Password" pattern="^[^\s]*$" >
+                                    <input type="password" class="form-control" id="password" name="password" value=""  placeholder="Password" autocomplete="new-password" pattern="^[^\s]*$" >
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="Confirmpassword" name="ConfirmPassword" placeholder="Confirm Password" pattern="^[^\s]*$" >
+                                    <input type="password" class="form-control" id="Confirmpassword" name="ConfirmPassword"  placeholder="Confirm Password" autocomplete="new-password" pattern="^[^\s]*$" >
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <!-- <div class="creat_account d-flex align-items-center">
@@ -322,6 +317,8 @@
             var password = document.getElementById('password').value;
             var Confirmpassword = document.getElementById('Confirmpassword').value;
 
+            console.log(email,password,Confirmpassword);
+
               //  << email validation >>
             const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.[a-zA-Z]{2,4}$/;
 
@@ -334,62 +331,72 @@
                 document.getElementById('valid-message').innerHTML ="Please Enter a Valid Gmail Address"
                 return false
                 }else if(!/^\d+$/.test(phoneNumber)){
-                document.getElementById('valid-message').innerHTML ="Mobile should contain only numbers"
+                document.getElementById('valid-message').innerHTML ="Please Enter a  valid Phone Number"
+                return false
+                }else if(phoneNumber.length !== 10){
+                document.getElementById('valid-message').innerHTML = "Enter a Valid Phone Number"
+                return false
+                }else if(/^(\d)\1+$/.test(phoneNumber)){
+                document.getElementById('valid-message').innerHTML = "Invalid mobile number. It should not consist of the same digit."
                 return false
                 }else if(!password){
                     document.getElementById('valid-message').innerHTML ="Please Enter a Strong Password"
                     return false
-                 //}
-                // else if(password){
-                //     // Check if the password meets the criteria
+                }
+                    // Check if the password meets the criteria
+                    else if (password.length < 8) {
+                        // alert('Password must be at least 8 characters long.');
+                        document.getElementById('valid-message').innerHTML ="Password must be at least 8 characters long."
+                        return false;
+                    }
 
-                //     console.log("yjghj");
+                   // Check if the password contains at least one uppercase letter
+                    else if (!/[A-Z]/.test(password)) {
+                        document.getElementById('valid-message').innerHTML ="Password must include One Uppercase characters."
+                        return false;
+                    }
 
-                //     if (password.length < 8) {
-                //         // alert('Password must be at least 8 characters long.');
-                //         document.getElementById('valid-message').innerHTML ="Password must be at least 8 characters long."
-                //         return false;
-                //     }
+                   // Check if the password contains at least one lowercase letter
+                    else if (!/[a-z]/.test(password)) {
+                        // alert('Password must contain at least one lowercase letter.');
+                        document.getElementById('valid-message').innerHTML ="Password must include One Lowercase characters."
+                        return false;
+                    }
 
-                //    // Check if the password contains at least one uppercase letter
-                //     if (!/[A-Z]/.test(password)) {
-                //         document.getElementById('valid-message').innerHTML ="Password must include One Uppercase characters."
-                //         return false;
-                //     }
+                   // Check if the password contains at least one digit
+                    else if (!/\d/.test(password)) {
+                        // alert('Password must contain at least one digit.');
+                        document.getElementById('valid-message').innerHTML ="Password contains at least one digit."
+                        return false;
+                    }
 
-                //    // Check if the password contains at least one lowercase letter
-                //     if (!/[a-z]/.test(password)) {
-                //         // alert('Password must contain at least one lowercase letter.');
-                //         document.getElementById('valid-message').innerHTML ="Password must include One Lowercase characters."
-                //         return false;
-                //     }
+                   // Check if the password contains at least one special character
+                    else if (!/[@$!%*?&]/.test(password)) {
+                        // alert('Password must contain at least one special character (@, $, !, %, *, ?, &).');
+                        document.getElementById('valid-message').innerHTML ="Password must contain at least one special character (@, $, !, %, *, ?, &).')"
+                        return false;
+                    }
 
-                //    // Check if the password contains at least one digit
-                //     if (!/\d/.test(password)) {
-                //         // alert('Password must contain at least one digit.');
-                //         document.getElementById('valid-message').innerHTML ="Password contains at least one digit."
-                //         return false;
-                //     }
-
-                //    // Check if the password contains at least one special character
-                //     if (!/[@$!%*?&]/.test(password)) {
-                //         // alert('Password must contain at least one special character (@, $, !, %, *, ?, &).');
-                //         document.getElementById('valid-message').innerHTML ="Password must contain at least one special character (@, $, !, %, *, ?, &).')"
-                //         return false;
-                //     }
-
-                //    // If all criteria are met, the password is valid
-                //     return true;
-
-                // }else if(Confirmpassword !== password){
+                else if(!Confirmpassword){
+                    document.getElementById('valid-message').innerHTML ="Please enter Your Same Password"
+                    return false
+                }else if(Confirmpassword !== password){
                     document.getElementById('valid-message').innerHTML ="Password Missmatch"
+                    return false
                 } else{
-                    return true
+                    // return true
                 }
         }
 
         
     </script>
+
+    <!-- <script>
+    document.getElementById("valid-message").style.display = "block";
+        setTimeout(function(){
+        document.getElementById("valid-message").style.display = "none";
+        }, 2000);
+    </script> -->
 
     <!-- jquery plugins here-->
     <!-- jquery -->

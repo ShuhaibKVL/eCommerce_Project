@@ -17,7 +17,6 @@ const isLogin = async(req,res,next) => {
     }
 }
 const IsBlocked = async(req,res,next) =>{
-    
     try {
         if(req.session.user_id){
             console.log("Block Middleware Invoked");
@@ -27,14 +26,15 @@ const IsBlocked = async(req,res,next) =>{
             const user = await User.findOne({_id:user_Id})
             console.log(user)
             const status_OF_Block =user.isBlocked
-            console.log(status_OF_Block);
+            console.log("Admin block status >> ",status_OF_Block);
             if(user.isBlocked){
-                res.redirect('/logout')
+                console.log("ADMIN BLOCKED YOU")
+                req.flash('error', '..!');
+                return res.redirect('/')
                 
             }else{
                 next()
             }
-            
         }else{
             console.log("not found ISblock session")
             next()
@@ -63,8 +63,6 @@ const isLogout = async(req,res,next) => {
         next(error)
     }
 }
-
-
 
 module.exports = {
         isLogin ,
