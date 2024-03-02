@@ -48,9 +48,14 @@ const LoadfilterProduct = async(req,res) => {
         //Best sellers
         const allProducts = await ProductModel.find()
 
-        // console.log("The sending datas :> ",allProducts);
+        // whishList
+        let whishListProducts;
+        if (req.session.user_id) {
+            whishListProducts = await whishList.findOne({UserId:req.session.user_id})
+            console.log("found WhishList >>",whishList);
+        }
         
-        res.render('filterProduct',{products:products,category:category,allProducts:allProducts,totalPages:totalPages,query:query})
+        res.render('filterProduct',{products:products,category:category,allProducts:allProducts,totalPages:totalPages,query:query,whishList:whishListProducts})
     } catch (error) {
         console.log(("Error on LoadfilterProduct CONTROLLLER :",error));
     }
@@ -89,7 +94,6 @@ const searchInput = async(req,res) => {
         
         // Execute the query to find products that match the search criteria
         const products = await ProductModel.find(searchCriteria).skip(skip).limit(limit)
-        // console.log("search output : ",products);
         
         res.json({products:products,query:query,totalPages:totalPages})
     } catch (error) {
@@ -113,7 +117,14 @@ const filterProducts = async(req,res) => {
         const totalPages =Math.ceil(totalProductsLength / limit)
         const products =  await ProductModel.find({Category:Input}).skip(skip).limit(limit)
 
-        res.json({products:products,query:query,totalPages:totalPages})
+        // whishList
+        let whishListProducts;
+        if (req.session.user_id) {
+            whishListProducts = await whishList.findOne({UserId:req.session.user_id})
+            console.log("found WhishList >>",whishListProducts);
+        }
+
+        res.json({products:products,query:query,totalPages:totalPages,whishList:whishListProducts})
 
     } catch (error) {
         console.log("ERROR on filterProducts CONTROLLER : ",error);

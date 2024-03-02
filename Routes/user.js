@@ -42,7 +42,7 @@ UserRoute.post('/Otp',Usercontrol.OTpVerification)
 
 UserRoute.get('/logout',Usercontrol.logout)
 
-UserRoute.get('/ProductDetails',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.ProductDeatils)
+UserRoute.get('/ProductDetails',UserAuth.IsBlocked,Usercontrol.ProductDeatils)
 
 UserRoute.get('/UserProfile',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.UserProfile_Loagin)
 
@@ -50,21 +50,19 @@ UserRoute.get('/Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Address
 
 UserRoute.get('/Add_Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Add_AddressLoad)
 
-UserRoute.post('/Add_Address',UserAuth.IsBlocked,Usercontrol.Add_Address)
+UserRoute.post('/Add_Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Add_Address)
 
 UserRoute.delete('/DeleteAddress',UserAuth.IsBlocked,Usercontrol.DeleteAddress)
 
 UserRoute.get('/Edit_Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Edit_AddressLoad)
 
-UserRoute.post('/Edit_Address',UserAuth.IsBlocked,Usercontrol.Edit_Address)
+UserRoute.post('/Edit_Address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Edit_Address)
 
 UserRoute.get('/Cart',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.LoadCarts)
 
-UserRoute.get('/UserCart',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.UserCart)
+UserRoute.get('/AddToCart',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.AddnewCart)
 
-UserRoute.get('/AddToCart',UserAuth.IsBlocked,Usercontrol.AddnewCart)
-
-UserRoute.post('/remove-from-cart',UserAuth.IsBlocked,Usercontrol.remove_from_cart)
+UserRoute.post('/remove-from-cart',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.remove_from_cart)
 
 UserRoute.get('/forgoutPassword',UserAuth.IsBlocked,Usercontrol.LaodforgoutPassword)
 
@@ -80,39 +78,39 @@ UserRoute.post('/NewPassword',UserAuth.IsBlocked,Usercontrol.NewPassword)
 
 UserRoute.post('/ResendOtp',UserAuth.IsBlocked,Usercontrol.ResendOTP)
 
-UserRoute.get('/update-cart',UserAuth.IsBlocked,Usercontrol.update_cart)
+UserRoute.get('/update-cart',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.update_cart)
 
-UserRoute.post('/UpdateProfile',Usercontrol.UpdateProfile)
+UserRoute.post('/UpdateProfile',UserAuth.isLogin,Usercontrol.UpdateProfile)
 
 UserRoute.get('/Chekout',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.LoadChekout)
 
-UserRoute.get('/loadCouponDetails',UserAuth.IsBlocked,Usercontrol.loadCouponDetails)
+UserRoute.get('/loadCouponDetails',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.loadCouponDetails)
 
-UserRoute.get('/useCoupon',UserAuth.IsBlocked,Usercontrol.useCoupon)
+UserRoute.get('/useCoupon',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.useCoupon)
 
 UserRoute.get('/direct_buy',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.direct_buy)
 
-UserRoute.post('/checkout_add_address',UserAuth.IsBlocked,Usercontrol.Add_Address)
+UserRoute.post('/checkout_add_address',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.Add_Address)
 
-UserRoute.post('/placeOrder',UserAuth.IsBlocked,Usercontrol.placeOrder)
+UserRoute.post('/placeOrder',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.placeOrder)
 
-UserRoute.post("/verifyPayment",UserAuth.IsBlocked,Usercontrol.verifyRazorpayPayment)
+UserRoute.post("/verifyPayment",UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.verifyRazorpayPayment)
 
 UserRoute.get('/confirmation_Order_page',UserAuth.isLogin,Usercontrol.Load_confirmation_Order_page)
 
 UserRoute.get('/LoadOrderManagment',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.LoadOrderManagment)
 
-UserRoute.patch('/cancelOrder',UserAuth.IsBlocked,Usercontrol.cancel_Order)
+UserRoute.patch('/cancelOrder',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.cancel_Order)
 
-UserRoute.patch('/ReturnOrder',UserAuth.IsBlocked,Usercontrol.ReturnOrder)
+UserRoute.patch('/ReturnOrder',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.ReturnOrder)
 
-UserRoute.get('/orderDetails',UserAuth.IsBlocked,Usercontrol.orderDetails)
+UserRoute.get('/orderDetails',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.orderDetails)
 
 UserRoute.get('/addToWhishList',UserAuth.isLogin,UserAuth.IsBlocked,WhishlistController.addToWhishList)
 
 UserRoute.get('/loadWhishList',UserAuth.isLogin,UserAuth.IsBlocked,WhishlistController.loadWhishList)
 
-UserRoute.post('/remove-from-whishlist',UserAuth.IsBlocked,WhishlistController.remove_from_whish_list)
+UserRoute.post('/remove-from-whishlist',UserAuth.isLogin,UserAuth.IsBlocked,WhishlistController.remove_from_whish_list)
 
 UserRoute.post('/searchFromNavbar',UserAuth.IsBlocked,filterProductController.redirectTOloadFilterPage)
 
@@ -127,9 +125,9 @@ UserRoute.post('/filterProducts',UserAuth.IsBlocked,filterProductController.filt
 UserRoute.get('/LoadWallet',UserAuth.isLogin,UserAuth.IsBlocked,walletController.LoadWallet)
 
    // INvoice download
-UserRoute.get('/download-invoice',Usercontrol.download_invoice)
+UserRoute.get('/download-invoice',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.download_invoice)
 
-UserRoute.get('/loadSalesReport',Usercontrol.loadSalesReport)
+// UserRoute.get('/loadSalesReport',Usercontrol.loadSalesReport)
 
 
 

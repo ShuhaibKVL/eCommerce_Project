@@ -8,6 +8,7 @@ const OrderModel = require('../model/Order')
 const couponModel = require('../model/Coupon')
 const walletModel = require('../model/wallet')
 const moment = require('moment')
+const sharp = require('sharp')
 
 
 const DashBoard =async (req, res) => {
@@ -145,7 +146,6 @@ const blockUser = async (req, res) => {
     } catch (error) {
         console.log("Error Occuered on blockUser Admin Route", error)
     }
-
 }
 
 
@@ -176,12 +176,26 @@ const Add_Product = async (req, res, next) => {
     try {
         const Name = req.body.name
         const Description = req.body.description
+        
         if (Name.length > 14) {
-            res.redirect('Product')
+            return res.redirect('Product')
         } else if (Description.length > 14) {
 
-            res.redirect('Product')
+            return res.redirect('Product')
         } else {
+
+            // Process each uploaded image using Sharp
+        // const processedImages = await Promise.all(req.files.map(async (file) => {
+        //     const filename = file.filename;
+        //     const imagePath = `${__dirname}/../path/to/uploaded/images/${filename}`;
+        //     const outputImagePath = `${__dirname}/../path/to/output/images/${filename}`;
+
+        //     const imageBuffer = await sharp(imagePath).toBuffer();
+        //     // Write the image buffer to the output file
+        //     await sharp(imageBuffer).toFile(outputImagePath);
+        //     return filename;
+            
+        // }));
 
             const newProduct = new ProductSchema({
                 Name: req.body.name,
@@ -191,10 +205,9 @@ const Add_Product = async (req, res, next) => {
                 Stock: req.body.stock,
                 Description: req.body.description,
                 Image: req.files.map((file) => file.filename)
+                // Image:processedImages
                 // Image : croppedImageData.map((file)=>file.filename)
             })
-
-            // newProduct.Image = JSON.parse(croppedImageData)
             await newProduct.save()
 
             res.redirect('Product')
@@ -239,6 +252,13 @@ const EditProduct = async (req, res) => {
     console.log(req.body.id);
     const Product_ID = req.body.id;
     console.log("Product ID : ", Product_ID);
+    // const existingIMages = []
+    // for (let i = 0; i <=4  ; i++) {
+    //     const element = document.getElementById('existingIMages'+i).value
+    //     existingIMages.push(element)
+    //     console.log("<>",existingIMages);
+    // }
+
     // Exclude the '_id' field from ProductData
     const ProductDataToUpdate = {
         Name: req.body.name,
@@ -247,7 +267,7 @@ const EditProduct = async (req, res) => {
         Size: req.body.size,
         Stock: req.body.stock,
         Description: req.body.description,
-        // Image: req.files.map((file) => file.filename)
+        Image: req.files.map((file) => file.filename)
     };
 
     console.log(ProductDataToUpdate);
@@ -646,13 +666,12 @@ const chart_data = async(req,res) =>{
             });
         })
 
-        console.log(categoryCounts);
         const categoryLabels = Object.keys(categoryCounts)
         const categoryData = Object.values(categoryCounts)
         
         // aggregate orders by DAY
         const ordersByDay = orders.reduce((acc,order) => {
-            const date = order.Orderdate.toISOString().split('T')[0]// Extract date in YYYY-MM-DD format
+            const date = order.createdAt.toISOString().split('T')[0]// Extract date in YYYY-MM-DD format
             if(!acc[date]){
                 acc[date] = {
                     totalAmount :0,
@@ -664,8 +683,12 @@ const chart_data = async(req,res) =>{
             return acc
         },{})
 
+        console.log("ordersByDay",ordersByDay);
+
         const labels = Object.keys(ordersByDay)
         const data = Object.values(ordersByDay)
+        console.log("labels :",labels);
+        console.log("data :",data);
 
         //Best sale category
         const bestCategory = orders.map(data => {
@@ -690,7 +713,7 @@ const filter_chart = async(req,res) => {
         if(filterQuery == "week"){
              // Aggregate order data by week
         const ordersByWeek = orders.reduce((acc, order) => {
-            const weekStart = new Date(order.Orderdate);
+            const weekStart = order.createdAt;
             weekStart.setHours(0, 0, 0, 0);
             weekStart.setDate(weekStart.getDate() - weekStart.getDay()); // Set to Sunday of the current week
             const weekEnd = new Date(weekStart);
@@ -717,7 +740,7 @@ const filter_chart = async(req,res) => {
         }else if(filterQuery == 'month'){
 
             const ordersByMonth = orders.reduce((acc, order) => {
-                const orderDate = new Date(order.Orderdate);
+                const orderDate = order.createdAt;
                 const yearMonthKey = `${orderDate.getFullYear()}-${(orderDate.getMonth() + 1).toString().padStart(2, '0')}`;
             
                 if (!acc[yearMonthKey]) {
@@ -740,7 +763,7 @@ const filter_chart = async(req,res) => {
         }else if(filterQuery == 'day'){
             // aggregate orders by DAY
         const ordersByDay = orders.reduce((acc,order) => {
-            const date = order.Orderdate.toISOString().split('T')[0]
+            const date = order.createdAt.toISOString().split('T')[0]
             if(!acc[date]){
                 acc[date] = {
                     totalAmount :0,
@@ -784,8 +807,18 @@ const loadSalesReport =async(req,res) => {
         const totalPages = Math.ceil(totalUsers / limit);
         console.log(totalUsers,"<>",totalPages);
 
-        const Orders = await OrderModel.find({OrderStatus : "Delivered"}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId' })
+        // const Orders = await OrderModel.find({OrderStatus : "Delivered"}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId' })
+        const Orders = await OrderModel.find({OrderStatus : "Delivered"}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId',model:'Product' })
         console.log("Orders Delivered :> ",Orders);
+        Orders.forEach(element => {
+            element.OrderItems.forEach(item => {
+                let name =item.ProductId
+                let Price = item.ProductId
+
+                console.log("The name is :> ",element.OderId,"<<>>",item)
+            })
+            
+        })
         
 
         res.render('salesReport',{order:Orders,totalPages,page})
@@ -793,25 +826,16 @@ const loadSalesReport =async(req,res) => {
         console.log("Error on loadSalesReport controller : ",error);
     }
 }
-const momentTimeZone = require('moment-timezone')
+
 const filter_sales_report = async(req,res) => {
     try {
         console.log("fgdhjk")
-        const startDateString = req.body.startDate
-        const endDateString = req.body.endDate
-        console.log(startDateString,endDateString,typeof(startDateString));
+        const startDateString = req.query.sDate
+        const endDateString = req.query.eDate
+        console.log("Dates : ",startDateString,endDateString);
 
         const startDate = new Date(startDateString)
         const endDate = new Date(endDateString)
-        console.log(startDate,endDate,typeof(startDateString));
-
-        // Extract date portion (year, month, day)
-        const startDateOnly = new Date(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate(),0,0,0);
-        const endDateOnly = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(),23,59,59);
-
-        const momentStartDate = momentTimeZone.utc(startDate).startOf('day')
-        const momentEndDate = momentTimeZone.utc(endDate).endOf('day')
-        console.log(momentEndDate,momentStartDate);
 
         const order = await OrderModel.find()
 
@@ -823,10 +847,11 @@ const filter_sales_report = async(req,res) => {
             }
         }
         
-        const Orders = await OrderModel.find({OrderStatus : "Delivered" , Orderdate:{ $gte:startDateOnly , $lte:endDateOnly}}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId' })
+        const Orders = await OrderModel.find({OrderStatus : "Delivered" , createdAt:{ $gte:startDate , $lte:endDate}}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId' })
         console.log(">> ",Orders);
 
-        // res.render('salesReport',{order:Orders,totalPages,page})
+        res.json({Orders})
+
     } catch (error) {
         console.log("Error on filter_sales_report Controller :",error);
     }

@@ -91,6 +91,6 @@ AdmiNRoute.get('/filter-chart',adminAuth.isLogout,Admincontroll.filter_chart)
 
 AdmiNRoute.get('/loadSalesReport',adminAuth.isLogout,Admincontroll.loadSalesReport)
 
-AdmiNRoute.post('/filter-sales_report',adminAuth.isLogout,Admincontroll.filter_sales_report)
+AdmiNRoute.get('/filter-sales_report',adminAuth.isLogout,Admincontroll.filter_sales_report)
 
 module.exports = AdmiNRoute;

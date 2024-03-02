@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function updateChart(chartData) {
-
     const labels = chartData.labels
     const orderCountData = chartData.data.map(data => data.orderCount)
     const totalAmountData = chartData.data.map(data => data.totalAmount)

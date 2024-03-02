@@ -222,45 +222,16 @@
                                         Shop
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="category.html"> shop category</a>
-                                        <a class="dropdown-item" href="single-product.html">product details</a>
-
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        pages
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> login</a>
-                                        <a class="dropdown-item" href="tracking.html">tracking</a>
-                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                        <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                        <a class="dropdown-item" href="elements.html">elements</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        blog
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="blog.html"> blog</a>
-                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                        <a class="dropdown-item" href="/loadSearchProduct"> shop category</a>
                                     </div>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex"
                             style="width: 180px; justify-content: space-between; align-items: center;">
                             <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <a href=""><i class="ti-heart"></i></a>
+                            <a href="/loadWhishList"><i class="fa-regular fa-heart" style="color: red;"></i></a>
 
                             <a href="/Cart"><i class="fa-solid fa-cart-shopping fa-bounce"
                                     style="color: rgb(255, 106, 0);"></i></a>
@@ -514,20 +485,23 @@
                                 <% }); %>
                                     <div style="display: flex; justify-content: end; width: 90%;">
                                         <div>
-                                            <p> Coupon :<span id="appliedCoupon">
+                                            <p1> Coupon :<span id="appliedCoupon" style="font-weight: 500;">
                                                     <% if(typeof coupon !=='undefined' ) { %>
 
                                                         <% }else{ %>
                                                             No coupon
                                                             <% } %>
                                                 </span>
-                                            </p>
+                                            </p1>
                                             <div style="display: flex; justify-content: end; ">
-                                                <p id="appliedCouponDiscount">
+                                                <p1 id="appliedCouponDiscount">
                                                     <% if(typeof coupon !=='undefined' ) { %>
-
                                                         <% } %>
-                                                </p>
+                                                </p1>
+                                                <p1 id="discountType"></p1>
+                                            </div>
+                                            <div style="display: flex; justify-content: end; ">
+                                                <p1 id="discoundAmount" style="color: red;"></p1>
                                             </div>
                                             <% if (deliveryCharge) { %>
                                                 <p3 style="font-size: 12px;"> Purchase more than $500.. Delivery charge free...</p3>
@@ -562,7 +536,7 @@
                                             </div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="paymentMethod"
+                                                <input class="form-check-input" type="radio" style="color: rgb(255, 0, 0);" name="paymentMethod"
                                                     value="Wallet" id="onlinePaymentOption">
                                                 <label class="form-check-label" for="onlinePaymentOption">Wallet
                                                     </label>
@@ -575,6 +549,9 @@
                                     <div style="height: 50px;">
                                         <p id="Msg_fr_COD_Option" style="color: red;"></p>
                                     </div>
+                                    <!-- if coupne applied ,push the value from " coupon applied function" -->
+                                    <input type="hidden" id="couponId" name="couponId">
+
                                     <button type="button" onclick="placeOrder()" id="placeorder"
                                         class="btn btn-primary btn-block">Place
                                         Order</button>
@@ -590,8 +567,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     <script>
@@ -703,15 +678,12 @@
     </footer>
     <!--::footer_part end::-->
 
-
-
-    <!-- <script>
+    <script>
     document.getElementById("Msg_fr_COD_Option").style.display = "block";
         setTimeout(function(){
         document.getElementById("Msg_fr_COD_Option").style.display = "none";
         }, 5000);
-    </script> -->
-
+    </script>
 
     </script>
 
@@ -764,7 +736,7 @@
             const addressRadios = document.getElementsByName('selectedAddress');
             let isSelected = false;
 
-            // Check if any radio button is selected
+            // any radio button is selected
             for (let i = 0; i < addressRadios.length; i++) {
                 if (addressRadios[i].checked) {
                     isSelected = true;
@@ -815,6 +787,8 @@
         function placeOrder() {
             var selectedPaymentMethod = getSelectedPaymentMethod();
             var addressId = getSelectedAddress();
+            const couponId = document.getElementById('couponId').value
+            console.log("The coupon id is :> ",couponId);
 
             console.log(addressId);
 
@@ -824,7 +798,7 @@
 
             } else {
                 if (selectedPaymentMethod) {
-                    // You can now use 'selectedPaymentMethod' for further processing
+
                     console.log('Selected Payment Method:', selectedPaymentMethod);
                     const totalAmount = document.getElementById('totalPrice')
 
@@ -837,9 +811,7 @@
                         return false
                     }
 
-
-                    // Example: Send the selectedPaymentMethod to the server using AJAX/fetch
-                    sendToServer(selectedPaymentMethod, addressId, Total);
+                    sendToServer(selectedPaymentMethod, addressId, Total,couponId);
                 } else {
                     document.getElementById('Msg_fr_COD_Option').innerHTML = 'Please select a payment method.'
                     console.log('Please select a payment method.');
@@ -856,19 +828,19 @@
                 }
             }
 
-            return null; // No option selected
+            return null;
         }
 
 
 
-        function sendToServer(selectedPaymentMethod, AddressId, Total) {
+        function sendToServer(selectedPaymentMethod, AddressId, Total,couponId) {
             // Example: Send a POST request to your server
             fetch('http://localhost:5000/placeOrder', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ paymentMethod: selectedPaymentMethod, addressId: AddressId, Total: Total }),
+                body: JSON.stringify({ paymentMethod: selectedPaymentMethod, addressId: AddressId, Total: Total ,couponId:couponId}),
             })
                 .then(response => response.json())
                 .then(data => {
@@ -955,15 +927,31 @@
                     } else {
                         const Total = response.totalAmountAfterDeduction;
                         const coupon = response.couponDetails;
+                        const discoundAmount = response.discount
+                        const discoundType = response.discountType
+                        const couponId = response.couponCode
+                        let discIcon ;
+                        if(discoundType == 'fixed'){
+                            discIcon =''
+                        }else{
+                            discIcon = '%'
+                        }
+
                         console.log(Total, coupon);
 
                         const totalAmount = document.querySelector('#totalPrice')
                         const appliedCoupon = document.querySelector('#appliedCoupon')
                         const appliedCouponDiscount = document.querySelector('#appliedCouponDiscount')
-
+                        const discAmount = document.getElementById('discoundAmount')
+                        const discoundTypeSpan = document.getElementById('discountType')
+                        
                         totalAmount.textContent = Total
                         appliedCoupon.textContent = coupon.couponCode
                         appliedCouponDiscount.textContent = coupon.discount
+                        discAmount.innerText = discoundAmount
+                        discoundTypeSpan.textContent = discIcon
+
+                        document.getElementById('couponId').value = couponId;
                     }
 
                 })

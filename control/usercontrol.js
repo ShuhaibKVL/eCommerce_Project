@@ -17,6 +17,7 @@ const { log, error } = require('console')
 const moment = require('moment')
 const fs = require('fs')
 const easyinvoice = require('easyinvoice')
+const whishListModel = require('../model/Whishlist')
 
 // Razo Pay
 var instance = new Razorpay({ key_id: process.env.YOUR_KEY_ID, key_secret: process.env.YOUR_SECRET })
@@ -52,8 +53,11 @@ const Home = async (req, res) => {
     try {
 
         let Profile;
+        let whishList;
         if (req.session.user_id) {
             Profile = await User.findById({ _id: req.session.user_id })
+            whishList = await whishListModel.findOne({UserId:req.session.user_id})
+            console.log("found WhishList >>",whishList);
         }
         const ProductData = await ProductModel.find()
         const MenData = await ProductModel.find({ Category: 'Men' })
@@ -63,7 +67,7 @@ const Home = async (req, res) => {
         const flashMessage = req.flash('error');
         console.log("flash Message is : ", flashMessage);
 
-        res.render('home', { Profile: Profile, Product: ProductData, Men: MenData, Women: WomenData, Kids: KidsData, error: flashMessage })
+        res.render('home', { whishList,Profile: Profile, Product: ProductData, Men: MenData, Women: WomenData, Kids: KidsData, error: flashMessage })
     } catch (error) {
         console.log("Error on Home Rendering ", error)
     }
@@ -425,42 +429,18 @@ const LoadCarts = async (req, res) => {
 
             for (const cartItem of CartProducts.cart) {
                 totalAmount += cartItem.quantity * cartItem.product.Price
-
             }
+            
             console.log("TOTAL AMOUNT > ", totalAmount);
 
             res.render('UserCart', { user: CartProducts, userId: UserID, Total: totalAmount })
 
-            // res.render('Profile_Test',{user:CartProducts})
-
         }
     } catch (error) {
-        console.log("Error on User Cart", error.message)
+        console.log("Error on User Cart", error)
     }
 }
 
-const UserCart = async (req, res) => {
-    // try {
-
-    //     if(!req.session.user_id){
-    //         res.redirect('/Signup')
-    //     }else{
-    //         console.log("dfghjkjhghj");
-    //         const UserID = req.session.user_id
-    //         const CartProducts = await User.findById(UserID).populate('cart.product')
-
-    //             console.log(CartProducts)
-
-    //             res.render('UserCart',{user:CartProducts})
-
-    //             // Profile_Test
-    //             // res.render('Profile_Test',{user:CartProducts})
-    //     }
-
-    // } catch (error) {
-    //     console.log("Error on Loading UserCart in Controll",error)
-    // }
-}
 
 const AddnewCart = async (req, res) => {
     try {
@@ -524,10 +504,8 @@ const remove_from_cart = async (req, res) => {
         const user = await User.findById(UserID)
 
         let productIndex = user.cart.findIndex(item => item.product._id.toString() === ProductId);
-        console.log("fghjkl");
 
         await User.updateOne({ _id: UserID }, { $pull: { cart: user.cart[productIndex] } });
-        console.log("fcgvhbjnkml,");
 
         res.redirect('/Cart')
 
@@ -558,8 +536,6 @@ const update_cart = async (req, res) => {
 
         console.log(CartProducts)
         console.log(totalAmount);
-
-        // res.render('UserCart', { user: CartProducts, userId: UserID, totalAmount: totalAmount });
 
         res.json(totalAmount)
     } catch (error) {
@@ -704,7 +680,7 @@ const UpdateProfile = async (req, res) => {
             console.log(userData);
 
             console.log("UPDATED SUCCESSFULLY")
-            console.log(UpdateProfile);
+
             res.redirect('/UserProfile')
         } else {
             res.redirect('/')
@@ -794,8 +770,7 @@ const useCoupon = async (req, res) => {
             return res.status(200).json({ isUse: true })
         } else {
 
-            const insertUserId = await couponModel.updateOne({ couponCode: couponId }, { $push: { userId: req.session.user_id } })
-            console.log(insertUserId);
+            req.session.couponId = couponId
 
             var totalAmountAfterDeduction = 0;
 
@@ -804,9 +779,9 @@ const useCoupon = async (req, res) => {
                 console.log(totalAmountAfterDeduction);
                 return res.status(200).json({ totalAmountAfterDeduction, couponDetails })
             } else {
-                totalAmountAfterDeduction = totalAmount / 100 * discountAmount
-                console.log(totalAmountAfterDeduction);
-                return res.status(200).json({ totalAmountAfterDeduction, couponDetails })
+                const discount = -1*(totalAmount / 100 * discountAmount)
+                totalAmountAfterDeduction = totalAmount - discount
+                return res.status(200).json({ totalAmountAfterDeduction, couponDetails ,discount})
             }
 
         }
@@ -842,6 +817,16 @@ const placeOrder = async (req, res) => {
             const paymentMethod = req.body.paymentMethod
             const addressId = req.body.addressId
             const Total = req.body.Total.trim()
+            const couponId = req.session.couponId
+
+
+            console.log(">>>>>",req.session.couponId);
+
+            if(couponId){
+                const insertUserId = await couponModel.updateOne({ couponCode: couponId }, { $push: { userId: req.session.user_id } })
+                console.log("coupon :> ",insertUserId);
+            }
+            
             console.log("total is :",Total);
             console.log(Total);
             const OderId = generateRandomOrderId()
@@ -880,7 +865,7 @@ const placeOrder = async (req, res) => {
                     console.log(order);
                     res.json({ status: "Razorpay", order: order, newOrder: newOrder })
                 });
-                // res.json({status:"Razorpay",orderId:order,newOrder:newOrder})
+                
 
             } else if (paymentMethod == 'COD') {
 
@@ -1226,7 +1211,6 @@ module.exports = {
     Edit_Address,
     DeleteAddress,
     LoadCarts,
-    UserCart,
     AddnewCart,
     remove_from_cart,
     LaodforgoutPassword,
