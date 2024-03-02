@@ -88,6 +88,14 @@
           </a>
         </li>
 
+        <li>
+          <a href="loadSalesReport">
+            <i class="zmdi zmdi-face"></i> <span>Ledger</span>
+          </a>
+        </li>
+
+        
+
       <li class="sidebar-header">LABELS</li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
@@ -233,7 +241,7 @@
                           data-toggle="dropdown">
                           <i class="icon-options"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-menu dropdown-menu-right " >
                           <a class="dropdown-item" href="javascript:void();">Action</a>
                           <a class="dropdown-item" href="javascript:void();">Another action</a>
                           <a class="dropdown-item" href="javascript:void();">Something else here</a>
@@ -241,14 +249,49 @@
                           <a class="dropdown-item" href="javascript:void();">Separated link</a>
                         </div>
                       </div>
-                    </div>
+                    </div  >
                   </div>
                   <div class="card-body">
                     <ul class="list-inline">
-                      <li id="day" class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>Day</li>
-                      <li id="week" class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Week</li>
-                      <li id="month" class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Month</li>
+                      <li id="day" class="list-inline-item"><i class="fa fa-circle mr-2 text-light" id="dayIcon" style="border:1px solid rgb(255, 255, 255); background-color: white; border-radius: 50%; height: 14px;"></i>Day</li>
+                      <li id="week" class="list-inline-item"><i class="fa fa-circle mr-2 text-light" id="weekIcon" style=" border-radius: 50%; height: 14px;" ></i>Week</li>
+                      <li id="month" class="list-inline-item"><i class="fa fa-circle mr-2 text-light" id="monthIcon" style=" border-radius: 50%; height: 14px;"></i>Month</li>
                     </ul>
+                    <script>
+                      document.getElementById('week').addEventListener('click', function(){
+
+                        document.getElementById('weekIcon').style.border = "1px solid rgb(255, 255, 255)"
+                        document.getElementById('weekIcon').style.backgroundColor = "white"
+
+                        document.getElementById('dayIcon').style.border = "none"
+                        document.getElementById('dayIcon').style.backgroundColor = "transparent"
+
+                        document.getElementById('monthIcon').style.border = "none"
+                        document.getElementById('monthIcon').style.backgroundColor = "transparent"
+                      })
+
+                      document.getElementById('month').addEventListener("click",function(){
+                        document.getElementById('weekIcon').style.border = "none"
+                        document.getElementById('weekIcon').style.backgroundColor = "transparent"
+
+                        document.getElementById('dayIcon').style.border = "none"
+                        document.getElementById('dayIcon').style.backgroundColor = "transparent"
+
+                        document.getElementById('monthIcon').style.border = "1px solid rgb(255, 255, 255)"
+                        document.getElementById('monthIcon').style.backgroundColor = "white"
+                      })
+
+                      document.getElementById('day').addEventListener("click",function(){
+                        document.getElementById('dayIcon').style.border = "1px solid rgb(255, 255, 255)"
+                        document.getElementById('dayIcon').style.backgroundColor = "white"
+
+                        document.getElementById('weekIcon').style.border = "none"
+                        document.getElementById('weekIcon').style.backgroundColor = "transparent"
+
+                        document.getElementById('monthIcon').style.border = "none"
+                        document.getElementById('monthIcon').style.backgroundColor = "transparent"
+                      })
+                    </script>
 
                     <!-- ORDERS CHART -->
                     <div class="chart-container-1">

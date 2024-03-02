@@ -202,7 +202,7 @@
     <div class="clearfix"></div>
 
     <div class="content-wrapper">
-      <div class="container-fluid">
+      <div class="container-fluid" style="margin-top: 70dvh;">
 
         <!--End Row-->
 
@@ -223,7 +223,8 @@
                     </div>
 
 
-                  <form action="EditProduct" id="editProductForm" class="tm-edit-product-form" method="post" enctype="multipart/form-data">
+                  <!-- <form action="EditProduct" onsubmit="validateForm()" id="editProductForm" class="tm-edit-product-form" method="post" enctype="multipart/form-data"> -->
+                    <form  action="EditProduct"  class="tm-edit-product-form" method="post" enctype="multipart/form-data">
                     <div class="form-group mb-3">
                       <label for="name">Product Name </label>
                       <input id="name" name="name" type="text" value="<%= Product.Name %>"
@@ -242,7 +243,6 @@
                       <label for="category">Category</label>
                       <select class="custom-select tm-select-accounts" value="<%= Product.Category %>" id="category"
                         name="category">
-
                         <option selected><%= Product.Category %></option>
                         <% Category.forEach(item => {  %>
                           <% if(!item.IsList){ %>
@@ -250,13 +250,8 @@
                             <% } %>
                             
                         <% }) %>
-                        
-                        <!-- <option value="Most Popular">Most Popular</option>
-                        <option value="Trending">Trending</option> -->
                       </select>
                     </div>
-                  
-
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
 
@@ -286,48 +281,38 @@
                 <div class="col-12">
 
                   <div class="tm-product-img-dummy mx-auto" style="background-color: rgba(240, 248, 255, 0.214);">
-                    <!-- <i
-                    class="fas fa-cloud-upload-alt tm-upload-icon"
-                    onclick="document.getElementById('fileInput').click();"
-                  ></i> -->
-                    <!-- <img src="" alt="Loading" width="100" height="100"> -->
-
+                    
                     <!-- Inside the <div class="tm-product-img-dummy mx-auto"> -->
                       <div class="tm-product-img-dummy mx-auto" style="background: transparent;" id="imagePreviews">
                         <% if(Product.Image.length > 0) {%>
                           <% Product.Image.forEach((Image,index) =>{ %>
                             <div class="div">
-                            <img src="/assets/uploads/<%= Image %>" id="image${index}" alt="Image Preview" width="100" height="100">
-                            <button type="button" class="btn btn-danger mt-2" onclick="removeImage(${index})"  style="border: none; background-color:#dc3545 ; color: white; font-size: 12px; padding: 5px 10px;">Remove</button>
-                            <input type="file" style="display:none;" onchange="updateImage(${index}, this)" accept="image/*" />
+                            <img src="/assets/uploads/<%= Image %>" id="image<%=index %>" alt="Image Preview" width="100" height="100">
+                            <button type="button" class="btn btn-danger mt-2" onclick="removeImage(index)"  style="border: none; background-color:#dc3545 ; color: white; font-size: 12px; padding: 5px 10px;">Remove</button>
+                            <input type="file" style="display:none;" onchange="updateImage(index, this)" accept="image/*" />
                             <button type="button" class="btn mt-2" onclick="addImage()" style="border: none; background-color: #01557ce2; color: white; font-size: 12px; padding: 5px 10px;">Add New Image</button>
                           </div>
-                          <script>
-                            function addImage(){
-                              const image = document.getElementById('image${index}').src
-                              console.log("HA HA HA HA HA HA AH HA",image);
-                              
-                            }
-                          </script>
+
+                          <input type="hidden" name="existingIMages<%= index %>" id="existingIMages<%= index %>" value="<%= Image%>">
+
                             <% }) %>
                         <% } %>
                       </div>
 
-                    <!-- <input id="fileInput" type="file" name="image" style="display:none;" multiple/> -->
-
                   </div>
+                  
                   <div class="custom-file mt-3 mb-3 ">
-                    <% console.log("THE IMAGES :",Product.Image) %>
-                    <input id="fileInput" value="<%= Product.Image%>"  type="file" name="image" style="display:none;" multiple maxlength="4" />
+                    <% console.log("IMages >>",Product.Image); %>
+                    <input id="fileInput"   type="file" name="image" style="display:none;" multiple maxlength="4" accept="image/*" />
                     <input type="button" class="btn btn-primary btn-block mx-auto" style="align-self: center; width: fit-content; border-radius: 10px;" value="UPLOAD PRODUCT IMAGES"
                       onclick="document.getElementById('fileInput').click();" />
                   </div>
-
-                  <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Product</button>
+                  
+                  <button type="submit" onclick="validateForm()" class="btn btn-primary btn-block text-uppercase">Update Product</button>
                   
                 </div>
                 </form>
-                  
+                
                 </div>
               </div>
             </div>
@@ -344,9 +329,6 @@
 
       </div>
       <!-- End container-fluid-->
-
-
-
     </div><!--End content-wrapper-->
     <!--Start Back To Top Button-->
     <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
@@ -433,31 +415,37 @@
   <script src="/Product/js/bootstrap.min.js"></script>
 
   <!-- https://getbootstrap.com/ -->
-  <script>
-    $(function () {
-      $("#expire_date").datepicker();
-    });
-  </script>
 
 <script>
   function validateForm() {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    
     const name = document.getElementById('name').value;
     const description = document.getElementById('description').value;
     const price = document.getElementById('price').value;
     const Size = document.getElementById('Size').value;
     const stock = document.getElementById('stock').value;
     const category = document.getElementById('category').value;
-    const fileInput = document.getElementById('fileInput').value
+    const fileInput = document.getElementById('fileInput')
+
+    // let exixtingImages = []
+    
+    // for (let i = 0; i <= 4; i++) {
+    //   const element = document.getElementById(`existingIMages${i}`).value
+    //   exixtingImages.push(element)
+    // }
+    // console.log("Existing Images :",exixtingImages);
+
+
 
     // Check the number of selected images
-    console.log("Selscted Images :>",fileInput.files.length);
     const selectedImagesCount = fileInput.files.length;
     console.log(selectedImagesCount);
     
 
     if (name.length > 12  || name.length < 2 ) {
       document.getElementById('error_message_name').innerHTML = "Name Should contain at least 2 character, and should  not exceed more than 14 letter"
-
+      console.log("name validation");
       setTimeout(function () {
         document.getElementById('error_message_name').innerHTML = ''
       }, 3000)
@@ -506,27 +494,32 @@
       }, 3000)
 
       return false
-    }else if (selectedImagesCount < 3 ) {
-      document.getElementById('error_message_name').innerHTML = 'Please select at least 3 images ';
+    }
+    // else if (selectedImagesCount < 3 ) {
+    //   console.log("images validation >> ");
+    //   document.getElementById('error_message_name').innerHTML = 'Please select at least 3 images ';
 
-      setTimeout(function () {
-        document.getElementById('error_message_name').innerHTML = ''
-      }, 3000)
+    //   setTimeout(function () {
+    //     document.getElementById('error_message_name').innerHTML = ''
+    //   }, 3000)
 
-      return false
-    }else {
+    //   return false
+    // }
+    else {
+      console.log("hgdfhsdj");
       document.getElementById('error_message_name').innerHTML = '';
       return true
     }
   }
 
-  const forms = document.getElementById('editProductForm')
-  forms.addEventListener('submit', function (event) {
-    
-    if (!validateForm()) {
-      event.preventDefault();
-    }
-  })
+  // const forms = document.getElementById('editProductForm')
+  // forms.addEventListener('submit', function (event) {
+  //   // event.preventDefault();
+  //   console.log(!validateForm());
+  //   if (!validateForm()) {
+  //     event.preventDefault();
+  //   }
+  // })
 </script>
 
 <script>
@@ -599,57 +592,6 @@
       inputElement.click();
   }
 </script>
-
-
-
-<script>
-
-  const input = document.getElementById('image-input');
-  const previews = document.getElementById('image-previews');
-
-  input.addEventListener('change', () => {
-    previews.innerHTML = '';
-    for (const file of input.files) {
-      const image = document.createElement('img');
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        image.src = event.target.result;
-        image.style.width = '200px';
-        image.style.height = 'auto';
-        const cropper = new Cropper(image, { aspectRatio: 1 });
-        previews.appendChild(image);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  });
-
-
-  const image = document.getElementById('image-input');
-  const cropper = new Cropper(image, {
-    aspectRatio: 16 / 9,
-    cropBoxMovable: false,
-    cropBoxResizable: false,
-    guides: false,
-    highlight: false,
-    crop: function(event) {
-      console.log("Crop data: " + JSON.stringify(event.detail));
-    },
-  });
-
-
-  const cropButton = document.getElementById('crop-button');
-  cropButton.addEventListener('click', function() {
-    const croppedImage = cropper.getCroppedCanvas();
-    const imageData = croppedImage.toDataURL();
-    const croppedImageElement = document.getElementById('cropped-image');
-    croppedImageElement.src = imageData;
-  });
-  //  // ---------------------------------- \\
-
-</script>
-
 </body>
 
 </html>

@@ -55,6 +55,9 @@
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+            <!--  SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
         <style>
             #bg-table {
                 background: transparent;
@@ -207,28 +210,34 @@
                             <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
                             <li class="dropdown-divider"></li>
                             <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+
+                            
+            
                         </ul>
                     </li>
                 </ul>
             </nav>
         </header>
         <!--End topbar header-->
+        
 
         <div class="clearfix"></div>
 
         <div class="content-wrapper">
             <div class="container-fluid" style="margin-top: 80dvh;">
-
-
+                
 
         <div class="container"  style="margin-top: 0dvh;">
+            <div class="erro_validation" style="display: flex; justify-content: center; height: 40px;">
+                <p style="color:white; background-color: red; font-size: 14px;" id="error_filter"></p>
+            </div>
             <div style="display: flex; justify-content: center;">
-            <form id="salesReportForm" class="filter-table"action="#" method="post">
+            <form >
                 <label for="from-date">From:</label>
-                <input type="date" id="from-date" name="fromdate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required>
+                <input type="date" id="from-date" name="fromdate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required >
                 <label for="to-date">To:</label>
-                <input type="date" id="to-date" name="todate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required>
-                <button type="submit" style="border: none; background-color: transparent;"><i class="fa-solid fa-filter fa-bounce" style="color: rgb(233, 252, 255);"></i></button>
+                <input type="date" id="to-date" name="todate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required >
+                <button type="submit" onclick="updateSalesReport()" style="border: 1px solid rgba(255, 229, 229, 0.761); border-radius: 15px; background-color: transparent; color: white;"><i class="fa-solid fa-filter fa-bounce" style="color: rgb(233, 252, 255); font-size: 10px;"></i> Filter</button>
             </form>
         </div>
             <div style="display: flex;justify-content: center;">
@@ -241,128 +250,103 @@
         </div>
 
 
-<div class="row" id="printThisDiv">
-    <div class="col-12 col-lg-12" style="background-color: transparent;">
-        <div class="card" style="background-color: transparent;">
-            <div class="table-responsive">
-                <div class="container d-flex justify-content-center">
-                    <p style="font-size: 2rem; color: white;">Sales Report</p>
-                </div>
-                
-                <!--================Order Area =================-->
-                <div id="reloadDiv">
-                    <section class="cart_area padding_top">
-                        <div class="container">
-                            <div class="cart_inner">
-                                <div class="table-responsive">
-                                    <% if ( order ) { %>
-                                        <table class="table" id="orderTable" >
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" style="color: red;">Date</th>
-                                                    <th scope="col" style="color: rgb(85, 196, 0);">Order ID</th>
-                                                    <th scope="col">Customer</th>
-                                                    <th scope="col">Orders Products</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Payment Method/th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="usersContainer">
-                                                <% for (let i=0; i < order.length; i++) { %>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="media">
-                                                                <div class="media-body">
-                                                                    <p style="color: red;">
-                                                                        <%= order[i].Orderdate.toLocaleDateString() %>
+        <div class="row" id="printThisDiv">
+            <div class="col-12 col-lg-12" style="background-color: transparent;">
+                <div class="card" style="background-color: transparent;">
+                    <div class="table-responsive">
+                        <div class="container d-flex justify-content-center">
+                            <p style="font-size: 2rem; color: white;">Sales Report</p>
+                        </div>
+                        
+                        <!--================Order Area =================-->
+                        <div id="reloadDiv">
+                            <section class="cart_area padding_top">
+                                <div class="container">
+                                    <div class="cart_inner">
+                                        <div class="table-responsive">
+                                            <% if ( order ) { %>
+                                                <table class="table" id="orderTable" >
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col" style="color: red;">Date</th>
+                                                            <th scope="col" style="color: rgb(85, 196, 0);">Order ID</th>
+                                                            <th scope="col">Customer</th>
+                                                            <th scope="col">Orders Products</th>
+                                                            <th scope="col">Amount</th>
+                                                            <th scope="col">Payment Method</th>
+                                                            <th scope="col" >Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="usersContainer">
+                                                        <% for (let i=0; i < order.length; i++) { %>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="media">
+                                                                        <div class="media-body">
+                                                                            <p style="color: red;">
+                                                                                <%= order[i].createdAt.toLocaleDateString() %>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <p style="color: rgb(85, 196, 0);">
+                                                                        <%= order[i].OderId %>
                                                                     </p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 style="color: rgb(85, 196, 0);">
-                                                                <%= order[i].OderId %>
-                                                            </h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="display-flex">
-                                                                <p><%= order[i].UserId.name %></p>
-                                                                <p><%= order[i].UserId.email %></p>
-                                                                <p><%= order[i].UserId.phoneNumber %></p>
-                                                            </div>
-                                                        <td>
-                                                            <div class="media-body">
-                                                                <% for (let j=0; j < order[i].OrderItems.length; j++) { %>
-                                                                    <p style="font-size: 14px;"><span style="color: orange;">
-                                                                            <%= j + 1 %> :
-                                                                        </span>
-                                                                        <%= order[i].OrderItems[j].ProductId.Name %>
-                                                                    </p>
-                                                                <% } %>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5> $ <%= order[i].totalAmount %>
-                                                            </h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="media">
-                                                                <div class="media-body">
-                                                                    <p style="color: blue;">
-                                                                        <%= order[i].PaymentMethod %>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="display-flex">
+                                                                        <p><%= order[i].UserId.name %></p>
+                                                                        <!-- <p><%= order[i].UserId.email %></p> -->
+                                                                        <!-- <p><%= order[i].UserId.phoneNumber %></p> -->
+                                                                    </div>
+                                                                <td>
+                                                                    <div class="media-body">
+                                                                        <% for (let j=0; j < order[i].OrderItems.length; j++) { %>
+                                                                            <p style="font-size: 14px;"><span style="color: orange;">
+                                                                                    <%= j + 1 %> :
+                                                                                </span>
+                                                                                <%= order[i].OrderItems[j].ProductId.Name %>
+                                                                            </p>
+                                                                        <% } %>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    
+                                                                    <p><%= order[i].totalAmount %></p>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="media">
+                                                                        <div class="media-body">
+                                                                            <p style="color: blue;">
+                                                                                <%= order[i].PaymentMethod %>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <p><%= order[i].OrderStatus %></p>
+                                                                </td>
+                                                            </tr>
+                                                            <% } %>
+                                                    </tbody>
+                                                </table>
+                                                <% } else{%>
+                                                    <div class="text-center d-flex justify-content-center">
+                                                        <h2 style="font-family:serif">Empty Orders...! </h2>
+                                                    </div>
                                                     <% } %>
-                                            </tbody>
-                                        </table>
-                                        <% } else{%>
-                                            <div class="text-center d-flex justify-content-center">
-                                                <h2 style="font-family:serif">Empty Orders...! </h2>
-                                            </div>
-                                            <% } %>
-
-                                </div>
-                            </div>
-                    </section>
+                                        </div>
+                                    </div>
+                            </section>
+                        </div>
+                        <!--================End Cart Area =================-->
+                    </div>
                 </div>
-                <!--================End Cart Area =================-->
+        
             </div>
-        </div>
+        </div><!--End Row-->
 
-    </div>
-</div><!--End Row-->
-
-<!-- <div class="row "> -->
-    <!-- PAGINATION -->
-        <!-- <% if(totalPages) { %>
-            <div class="col-lg-12">
-                <div class="pageination">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <i class="ti-angle-double-left"></i>
-                                </a>
-                            </li>
-                            <% for(let i=1; i <=totalPages ; i++ ){ %>
-                                <li class="page-item"><a href="/admin/loadSalesReport?page=<%= i %>" class="page-link">
-                                        <%= i %>
-                                    </a></li>
-                                <% } %>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <i class="ti-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <% } %> -->
-<!-- </div> -->
 
 
 
@@ -457,76 +441,32 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <!-- Bootstrap JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-  crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-  integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5"
-  crossorigin="anonymous"></script>
-
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-  crossorigin="anonymous"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+                <!-- Bootstrap JavaScript -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+            
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+            integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5"
+            crossorigin="anonymous"></script>
+            
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
         <script>
-
-            const salesReportForm = document.getElementById('salesReportForm');
-            const fromDateInput = document.getElementById('from-date');
-            const toDateInput = document.getElementById('to-date');
+            function downloadPDF(divName) {
+                const printContents = document.getElementById(divName).innerHTML;
+                const originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+            }
         
-            salesReportForm.addEventListener('submit', (event) => {
-                const fromDate = new Date(fromDateInput.value);
-                const toDate = new Date(toDateInput.value);
-                const today = new Date();
-                console.log("Date validation invoked");
-        
-                if (fromDate > today) {
-                    event.preventDefault();
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'From date cannot be greater than today date!',
-                    });
-                    return;
-                }
-        
-                if (toDate > today) {
-                    event.preventDefault();
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'To date cannot be greater than today date!',
-                    });
-                    return;
-                }
-        
-                if (fromDate > toDate) {
-                    event.preventDefault();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'From date cannot be greater than To date.',
-                    });
-                    return;
-                }
-            });
-        
-        
-        
-                function downloadPDF(divName) {
-                    const printContents = document.getElementById(divName).innerHTML;
-                    const originalContents = document.body.innerHTML;
-                    document.body.innerHTML = printContents;
-                    window.print();
-                    document.body.innerHTML = originalContents;
-                }
-        
-                function downloadExcel(divName) {
+            function downloadExcel(divName) {
         
             const table = document.getElementById(divName);
             const rows = table.getElementsByTagName('tr');
@@ -564,22 +504,134 @@
 
     <script>
         function updateSalesReport(){
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaa");
+            event.preventDefault()
+            
+            const divFilter = document.getElementById('usersContainer')
+            const error_element = document.getElementById('error_filter')
+
             const startDate = document.getElementById('from-date').value
             const endDate = document.getElementById('to-date').value
-            console.log(startDate,endDate);
+            const today = new Date()
+            const fromDate = new Date(startDate)
+            const toDate = new Date(endDate)
+            console.log(startDate,endDate,today,"<><><>",fromDate,toDate);
 
-            fetch('/admin/filter-sales_report', {
-                method:'POST',
-                headers:{
-                    'Content-type': 'application/json'
-                },
-                body:JSON.stringify({startDate,endDate})
+            if(!startDate ){
+                console.log("Start date not getted !!");
+                error_element.innerText = 'Please enter filter date !!!'
+                setTimeout(function() {
+                error_element.innerHTML = ''
+                }, 2000); // 2000 milliseconds delay (2 seconds in this case)
+
+                event.preventDefault()
+            }
+            else if(!endDate){
+
+                error_element.innerText = 'Please enter filter date !!!'
+                setTimeout(function() {
+                error_element.innerHTML = ''
+                }, 2000);
+
+                event.preventDefault()
+            }
+            else if(fromDate > today) {
+                error_element.innerText = 'From date cannot be greater than today date !!!'
+                setTimeout(function() {
+                error_element.innerHTML = ''
+                }, 3000);
+
+                event.preventDefault();
+            }
+            else if(toDate > today) {
+                error_element.innerText = 'To date cannot be greater than today date !!!'
+                setTimeout(function() {
+                    error_element.innerHTML = ''
+                }, 2000);
+            event.preventDefault();
+            }
+            else if(fromDate > toDate) {
+                error_element.innerText = ' From date cannot be greater than To date !!!'
+                setTimeout(function() {
+                    error_element.innerHTML = ''
+                }, 3000);
+                event.preventDefault();
+            }else{
+
+            fetch(`/admin/filter-sales_report?sDate=${startDate}&eDate=${endDate}`, {
+                method:'GET',
             })
-        }
+            .then(response => response.json())
+            .then(data =>{
+                console.log("<<>>",data);
 
-        const filterForm =  document.getElementById('salesReportForm')
-        filterForm.addEventListener('submit',updateSalesReport)
-        
+                const ordersFiltered = data.Orders.map(Order => {
+                        let orderItemsHTML = '';
+
+                        // Loop through each order item and generate HTML
+                        Order.OrderItems.forEach((item, index) => {
+                            orderItemsHTML += `
+                                <p style="font-size: 14px;"><span style="color: orange;">
+                                    ${index + 1} :
+                                </span>
+                                ${item.ProductId.Name}
+                                </p>
+                            `;
+                        });
+
+                        // Generate HTML for each order
+                        return `
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <p style="color: red;">
+                                                ${new Date(Order.createdAt).toLocaleDateString()}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5 style="color: rgb(85, 196, 0);">
+                                        ${Order.OderId}
+                                    </h5>
+                                </td>
+                                <td>
+                                    <div class="display-flex">
+                                        <p>${Order.UserId.name}</p>
+                                        <p>${Order.UserId.email}</p>
+                                        <p>${Order.UserId.phoneNumber}</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="media-body">
+                                        ${orderItemsHTML}
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5> $ ${Order.totalAmount}</h5>
+                                </td>
+                                <td>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <p style="color: blue;">
+                                                ${Order.PaymentMethod}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    // Join all generated HTML elements and insert into the DOM
+                    document.getElementById('usersContainer').innerHTML = ordersFiltered.join('');
+
+                
+                })
+            }
+        }
+                
     </script>
 
 </body>
