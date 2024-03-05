@@ -148,9 +148,13 @@
     <!--================ confirmation part start =================-->
     <section class="confirmation_part padding_top">
         <% if(typeof OrderDetails !== 'undefined' ) { %>
+            
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
+                        <% if(OrderDetails.OrderStatus == 'Delivered'){ %>
+                        <a href="/download-invoice?oderId=<%= OrderDetails.OderId %>" class="float-right"><button style="border: none; color: blue; " id="downloadInvoiceBtn">Download Invoice  <i class="fa-solid fa-cloud-arrow-down fa-beat"></i></button></a>
+                        <% } %>
                         <div class="confirmation_tittle">
                             <span style="color: green !important;"></span>
                         </div>
@@ -177,6 +181,7 @@
                                 </li>
                             </ul>
                         </div>
+                        
                     </div>
                     
                     <div class="col-lg-6 col-lx-4">

@@ -250,13 +250,13 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu">
-                                    <% if(products){ %>
+                                    <!-- <% if(products){ %>
                                         <p><span>
                                                 <%= products.length %>
                                             </span> Product Found</p>
                                         <% }else{ %>
                                             <p><span>0 </span> Prodict Found</p>
-                                            <% } %>
+                                            <% } %> -->
 
                                 </div>
 
@@ -302,7 +302,8 @@
 
                     <div id="latestProducts" class="row align-items-center latest_product_inner">
                         <% if(products){ %>
-                            <% products.forEach(product=> { %> <!-- Change 'item' to 'product' -->
+                            <% products.forEach(product=> { %>
+                                <% if(!product.isList){%>
                                 <div class="col-lg-4 col-sm-6" >
                                         <div class="single_product_item">
                                             <% if (!product.Stock> 0) { %>
@@ -333,6 +334,7 @@
                                             </div>
                                         </div>
                                 </div>
+                                <% } %>
                             <% }) %>
                         <% } %>
                                         <!-- <div class="col-lg-4 col-sm-6">
@@ -423,7 +425,8 @@
 
                         <% if(allProducts){ %>
 
-                            <% allProducts.forEach(product=> { %> <!-- Change 'item' to 'product' -->
+                            <% allProducts.forEach(product=> { %>
+                                <% if(!product.isList){%>
                                 <a href="/ProductDetails?id=<%= product._id %>">
                                     <div class="single_product_item">
                                         <% if (!product.Stock> 0) { %>
@@ -444,7 +447,7 @@
                                                 </div>
                                     </div>
                                 </a>
-                                <% }) %>
+                                <% }}) %>
                                     <% } %>
 
                                         <!-- <div class="single_product_item">
@@ -632,7 +635,10 @@
                     const query = data.query
 
                     // Generate HTML based on JSON data
-                    const productsHTML = product.map(product => `
+                    const productsHTML = product.map(product =>{
+                        
+                    if(!product.isList){
+                    return `
                     <div class="col-lg-4 col-sm-6">
                                     <div class="single_product_item">
                                         <a href="/ProductDetails?id=${product._id}">
@@ -647,7 +653,7 @@
                                         </div>
                                     </div>
                                 </div>
-                    `).join(''); // Join HTML strings into a single string
+                    `}}).join(''); // Join HTML strings into a single string
 
                     // const totalPages = Math.ceil(productTotal / productPerPage);
                     const totalPages = data.totalPages
@@ -730,7 +736,10 @@
                     console.log("the response from filter :", data)
                     const product = data.products
                     // Generate HTML based on JSON data
-                    const productsHTML = product.map(product => `
+                    const productsHTML = product.map(product => {
+                        
+                    if(!product.isList){
+                    return  `
                     <div class="col-lg-4 col-sm-6">
                                     <div class="single_product_item">
                                         <img class="product-image"  src="/assets/uploads/${product.Image[0]}" alt="">
@@ -741,7 +750,7 @@
                                         </div>
                                     </div>
                                 </div>
-                    `).join(''); // Join HTML strings into a single string
+                    `}}).join(''); // Join HTML strings into a single string
 
                     const totalPages = data.totalPages
                     const query = data.query

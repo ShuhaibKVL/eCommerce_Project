@@ -203,7 +203,8 @@
                                 <tbody>
 
                                     <% user.cart.forEach((item,i=0)=> { %>
-                                        <!-- <tr data-item-index="<%=  %>"> -->
+                                        <% console.log(item.product.isList); %>
+                                        <% if(!item.product.isList) {%>
                                         <td>
                                             <div class="media">
 
@@ -218,11 +219,6 @@
                                                     </p>
                                                     <p>
                                                         <%= item.product.Description %>
-                                                    </p>
-                                                    <p>
-                                                        <%= item.product.Description %>
-                                                    </p>
-
                                                     </p>
                                                 </div>
                                             </div>
@@ -239,9 +235,7 @@
 
                                                 <input type="hidden" id="ProductID" value="<%= item.product._id %>">
                                                 <input type="hidden" id="userId" value="<%=  userId %>">
-                                                <!-- <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                            <input class="" type="text" value="1" min="1" max="10">
-                            <span id="incrementButton" class="input-number-increment"> <i class="ti-angle-up"></i></span> -->
+                                                
                                                 <input type="number" min="1" value="<%= item.quantity %>"
                                                     max="<%= item.product.Stock %>"
                                                     data-product-id="<%= item.product._id %>"
@@ -250,18 +244,6 @@
                                                     oninput="updateCart(this)" style="width: 70px; height: 30px; ">
                                             </div>
                                             <input type="hidden" name="" id="hidden" value="<%= i %>">
-
-
-
-                                            <!-- <div class="product_count">
-                            <span class="input-number-decrement" onclick="updateQuantity('decrement', '<%=  %>')">
-                                <i class="ti-angle-down"></i>
-                            </span>
-                            <input class="input-number" type="text" value="<%=  %>" min="0" max="10" readonly>
-                            <span class="input-number-increment" onclick="updateQuantity('increment', '<%=  %>')">
-                                <i class="ti-angle-up"></i>
-                            </span>
-                            </div> -->
 
                                         </td>
                                         <td>
@@ -281,48 +263,6 @@
                                         </tr>
 
 
-                                        <!-- <tr class="shipping_area">
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <h5>Shipping</h5>
-                      </td>
-                      <td>
-                        <div class="shipping_box">
-                          <ul class="list">
-                            <li>
-                              <a href="#">Flat Rate: $5.00</a>
-                            </li>
-                            <li>
-                              <a href="#">Free Shipping</a>
-                            </li>
-                            <li>
-                              <a href="#">Flat Rate: $10.00</a>
-                            </li>
-                            <li class="active">
-                              <a href="#">Local Delivery: $2.00</a>
-                            </li>
-                          </ul>
-                          <h6>
-                            Calculate Shipping
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                          </h6>
-                          <select class="shipping_select">
-                            <option value="1">Bangladesh</option>
-                            <option value="2">India</option>
-                            <option value="4">Pakistan</option>
-                          </select>
-                          <select class="shipping_select section_bg">
-                            <option value="1">Select a State</option>
-                            <option value="2">Select a State</option>
-                            <option value="4">Select a State</option>
-                          </select>
-                          <input type="text" placeholder="Postcode/Zipcode" />
-                          <a class="btn_1" href="#">Update Details</a>
-                        </div>
-                      </td>
-                    </tr>  -->
-                                        <!-- Add this line to display the overall total amount -->
                                         <script>
                                             // Assuming you have an API endpoint for updating the cart
                                             const updateCart = (input) => {
@@ -344,7 +284,7 @@
                                                         document.getElementById('out-stock-msg').innerHTML = ' '
                                                     },3000)
                                                 }else {
-
+                                                    
                                                     fetch(`http://localhost:5000/update-cart?id=${productId}&pr=${userId}&QA=${quantity}`)
                                                         .then(response => response.json())
                                                         .then(cartData => {
@@ -373,9 +313,8 @@
                                                 });
                                             });
                                         </script>
-
-
-
+                                        
+                                        <% } %>
 
                                         <% }); %>
                                 </tbody>

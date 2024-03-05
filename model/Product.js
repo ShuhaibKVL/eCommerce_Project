@@ -29,6 +29,10 @@ const ProductData = mongoose.Schema ({
     Image : {
         type : Array,
         required : true
+    },
+    isList:{
+        type:Boolean,
+        default:false
     }
 })
 

@@ -420,6 +420,7 @@ const LoadCarts = async (req, res) => {
 
             const UserID = req.session.user_id
             const CartProducts = await User.findById(UserID).populate('cart.product')
+            console.log("CartProducts :",CartProducts);
 
             if (!CartProducts) {
                 console.log("User Not Found");
@@ -428,7 +429,10 @@ const LoadCarts = async (req, res) => {
             let totalAmount = 0;
 
             for (const cartItem of CartProducts.cart) {
-                totalAmount += cartItem.quantity * cartItem.product.Price
+                if(!cartItem.product.isList){
+                    totalAmount += cartItem.quantity * cartItem.product.Price
+                }
+                
             }
             
             console.log("TOTAL AMOUNT > ", totalAmount);
@@ -713,7 +717,10 @@ const LoadChekout = async (req, res) => {
             let totalAmount = 0;
 
             for (const cartItem of CartProducts.cart) {
-                totalAmount += cartItem.quantity * cartItem.product.Price
+                if(!cartItem.product.isList){
+                    totalAmount += cartItem.quantity * cartItem.product.Price
+                }
+                
 
             }
 
@@ -818,19 +825,13 @@ const placeOrder = async (req, res) => {
             const addressId = req.body.addressId
             const Total = req.body.Total.trim()
             const couponId = req.session.couponId
-
-
-            console.log(">>>>>",req.session.couponId);
-
+            
             if(couponId){
                 const insertUserId = await couponModel.updateOne({ couponCode: couponId }, { $push: { userId: req.session.user_id } })
                 console.log("coupon :> ",insertUserId);
             }
             
-            console.log("total is :",Total);
-            console.log(Total);
             const OderId = generateRandomOrderId()
-            console.log("Total amount after deduction Of coupon ", Total);
 
             const address = await AddressSchema.findById(addressId)
             console.log(address);
@@ -904,12 +905,11 @@ const placeOrder = async (req, res) => {
 
             } else if (paymentMethod == 'Wallet') {
                 const wallet = await walletModal.findOne({ userId: UserID })
-                // console.log("The wallet is >> ", wallet);
-                console.log(wallet.balance,"<>");
+
                 if(wallet.balance < parseInt(Total)){
                     return res.json({ status: "not balance", balance: wallet.balance })
                 }else{
-                    console.log("Wallet have the balace");
+
                 const newOrder = new OrderModel({
                     UserId: UserID,
                     OderId: OderId,
@@ -1100,7 +1100,15 @@ const ReturnOrder = async (req, res) => {
 const orderDetails = async (req, res) => {
     try {
         const oderId = req.query.id
-        // const orderDetails = await OrderModel.findById(oderId).populate(['OrderItems.ProductId'])
+        const allOrder = await OrderModel.find()
+        for(const orders of allOrder){
+            const allDelivered = orders.OrderItems.every(item => item.OrderStatus === 'Delivered')
+            if(allDelivered){
+                orders.OrderStatus = "Delivered"
+                await orders.save()
+            }
+        }
+
         const order = await OrderModel.findById(oderId).populate('UserId').populate('OrderItems.ProductId').exec();
         console.log("The oder details got : - ", order);
 

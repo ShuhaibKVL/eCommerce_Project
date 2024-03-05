@@ -5,8 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>aranoz</title>
-    <link rel="icon" href="images/favicon.png">
+    <title>veloxAttire</title>
+    <link rel="icon" href="/assets/images/Group 7.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate CSS -->
@@ -325,7 +325,7 @@
 
                 <div id="AddressSelectionDiv">
                     <h6 style="margin-bottom: 5px;">Select your Address to Deliver product</h6>
-                        <% console.log("The ddress on browser : > ",Address); %>
+                        
                     <% if (typeof Address !=='undefined' && Address.length > 0) { %>
                         <% Address.forEach((address, index)=> { %>
                             <div class="address-container">
@@ -452,6 +452,7 @@
                         <% if(user && user.cart && user.cart.length> 0) {%>
 
                             <% user.cart.forEach((item,i=0)=> { %>
+                                <% if (!item.product.isList) { %>
                                 <!-- Add your product details, total price, delivery options, etc. here -->
                                 <div class="mb-3"
                                     style="display: flex; align-items: center; width: 100%; border-radius: 10px; ">
@@ -478,10 +479,8 @@
                                         </div>
                                     </div>
 
-
-
                                 </div>
-
+                                <%} %>
                                 <% }); %>
                                     <div style="display: flex; justify-content: end; width: 90%;">
                                         <div>
@@ -831,8 +830,6 @@
             return null;
         }
 
-
-
         function sendToServer(selectedPaymentMethod, AddressId, Total,couponId) {
             // Example: Send a POST request to your server
             fetch('http://localhost:5000/placeOrder', {
@@ -896,12 +893,9 @@
                     
                     }
                 })
-
                 .catch(error => console.error('Error sending data to the server:', error));
         }
     </script>
-
-
 
     <script>
         // Assuming you have an API endpoint for updating the cart
@@ -957,8 +951,6 @@
                 })
                 .catch(error => console.error("Error:", error));
         }
-
-
 
         const getCoupon = document.getElementById('getCoupon')
 
@@ -1115,7 +1107,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log("the verify payment sussess return >>>>>>>>>>>>>>>>>> ",data);
+                
                 if (data.status === 'RazorPay') {
                     Swal.fire({
                         icon: 'success',

@@ -108,15 +108,6 @@
                 </li>
 
 
-
-                <li class="sidebar-header">LABELS</li>
-                <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
-                </li>
-                <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i>
-                        <span>Warning</span></a></li>
-                <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
-                </li>
-
             </ul>
 
         </div>
@@ -444,7 +435,7 @@
         crossorigin="anonymous"></script>
 
     <script>
-        function approveCancelRequest(ProductId, OderId, UserId) {
+        function approveCancelRequest(ProductId, OderId, UserId,page) {
             console.log(ProductId);
 
             fetch(`http://localhost:5000/admin/Approve_cancel_order?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
@@ -456,7 +447,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    
+                    console.log("TTTT");
                     const currentPage = data.CurrentPage
 
                     Swal.fire({

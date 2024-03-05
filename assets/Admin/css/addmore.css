@@ -231,3 +231,10 @@
 .single_confirmation_details ul li span{
     margin-left: 10px;
 }
+
+.address h3, address{
+    color: white;
+}
+.address p1{
+    color: white;
+}

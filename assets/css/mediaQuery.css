@@ -1,0 +1,16 @@
+@media screen and (max-width:560px){
+    #heartDiv a{
+        display: none;
+    }
+    #iconsButton{
+        display: block;
+    }
+}
+
+#iconsButton{
+    display: none;
+}
+#iconesAneme{
+    display: none;
+}
+

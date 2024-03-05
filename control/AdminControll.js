@@ -184,19 +184,6 @@ const Add_Product = async (req, res, next) => {
             return res.redirect('Product')
         } else {
 
-            // Process each uploaded image using Sharp
-        // const processedImages = await Promise.all(req.files.map(async (file) => {
-        //     const filename = file.filename;
-        //     const imagePath = `${__dirname}/../path/to/uploaded/images/${filename}`;
-        //     const outputImagePath = `${__dirname}/../path/to/output/images/${filename}`;
-
-        //     const imageBuffer = await sharp(imagePath).toBuffer();
-        //     // Write the image buffer to the output file
-        //     await sharp(imageBuffer).toFile(outputImagePath);
-        //     return filename;
-            
-        // }));
-
             const newProduct = new ProductSchema({
                 Name: req.body.name,
                 Price: req.body.price,
@@ -225,7 +212,20 @@ const DeletProduct = async (req, res) => {
 
         const Product_Id = req.query.id
         console.log(Product_Id)
-        const Delete = await ProductSchema.deleteOne({ _id: Product_Id })
+        const product = await ProductSchema.findById(Product_Id)
+        console.log(product);
+        console.log("<>",product.isList);
+        let update_isList;
+        if(product.isList){
+            console.log("AAAAAAAAA");
+            update_isList = await ProductSchema.findByIdAndUpdate(Product_Id,{ $set: {isList: false}}, {new:false})
+        }else{
+            console.log("BBBBBBBBBB");
+            update_isList = await ProductSchema.findByIdAndUpdate(Product_Id,{ $set: {isList: true}}, {new:true})
+        }
+
+        console.log(">>>>",update_isList);
+        // const Delete = await ProductSchema.deleteOne({ _id: Product_Id })
 
         res.redirect('Product')
 
@@ -259,7 +259,6 @@ const EditProduct = async (req, res) => {
     //     console.log("<>",existingIMages);
     // }
 
-    // Exclude the '_id' field from ProductData
     const ProductDataToUpdate = {
         Name: req.body.name,
         Price: req.body.price,
@@ -276,8 +275,6 @@ const EditProduct = async (req, res) => {
     }
     try {
         const updateProduct = await ProductSchema.findByIdAndUpdate(Product_ID, ProductDataToUpdate, { new: true });
-        console.log('Updated product:', updateProduct);
-        console.log("Update Success");
         res.redirect('Product');
     } catch (error) {
         console.log("Error Occurred on EDITPRODUCT", error);
@@ -687,8 +684,6 @@ const chart_data = async(req,res) =>{
 
         const labels = Object.keys(ordersByDay)
         const data = Object.values(ordersByDay)
-        console.log("labels :",labels);
-        console.log("data :",data);
 
         //Best sale category
         const bestCategory = orders.map(data => {
@@ -794,7 +789,7 @@ const loadSalesReport =async(req,res) => {
     const skip = (page - 1) * limit;
     try {
         const order = await OrderModel.find()
-
+        const totalOrders = order.length
         for(const orders of order){
             const allDelivered = orders.OrderItems.every(item => item.OrderStatus === 'Delivered')
             if(allDelivered){
@@ -805,23 +800,25 @@ const loadSalesReport =async(req,res) => {
 
         const totalUsers = await OrderModel.find({OrderStatus : "Delivered"}).countDocuments()
         const totalPages = Math.ceil(totalUsers / limit);
-        console.log(totalUsers,"<>",totalPages);
 
         // const Orders = await OrderModel.find({OrderStatus : "Delivered"}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId' })
         const Orders = await OrderModel.find({OrderStatus : "Delivered"}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId',model:'Product' })
-        console.log("Orders Delivered :> ",Orders);
         Orders.forEach(element => {
             element.OrderItems.forEach(item => {
                 let name =item.ProductId
                 let Price = item.ProductId
-
-                console.log("The name is :> ",element.OderId,"<<>>",item)
             })
-            
         })
-        
+        const startDate = order[0].createdAt
+        const endDate = order[order.length-1].createdAt
 
-        res.render('salesReport',{order:Orders,totalPages,page})
+        const totalRevenue = Orders.reduce((acc,order) => {
+            return acc + parseFloat(order.totalAmount)
+        },0)
+
+
+        
+        res.render('salesReport',{order:Orders,totalPages,page,startDate,endDate,totalRevenue,totalOrders,totalUsers})
     } catch (error) {
         console.log("Error on loadSalesReport controller : ",error);
     }
@@ -829,7 +826,6 @@ const loadSalesReport =async(req,res) => {
 
 const filter_sales_report = async(req,res) => {
     try {
-        console.log("fgdhjk")
         const startDateString = req.query.sDate
         const endDateString = req.query.eDate
         console.log("Dates : ",startDateString,endDateString);
@@ -848,9 +844,14 @@ const filter_sales_report = async(req,res) => {
         }
         
         const Orders = await OrderModel.find({OrderStatus : "Delivered" , createdAt:{ $gte:startDate , $lte:endDate}}).populate({ path: 'UserId', model: 'User' }).populate({ path: 'OrderItems.ProductId' })
-        console.log(">> ",Orders);
+        
+        const totalRevenue = Orders.reduce((acc,order) => {
+            return acc + parseFloat(order.totalAmount)
+        },0)
+        const fromDate = startDate.toLocaleDateString()
+        const toDate = endDate.toLocaleDateString()
 
-        res.json({Orders})
+        res.json({Orders,fromDate,toDate,totalRevenue})
 
     } catch (error) {
         console.log("Error on filter_sales_report Controller :",error);

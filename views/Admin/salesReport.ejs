@@ -70,6 +70,17 @@
                 background-color: #00225191;
             }
 
+
+    @media screen and (max-width: 768px) {
+        .table-responsive p {
+            font-size: 12px;
+        }
+        .table-responsive .media-body {
+            padding: 5px;
+        }
+    }
+
+
         </style>
 </head>
 
@@ -131,14 +142,6 @@
                     <a href=""  style="border:2px solid white ;">
                         <i class="zmdi zmdi-face"></i> <span>Sales Report</span>
                     </a>
-                </li>
-
-                <li class="sidebar-header">LABELS</li>
-                <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
-                </li>
-                <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i>
-                        <span>Warning</span></a></li>
-                <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
                 </li>
 
             </ul>
@@ -222,140 +225,144 @@
         
 
         <div class="clearfix"></div>
-
         <div class="content-wrapper">
             <div class="container-fluid" style="margin-top: 80dvh;">
-                
-
-        <div class="container"  style="margin-top: 0dvh;">
-            <div class="erro_validation" style="display: flex; justify-content: center; height: 40px;">
-                <p style="color:white; background-color: red; font-size: 14px;" id="error_filter"></p>
-            </div>
-            <div style="display: flex; justify-content: center;">
-            <form >
-                <label for="from-date">From:</label>
-                <input type="date" id="from-date" name="fromdate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required >
-                <label for="to-date">To:</label>
-                <input type="date" id="to-date" name="todate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required >
-                <button type="submit" onclick="updateSalesReport()" style="border: 1px solid rgba(255, 229, 229, 0.761); border-radius: 15px; background-color: transparent; color: white;"><i class="fa-solid fa-filter fa-bounce" style="color: rgb(233, 252, 255); font-size: 10px;"></i> Filter</button>
-            </form>
-        </div>
-            <div style="display: flex;justify-content: center;">
-                <a href="#" onclick="downloadPDF('printThisDiv')"
-                        style="color: rgb(255, 255, 255); font-weight: 200; font-size: 14px; text-decoration: none; background-color: rgba(1, 69, 90, 0.373);padding: 5px 5px ; border-radius: 15px;">Download as PDF</a>
-                
-                <a href="#" onclick="downloadExcel('printThisDiv')"
-                    style="color: rgb(255, 255, 255); font-weight: 200; font-size: 14px; text-decoration: none;  margin-left: 15px;  background-color: rgba(1, 69, 90, 0.373); padding: 5px 5px ; border-radius: 15px;">Download as Excel</a>
-            </div>
-        </div>
-
-
-        <div class="row" id="printThisDiv">
-            <div class="col-12 col-lg-12" style="background-color: transparent;">
-                <div class="card" style="background-color: transparent;">
-                    <div class="table-responsive">
-                        <div class="container d-flex justify-content-center">
-                            <p style="font-size: 2rem; color: white;">Sales Report</p>
-                        </div>
-                        
-                        <!--================Order Area =================-->
-                        <div id="reloadDiv">
-                            <section class="cart_area padding_top">
-                                <div class="container">
-                                    <div class="cart_inner">
-                                        <div class="table-responsive">
-                                            <% if ( order ) { %>
-                                                <table class="table" id="orderTable" >
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col" style="color: red;">Date</th>
-                                                            <th scope="col" style="color: rgb(85, 196, 0);">Order ID</th>
-                                                            <th scope="col">Customer</th>
-                                                            <th scope="col">Orders Products</th>
-                                                            <th scope="col">Amount</th>
-                                                            <th scope="col">Payment Method</th>
-                                                            <th scope="col" >Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="usersContainer">
-                                                        <% for (let i=0; i < order.length; i++) { %>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="media">
-                                                                        <div class="media-body">
-                                                                            <p style="color: red;">
-                                                                                <%= order[i].createdAt.toLocaleDateString() %>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <p style="color: rgb(85, 196, 0);">
-                                                                        <%= order[i].OderId %>
-                                                                    </p>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="display-flex">
-                                                                        <p><%= order[i].UserId.name %></p>
-                                                                        <!-- <p><%= order[i].UserId.email %></p> -->
-                                                                        <!-- <p><%= order[i].UserId.phoneNumber %></p> -->
-                                                                    </div>
-                                                                <td>
-                                                                    <div class="media-body">
-                                                                        <% for (let j=0; j < order[i].OrderItems.length; j++) { %>
-                                                                            <p style="font-size: 14px;"><span style="color: orange;">
-                                                                                    <%= j + 1 %> :
-                                                                                </span>
-                                                                                <%= order[i].OrderItems[j].ProductId.Name %>
-                                                                            </p>
-                                                                        <% } %>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    
-                                                                    <p><%= order[i].totalAmount %></p>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="media">
-                                                                        <div class="media-body">
-                                                                            <p style="color: blue;">
-                                                                                <%= order[i].PaymentMethod %>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <p><%= order[i].OrderStatus %></p>
-                                                                </td>
-                                                            </tr>
-                                                            <% } %>
-                                                    </tbody>
-                                                </table>
-                                                <% } else{%>
-                                                    <div class="text-center d-flex justify-content-center">
-                                                        <h2 style="font-family:serif">Empty Orders...! </h2>
-                                                    </div>
-                                                    <% } %>
-                                        </div>
-                                    </div>
-                            </section>
-                        </div>
-                        <!--================End Cart Area =================-->
+                <div class="container" style="margin-top: 0dvh;">
+                    <div class="erro_validation" style="display: flex; justify-content: center; height: 40px;">
+                        <p style="color:white; background-color: red; font-size: 14px;" id="error_filter"></p>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <form>
+                            <label for="from-date">From:</label>
+                            <input type="date" id="from-date" name="fromdate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required>
+                            <label for="to-date">To:</label>
+                            <input type="date" id="to-date" name="todate" style="background-color: rgba(255, 255, 255, 0.653); border: none; border-radius: 3px;" required>
+                            <button type="submit" onclick="updateSalesReport()" style="border: 1px solid rgba(255, 229, 229, 0.761); border-radius: 15px; background-color: transparent; color: white;"><i class="fa-solid fa-filter fa-bounce" style="color: rgb(233, 252, 255); font-size: 10px;"></i> Filter</button>
+                        </form>
+                    </div>
+                    <div style="display: flex;justify-content: center;">
+                        <a href="#" onclick="downloadPDF('printThisDiv')" style="color: rgb(255, 255, 255); font-weight: 200; font-size: 14px; text-decoration: none; background-color: rgba(1, 69, 90, 0.373);padding: 5px 5px ; border-radius: 15px;">Download as PDF</a>
+                        <a href="#" onclick="downloadExcel('printThisDiv')" style="color: rgb(255, 255, 255); font-weight: 200; font-size: 14px; text-decoration: none; margin-left: 15px; background-color: rgba(1, 69, 90, 0.373); padding: 5px 5px ; border-radius: 15px;">Download as Excel</a>
                     </div>
                 </div>
+                <div class="row" id="printThisDiv">
+                    <div class="col-12 col-lg-12" style="background-color: transparent;">
+                        <div class="card" style="background-color: transparent;">
+                            <div class="table-responsive">
+                                <div class="container d-flex justify-content-center">
+                                    <p style="font-size: 2rem; color: white;">Sales Report</p>
+                                </div>
+                                <!--================Order Area =================-->
+                                <div id="reloadDiv">
+                                    <section class="cart_area padding_top">
+                                        <div class="container">
+                                            <div class="address" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                                <div>
+                                                    <p1 id="startDate">From : <%= startDate.toLocaleDateString() %></p1>
+                                                    <br>
+                                                    <p1 id="endDate">To : <%= endDate.toLocaleDateString() %></p1>
+                                                </div>
+                                                <div>
+                                                    <p1 id="Total_revenue">Total revenue : <%= totalRevenue %></p1>
+                                                    <br>
+                                                    <p1>Total orders : <%= totalOrders %></p1>
+                                                    <br>
+                                                    <p1>Delivered Orders : <%= totalUsers %></p1>
+                                                </div>
+                                                <div>
+                                                    <h3>veloXAttire LTD</h3>
+                                                    <address class="" style="font-size: 12px;">
+                                                        TP8 7 , Online Sales.th floor,Phase 4 ,Cyber Park , Bangalor
+                                                        <br> zip :147893 , Bangaloor
+                                                        <br> India
+                                                    </address>
+                                                </div>
+                                            </div>
+                                            <div class="cart_inner">
+                                                <div class="table-responsive">
+                                                    <% if ( order ) { %>
+                                                        <table class="table table-bordered" id="orderTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col" style="color: red;">Date</th>
+                                                                    <th scope="col" style="color: rgb(85, 196, 0);">Order ID</th>
+                                                                    <th scope="col">Customer</th>
+                                                                    <th scope="col">Orders Products</th>
+                                                                    <th scope="col">Amount</th>
+                                                                    <th scope="col">Payment Method</th>
+                                                                    <th scope="col">Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="usersContainer">
+                                                                <% for (let i=0; i < order.length; i++) { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <p style="color: red;">
+                                                                                        <%= order[i].createdAt.toLocaleDateString() %>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p style="color: rgb(85, 196, 0);">
+                                                                                <%= order[i].OderId %>
+                                                                            </p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="display-flex">
+                                                                                <p><%= order[i].UserId.name %></p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="media-body">
+                                                                                <% for (let j=0; j < order[i].OrderItems.length; j++) { %>
+                                                                                    <p style="font-size: 14px;"><span style="color: orange;">
+                                                                                            <%= j + 1 %> :
+                                                                                        </span>
+                                                                                        <%= order[i].OrderItems[j].ProductId.Name %>
+                                                                                    </p>
+                                                                                <% } %>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p><%= order[i].totalAmount %></p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="media">
+                                                                                <div class="media-body">
+                                                                                    <p style="color: blue;">
+                                                                                        <%= order[i].PaymentMethod %>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p><%= order[i].OrderStatus %></p>
+                                                                        </td>
+                                                                    </tr>
+                                                                <% } %>
+                                                            </tbody>
+                                                        </table>
+                                                    <% } else { %>
+                                                        <div class="text-center d-flex justify-content-center">
+                                                            <h2 style="font-family: serif">Empty Orders...! </h2>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <!--================End Cart Area =================-->
+                            </div>
+                        </div>
+                    </div>
+                </div><!--
         
-            </div>
-        </div><!--End Row-->
 
-
-
-
-        <!--start overlay-->
-        <div class="overlay toggle-menu"></div>
-        <!--end overlay-->
-
-            </div><!-- End container-fluid-->
-        </div><!--End content-wrapper-->
+        <!--End content-wrapper-->
         <!--Start Back To Top Button-->
         <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
         <!--End Back To Top Button-->
@@ -504,7 +511,6 @@
 
     <script>
         function updateSalesReport(){
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaa");
             event.preventDefault()
             
             const divFilter = document.getElementById('usersContainer')
@@ -563,7 +569,10 @@
             })
             .then(response => response.json())
             .then(data =>{
-                console.log("<<>>",data);
+                if(data.Orders.length == 0){
+                    const ordersFiltered = " No orders in the provided date duration..!"
+                    document.getElementById('usersContainer').innerHTML = ordersFiltered
+                }else{
 
                 const ordersFiltered = data.Orders.map(Order => {
                         let orderItemsHTML = '';
@@ -623,9 +632,18 @@
                             </tr>
                         `;
                     });
+        
 
                     // Join all generated HTML elements and insert into the DOM
                     document.getElementById('usersContainer').innerHTML = ordersFiltered.join('');
+                }
+
+                    const startDate = document.getElementById('startDate')
+                    const endDate = document.getElementById('endDate')
+                    const totalRevenue = document.getElementById('Total_revenue')
+                    startDate.innerHTML = data.fromDate
+                    endDate.innerHTML = data.toDate
+                    totalRevenue.innerHTML = data.totalRevenue
 
                 
                 })
