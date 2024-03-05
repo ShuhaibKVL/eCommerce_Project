@@ -551,7 +551,7 @@
         function DeleteCoupon(couponId){
             console.log(couponId);
 
-            fetch(`http://localhost:5000/admin/DeleteCoupon?id=${couponId}`)
+            fetch(`/admin/DeleteCoupon?id=${couponId}`)
             .then(Response => Response.json())
             .then(data => {
                 console.log(data);
@@ -577,7 +577,7 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         function openEditCouponModal(couponId) {
-            fetch(`http://localhost:5000/admin/getEditCouponDetails?id=${couponId}`)
+            fetch(`/admin/getEditCouponDetails?id=${couponId}`)
             .then(response => {
                 if(!response.ok){
                     throw new Error('Failed to fetch coupon details')

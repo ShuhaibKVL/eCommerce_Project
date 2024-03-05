@@ -438,7 +438,7 @@
         function approveCancelRequest(ProductId, OderId, UserId,page) {
             console.log(ProductId);
 
-            fetch(`http://localhost:5000/admin/Approve_cancel_order?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
+            fetch(`/admin/Approve_cancel_order?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -478,7 +478,7 @@
         function Delivered(ProductId, OderId, UserId, page) {
             console.log(ProductId);
 
-            fetch(`http://localhost:5000/admin/Delivered?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
+            fetch(`/admin/Delivered?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -517,7 +517,7 @@
         function Order_Return(ProductId, OderId, UserId) {
             console.log(ProductId);
 
-            fetch(`http://localhost:5000/admin/Order_Return?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
+            fetch(`/admin/Order_Return?id=${ProductId}&OderId=${OderId}&UserId=${UserId}&page=${page}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -547,11 +547,6 @@
                 .catch(error => console.log("Error :", error));
         };
     </script>
-
-
-
-
-
 
 </body>
 
