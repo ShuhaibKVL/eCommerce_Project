@@ -690,12 +690,6 @@
                         </div>
                         
                     </div>
-
-                    
-
-                    
-
-
                     
                 </div>
             </div>
@@ -847,7 +841,7 @@
          function handleDeleleteClick(addressId){
             console.log("fghjdfjf gfd jfhj ffd fg",addressId);
             
-            fetch(`http://localhost:5000/DeleteAddress?id=${addressId}`,{
+            fetch(`/DeleteAddress?id=${addressId}`,{
                 method:'DELETE',
                 header:{
                     'Content-Type':'application/json'

@@ -832,7 +832,7 @@
 
         function sendToServer(selectedPaymentMethod, AddressId, Total,couponId) {
             // Example: Send a POST request to your server
-            fetch('http://localhost:5000/placeOrder', {
+            fetch('/placeOrder', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -900,7 +900,7 @@
     <script>
         // Assuming you have an API endpoint for updating the cart
         function useCoupon(coupon, total) {
-            fetch(`http://localhost:5000/useCoupon?id=${coupon}&total=${total}`)
+            fetch(`/useCoupon?id=${coupon}&total=${total}`)
                 .then(response => response.json())
                 .then(response => {
                     console.log('iam response : ', response);
@@ -970,7 +970,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             function openCouponModal() {
-                fetch(`http://localhost:5000/loadCouponDetails`)
+                // http://localhost:5000/loadCouponDetails
+                fetch(`/loadCouponDetails`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Failed to fetch coupon details')
