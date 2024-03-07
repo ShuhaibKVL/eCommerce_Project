@@ -315,7 +315,7 @@ const DeletCategory = async (req, res) => {
         console.log(CategoryID);
         const DeleteCategory = await Category.deleteOne({ _id: CategoryID })
         console.log("Successs")
-        res.redirect('Product')
+        res.redirect('/Product')
         // ,{ successMessage: 'Successfully Deleted the User' }
     } catch (error) {
         console.log("Error ON DeleteCategory", error)
