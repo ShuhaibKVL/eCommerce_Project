@@ -393,23 +393,18 @@
                         </div>
 
                         <div class="col-md-12 form-group p_star " style="display: flex;">
-                            <select class="country_select" name="Country">
-                                <option value="India">India</option>
-                                <option value="USA">USA</option>
-                                <option value="Caneda">Caneda</option>
-                            </select>
-
-                            <select class="country_select" name="State">
-                                <option value="Kerala">Kerala</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Karnadaka">Karnadaka</option>
-                            </select>
-
-                            <select class="country_select" name="District">
-                                <option value="Palakkad">Palakkad</option>
-                                <option value="Malappuram">Malappuam</option>
-                                <option value="Kozhikod">Kozhikod</option>
-                            </select>
+                            <div class="col-md-6 form-group p_star">
+                                <label for="email">Country</label>
+                                <input type="text" class="form-control" id="email" name="Country" />
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <label for="email">State</label>
+                                <input type="text" class="form-control" id="email" name="State" />
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <label for="email">District</label>
+                                <input type="text" class="form-control" id="email" name="District" />
+                            </div>
                         </div>
 
                         <div class="col-md-12 form-group p_star">
@@ -900,6 +895,7 @@
     <script>
         // Assuming you have an API endpoint for updating the cart
         function useCoupon(coupon, total) {
+            console.log("<<>>",coupon,total);
             fetch(`/useCoupon?id=${coupon}&total=${total}`)
                 .then(response => response.json())
                 .then(response => {

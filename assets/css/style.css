@@ -2103,7 +2103,7 @@ ul {
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
 .main_menu {
   position: absolute;
-  background-color: #fdf5ee;
+  background-color: #ffe5cd;
   left: 0;
   top: 0;
   width: 100%;
@@ -3094,7 +3094,7 @@ ul {
 /* line 40, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_best_seller.scss */
 .best_seller .single_product_item:hover .single_product_text {
   padding: 15px;
-  background-color: rgb(255, 248, 236);
+  background-color: rgb(255, 229, 185);
 }
 
 /* line 44, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_best_seller.scss */
@@ -4829,7 +4829,8 @@ ul {
 
 /* line 1459, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
 .p_star input {
-  background: #fff;
+  background: #fff5eb;
+  border: solid 1px rgb(255, 208, 161);
 }
 
 /* line 1466, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */

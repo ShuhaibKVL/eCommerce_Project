@@ -199,7 +199,7 @@
             color: rgb(0, 119, 255);
             margin-left: 40px;
             transition: 3ms;
-            position: relative;
+            position: sticky;
             overflow: hidden;
         }
         .addbuttton::before{
@@ -401,23 +401,8 @@
                             <a class="list-group-item list-group-item-action " href="/Cart">CART</a>
                             <a id="bt3" class="list-group-item list-group-item-action" onclick="loadContent('Address')" >MANAGE ADDRESS</a>
                             <a id="bt2" class="list-group-item list-group-item-action"  onclick="loadContent('Edit_Profile')">Edit Profile</a>
-                            <a id="bt2" class="list-group-item list-group-item-action"href="/LoadOrderManagment" >Orderes</a>
-                            <!-- href="/Address" -->
-                            <!-- <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('user-details')">User Details</li>
-                            <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('addresses')">Addresses</li> -->
-                            <!-- <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('orders')">Orders</li>
-                            <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('add-address')">Add Address</li>
-                            <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('edit-profile')">Edit Profile</li>
-                            <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('cancel-orders')">Cancel Orders</li>
-                            <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('forgot-password')">Forgot Password</li>
-                            <li class="list-group-item list-group-item-action" data-toggle="list" onclick="loadContent('cart-management')">Cart Management</li> -->
-
-                            <!-- <a class="list-group-item list-group-item-action" data-toggle="list"
-                        href="#account-social-links">Social links</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list"
-                        href="#account-connections">Connections</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list"
-                        href="#account-notifications">Notifications</a> -->
+                            <a id="bt2" class="list-group-item list-group-item-action"href="/LoadOrderManagment" >Orders</a>
+                            
                         </div>
                     </div>
 
@@ -433,33 +418,27 @@
                     </div>
 
                 <div id="address" style="display: none;  border: 3px solid rgb(255, 243, 219);" class="col-md-9">
-                    <a href="/Add_Address"><button class="addbuttton">Add Addrss</button></a>
+                    <a href="/Add_Address"><button class="addbuttton">Add Address</button></a>
                     <% if(typeof Address !== 'Undefined'){ %>
                     
                         <% Address.forEach(Address => { %>
                         
-                            <div class="min_sub" style="padding: 2vw; ">
-                                <p> <span class="Address_span"> First Name :</span> <%= Address.FirstName %> </p>
-                                <p> <span class="Address_span"> Last Name :</span> <%= Address.LastName %> </p>
-                                <p> <span class="Address_span">Phone Number :</span> <%= Address.PhoneNumber %> </p>
-                                <p> <span class="Address_span">Email :</span> <%= Address.Email %> </p>
-                                <p> <span class="Address_span"> Country :</span> <%= Address.Country %> </p>
-                                <p> <span class="Address_span"> State :</span> <%= Address.State %> </p>
-                                <p> <span class="Address_span"> District :</span> <%= Address.District %> </p>
-                                <p> <span class="Address_span"> Address :</span> <%= Address.add1 %> </p>
-                                <p><%= Address.add2 %> </p>
-                                <p> <span class="Address_span"> Town :</span> <%= Address.Town %> </p>
-                                <p> <span class="Address_span"> Pin Code :</span> <%= Address.PinCode %> </p>
-                                <br>
-                            </div>
-                            
-                        
-                        
-                        <a href="/Edit_Address?id=<%= Address._id %>"><button class="Edibuttton">Edit Address</button></a>
+                            <div class="sub">
+                                <div class="min_sub">
+                                    <div class="address-info">
+                                        <p><span class="Address_span">First Name:</span> <%= Address.FirstName %></p>
+                                        <p><span class="Address_span">Last Name:</span> <%= Address.LastName %></p>
+                                        <p><span class="Address_span">Phone Number:</span> <%= Address.PhoneNumber %></p>
+                                        <p><span class="Address_span">Email:</span> <%= Address.Email %></p>
+                                        <p><span class="Address_span">Country, State, District:</span> <%= Address.Country %>, <%= Address.State %>, <%= Address.District %></p>
+                                        <p><span class="Address_span">Address:</span> <%= Address.add1 %>, <%= Address.add2 %>, <%= Address.Town %>, <%= Address.PinCode %></p>
+                                    </div>
+                                    <br>
+                                    <a href="/Edit_Address?id=<%= Address._id %>"><button class="Edibuttton">Edit Address</button></a>
                         <button class="delete Editbuttton" data-address-id="<%= Address._id %>" >Delete Address</button>
-
+                                </div>
+                            </div>
                         <% }) %>
-            
                     <% }else{ %>
                         <h3>No Address Added</h3>
                         
@@ -797,15 +776,16 @@
                     contentDiv.style.display = " none"
                     document.getElementById("address").style.display = "none"
                     document.getElementById("UserDetails").style.display = "block"
-                    document.getElementById("bt1").style.backgroundColor = " rgb(255, 248, 228)"
+                    document.getElementById("bt1").style.backgroundColor = " red"
                     document.getElementById("bt2").style.backgroundColor = "white"
+                    document.getElementById("bt3").style.backgroundColor = " white"
                     break;
                     
                 case 'Edit_Profile':
                     contentDiv.style.display = " block"
                     document.getElementById("UserDetails").style.display = "none"
                     document.getElementById("address").style.display = "none"
-                    document.getElementById("bt2").style.backgroundColor = " rgb(255, 248, 228)"
+                    document.getElementById("bt2").style.backgroundColor = " red"
                     document.getElementById("bt1").style.backgroundColor = "white"
                     document.getElementById("bt3").style.backgroundColor = "white"
                     break;
@@ -815,7 +795,7 @@
                     contentDiv.style.display = " none"
                     document.getElementById("UserDetails").style.display = "none"
                     document.getElementById("address").style.display = "block"
-                    document.getElementById("bt3").style.backgroundColor = " rgb(255, 248, 228)"
+                    document.getElementById("bt3").style.backgroundColor = " red"
                     document.getElementById("bt2").style.backgroundColor = "white"
                     document.getElementById("bt1").style.backgroundColor = "white"
                     break;
