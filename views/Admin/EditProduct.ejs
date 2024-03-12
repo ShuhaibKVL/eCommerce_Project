@@ -205,10 +205,8 @@
                     <div style="height: 50px;">
                       <p id="error_message_name" style="color: red;"></p>
                     </div>
-
-
-                  <!-- <form action="EditProduct" onsubmit="validateForm()" id="editProductForm" class="tm-edit-product-form" method="post" enctype="multipart/form-data"> -->
-                    <form  action="EditProduct"  class="tm-edit-product-form" method="post" enctype="multipart/form-data">
+                  <form action="EditProduct" id="editProductForm" class="tm-edit-product-form" method="post" enctype="multipart/form-data">
+                    <!-- <form  action="EditProduct"  class="tm-edit-product-form" method="post" enctype="multipart/form-data"> -->
                     <div class="form-group mb-3">
                       <label for="name">Product Name </label>
                       <input id="name" name="name" type="text" value="<%= Product.Name %>"
@@ -277,10 +275,9 @@
                             <button type="button" class="btn mt-2" onclick="addImage()" style="border: none; background-color: #01557ce2; color: white; font-size: 12px; padding: 5px 10px;">Add New Image</button>
                           </div>
 
-                          <input type="hidden" name="existingIMages<%= index %>" id="existingIMages<%= index %>" value="<%= Image%>">
-
                             <% }) %>
                         <% } %>
+                        <input type="hidden" value="<%= Product.Image %>" name="existImage" id="existImage">
                       </div>
 
                   </div>
@@ -288,15 +285,14 @@
                   <div class="custom-file mt-3 mb-3 ">
                     <% console.log("IMages >>",Product.Image); %>
                     <input id="fileInput"   type="file" name="image" style="display:none;" multiple maxlength="4" accept="image/*" />
-                    <input type="button" class="btn btn-primary btn-block mx-auto" style="align-self: center; width: fit-content; border-radius: 10px;" value="UPLOAD PRODUCT IMAGES"
+                    <input type="button" class="btn btn-primary btn-block mx-auto" style="align-self: center; width: fit-content; border-radius: 10px;" value="UPLOAD NEW IMAGES"
                       onclick="document.getElementById('fileInput').click();" />
                   </div>
                   
-                  <button type="submit" onclick="validateForm()" class="btn btn-primary btn-block text-uppercase">Update Product</button>
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Product</button>
                   
                 </div>
                 </form>
-                
                 </div>
               </div>
             </div>
@@ -404,27 +400,22 @@
   function validateForm() {
     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     
-    const name = document.getElementById('name').value;
-    const description = document.getElementById('description').value;
+    const name = document.getElementById('name').value.trim()
+    const description = document.getElementById('description').value.trim()
     const price = document.getElementById('price').value;
+    const Price = Number(price)
     const Size = document.getElementById('Size').value;
     const stock = document.getElementById('stock').value;
+    const Stock = Number(stock)
     const category = document.getElementById('category').value;
     const fileInput = document.getElementById('fileInput')
-
-    // let exixtingImages = []
+    const sss = document.getElementById('existImage').value
+    console.log("Existing Images :> ",sss);
     
-    // for (let i = 0; i <= 4; i++) {
-    //   const element = document.getElementById(`existingIMages${i}`).value
-    //   exixtingImages.push(element)
-    // }
-    // console.log("Existing Images :",exixtingImages);
-
-
 
     // Check the number of selected images
     const selectedImagesCount = fileInput.files.length;
-    console.log(selectedImagesCount);
+    console.log("Selected Images :>",selectedImagesCount);
     
 
     if (name.length > 12  || name.length < 2 ) {
@@ -436,18 +427,8 @@
 
       return false
 
-    } else if(description.length > 28 || description.length < 5){
-      console.log("Description validated >",description,typeof description);
-      document.getElementById('error_message_name').innerHTML = "Description Should contain at least 5 character, and should not exceed more than 28 letter";
-
-      setTimeout(function () {
-        document.getElementById('error_message_name').innerHTML = ''
-      }, 3000)
-
-      return false
-
-    }else if(price.length < 1) {
-      document.getElementById('error_message_name').innerHTML = 'Price must contain the product Price';
+    } else if(Price <= 1) {
+      document.getElementById('error_message_name').innerHTML = 'Price must contain the product Price greater than 1';
 
       setTimeout(function () {
         document.getElementById('error_message_name').innerHTML = ''
@@ -462,7 +443,7 @@
       }, 3000)
 
       return false
-    }else if (stock.length == 0 ) {
+    }else if (Stock <= 0 ) {
       document.getElementById('error_message_name').innerHTML = 'Please enter The product stock';
 
       setTimeout(function () {
@@ -478,17 +459,27 @@
       }, 3000)
 
       return false
+    }else if(description.length > 28 || description.length < 5){
+
+      document.getElementById('error_message_name').innerHTML = "Description Should contain at least 5 character, and should not exceed more than 28 letter";
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
+
+      return false
+
+    }else if(sss.length < 3){
+      if (selectedImagesCount < 3 ) {
+      console.log("images validation >> ");
+      document.getElementById('error_message_name').innerHTML = 'Please select at least 3 images ';
+
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
+
+      return false
     }
-    // else if (selectedImagesCount < 3 ) {
-    //   console.log("images validation >> ");
-    //   document.getElementById('error_message_name').innerHTML = 'Please select at least 3 images ';
-
-    //   setTimeout(function () {
-    //     document.getElementById('error_message_name').innerHTML = ''
-    //   }, 3000)
-
-    //   return false
-    // }
+    }
     else {
       console.log("hgdfhsdj");
       document.getElementById('error_message_name').innerHTML = '';
@@ -496,14 +487,14 @@
     }
   }
 
-  // const forms = document.getElementById('editProductForm')
-  // forms.addEventListener('submit', function (event) {
-  //   // event.preventDefault();
-  //   console.log(!validateForm());
-  //   if (!validateForm()) {
-  //     event.preventDefault();
-  //   }
-  // })
+  const forms = document.getElementById('editProductForm')
+  forms.addEventListener('submit', function (event) {
+    // event.preventDefault();
+    console.log(!validateForm());
+    if (!validateForm()) {
+      event.preventDefault();
+    }
+  })
 </script>
 
 <script>

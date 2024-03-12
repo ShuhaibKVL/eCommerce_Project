@@ -497,7 +497,7 @@
                                                     <% if(typeof coupon !=='undefined' ) { %>
                                                         <% } %>
                                                 </p1>
-                                                <p1 id="discountType"></p1>
+                                                <p1 style="color: #ffa600;" id="discountType"></p1>
                                             </div>
                                             <div style="display: flex; justify-content: end; ">
                                                 <p1 id="discoundAmount" style="color: red;"></p1>
@@ -922,11 +922,11 @@
                         const Total = response.totalAmountAfterDeduction;
                         const coupon = response.couponDetails;
                         const discoundAmount = response.discount
-                        const discoundType = response.discountType
-                        const couponId = response.couponCode
+                        const discoundType = coupon.discountType
+                        const couponId = coupon.couponCode
                         let discIcon ;
                         if(discoundType == 'fixed'){
-                            discIcon =''
+                            discIcon =' '
                         }else{
                             discIcon = '%'
                         }
@@ -941,9 +941,9 @@
                         
                         totalAmount.textContent = Total
                         appliedCoupon.textContent = coupon.couponCode
-                        appliedCouponDiscount.textContent = coupon.discount
-                        discAmount.innerText = discoundAmount
-                        discoundTypeSpan.textContent = discIcon
+                        appliedCouponDiscount.textContent = "Offer :"+ coupon.discount
+                        discAmount.innerText = "-"+discoundAmount
+                        discoundTypeSpan.textContent =discIcon
 
                         document.getElementById('couponId').value = couponId;
                     }

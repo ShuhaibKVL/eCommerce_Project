@@ -192,8 +192,7 @@ const Add_Product = async (req, res, next) => {
                 Stock: req.body.stock,
                 Description: req.body.description,
                 Image: req.files.map((file) => file.filename)
-                // Image:processedImages
-                // Image : croppedImageData.map((file)=>file.filename)
+
             })
             await newProduct.save()
 
@@ -249,33 +248,44 @@ const LoadEditProduct = async (req, res) => {
 
 
 const EditProduct = async (req, res) => {
-    console.log(req.body.id);
+    console.log("Edit Product Invoked");
+    try{
     const Product_ID = req.body.id;
-    console.log("Product ID : ", Product_ID);
-    // const existingIMages = []
-    // for (let i = 0; i <=4  ; i++) {
-    //     const element = document.getElementById('existingIMages'+i).value
-    //     existingIMages.push(element)
-    //     console.log("<>",existingIMages);
-    // }
-
-    const ProductDataToUpdate = {
-        Name: req.body.name,
-        Price: req.body.price,
-        Category: req.body.category,
-        Size: req.body.size,
-        Stock: req.body.stock,
-        Description: req.body.description,
-        Image: req.files.map((file) => file.filename)
-    };
-
-    console.log(ProductDataToUpdate);
-    if (req.files) {
-        ProductDataToUpdate.Image = req.files.map((file) => file.filename)
-    }
-    try {
+    let Image = req.files.map((file) => file.filename)
+    const existImages = req.body.existImage
+    
+    if(existImages){
+        console.log("existImage :",existImages);
+        const existImagesArray = existImages.split(',');
+        console.log(existImagesArray);
+        
+        const ProductDataToUpdate = {
+            Name: req.body.name,
+            Price: req.body.price,
+            Category: req.body.category,
+            Size: req.body.size,
+            Stock: req.body.stock,
+            Description: req.body.description,
+            Image: existImagesArray
+        };
         const updateProduct = await ProductSchema.findByIdAndUpdate(Product_ID, ProductDataToUpdate, { new: true });
-        res.redirect('Product');
+    }else{
+        const ProductDataToUpdate = {
+            Name: req.body.name,
+            Price: req.body.price,
+            Category: req.body.category,
+            Size: req.body.size,
+            Stock: req.body.stock,
+            Description: req.body.description,
+            Image: req.files.map((file) => file.filename)
+        };
+        if (req.files) {
+            ProductDataToUpdate.Image = req.files.map((file) => file.filename)
+        }
+        const updateProduct = await ProductSchema.findByIdAndUpdate(Product_ID, ProductDataToUpdate, { new: true });
+    }
+    
+    res.redirect('Product');
     } catch (error) {
         console.log("Error Occurred on EDITPRODUCT", error);
     }
@@ -312,11 +322,8 @@ const CreateCategory = async (req, res) => {
 const DeletCategory = async (req, res) => {
     try {
         const CategoryID = req.query.id
-        console.log(CategoryID);
         const DeleteCategory = await Category.deleteOne({ _id: CategoryID })
-        console.log("Successs")
         res.redirect('/Product')
-        // ,{ successMessage: 'Successfully Deleted the User' }
     } catch (error) {
         console.log("Error ON DeleteCategory", error)
     }
@@ -566,10 +573,7 @@ function generateCouponCode(length) {
 
 const addNewCoupon = async (req, res) => {
     try {
-
-        // Generate a unique coupon code with a specified length
         const uniqueCouponCode = generateCouponCode(8);
-        console.log("coupon code is : ", uniqueCouponCode);
 
         const newCoupon = new couponModel({
             name: req.body.name,
@@ -579,10 +583,7 @@ const addNewCoupon = async (req, res) => {
             instruction: req.body.instruction,
             expireDate: req.body.expireDate
         })
-
         await newCoupon.save()
-        console.log(newCoupon);
-
         res.redirect('/admin/loadCoupon')
 
     } catch (error) {
@@ -593,11 +594,8 @@ const addNewCoupon = async (req, res) => {
 const DeleteCoupon = async (req, res) => {
     try {
         couponId = req.query.id
-        console.log(couponId);
         const deleteCoupon = await couponModel.deleteOne({ _id: couponId })
-
         res.json("success")
-
     } catch (error) {
         console.log("Error on DeleteCoupon Controller : ", error.message);
     }
@@ -612,7 +610,6 @@ const getEditCouponDetails = async (req, res) => {
         } else {
             res.status(404).json({ error: 'Coupon not found' })
         }
-
     } catch (error) {
         console.log("Error on getEditCouponDetails Controller : ", error);
         res.status(500).json({ error: 'Internal server error' })

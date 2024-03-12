@@ -211,7 +211,7 @@
                     <div class="form-group mb-3">
                       <label for="name">Product Name </label>
                       <input id="name" name="name" type="text" value=""
-                        class="form-control validate" />
+                      class="form-control validate" />
 
                       <!-- For Only Passing The Respective Product Id  -->
                       <input type="hidden" name="id" value="">
@@ -219,8 +219,8 @@
                     </div>
                     <div class="form-group mb-3">
                       <label for="name">Price </label>
-                      <input id="price" name="price" type="text" value=""
-                        class="form-control validate"  />
+                      <input id="price" name="price" type="text" value="" min="1"
+                        class="form-control validate" />
                     </div>
                     <div class="form-group mb-3">
                       <label for="category">Category</label>
@@ -236,8 +236,6 @@
                         
                       </select>
                     </div>
-                  
-
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
 
@@ -253,7 +251,7 @@
                     </div>
                     <div class="form-group mb-3 col-xs-12 col-sm-6">
                       <label for="stock">Units In Stock </label>
-                      <input id="stock" name="stock" type="text" value=""
+                      <input id="stock" name="stock" type="text" value="" min="1"
                         class="form-control validate" />
                     </div>
                   </div>
@@ -289,7 +287,6 @@
                   
                 </div>
                 </form>
-                  
                   </div>
                 </div>
               </div>
@@ -310,12 +307,7 @@
             }, 2000);
           </script>
 
-          
-
           <!--End Row-->
-
-          <!--End Dashboard Content-->
-
           <!--start overlay-->
           <div class="overlay toggle-menu"></div>
           <!--end overlay-->
@@ -324,6 +316,7 @@
         <!-- End container-fluid-->
         
       </div><!--End content-wrapper-->
+
       <!--Start Back To Top Button-->
       <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
       <!--End Back To Top Button-->
@@ -418,14 +411,17 @@
 
 <script>
   function validateForm() {
-    const name = document.getElementById('name').value;
-    const description = document.getElementById('description').value;
+    const name = document.getElementById('name').value.trim()
+    const description = document.getElementById('description').value.trim()
     const price = document.getElementById('price').value;
+    const Price = Number(price)
     const Size = document.getElementById('Size').value;
     const stock = document.getElementById('stock').value;
+    const Stock = Number(stock)
     const category = document.getElementById('category').value;
     const fileInput = document.getElementById('fileInput')
     console.log("fileInput :>",fileInput);
+    console.log("Price >",price,typeof(price),typeof(Price));
 
     // Check the number of selected images
     const selectedImagesCount = fileInput.files.length;
@@ -441,18 +437,8 @@
 
       return false
 
-    } else if(description.length > 14 || description.length < 5){
-      console.log("Description validated ");
-      document.getElementById('error_message_name').innerHTML = "Description Should contain at least 5 character, and should not exceed more than 28 letter";
-
-      setTimeout(function () {
-        document.getElementById('error_message_name').innerHTML = ''
-      }, 3000)
-
-      return false
-
-    }else if(price.length < 1) {
-      document.getElementById('error_message_name').innerHTML = 'Price must contain the product Price';
+    }else if(Price <= 0) {
+      document.getElementById('error_message_name').innerHTML = 'Price must contain the product Price Greater than 1';
 
       setTimeout(function () {
         document.getElementById('error_message_name').innerHTML = ''
@@ -467,8 +453,8 @@
       }, 3000)
 
       return false
-    }else if (stock.length == 0 ) {
-      document.getElementById('error_message_name').innerHTML = 'Please enter The product stock';
+    }else if (Stock <= 0) {
+      document.getElementById('error_message_name').innerHTML = 'Please enter The product stock 1 or more';
 
       setTimeout(function () {
         document.getElementById('error_message_name').innerHTML = ''
@@ -483,6 +469,16 @@
       }, 3000)
 
       return false
+    }else if(description.length > 28 || description.length < 5){
+      console.log("Description validated ");
+      document.getElementById('error_message_name').innerHTML = "Description Should contain at least 5 character, and should not exceed more than 28 letter";
+
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
+
+      return false
+
     }else if (selectedImagesCount < 3 ) {
       document.getElementById('error_message_name').innerHTML = 'Please select at least 3 images ';
 

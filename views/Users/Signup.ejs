@@ -323,7 +323,7 @@
             const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.[a-zA-Z]{2,4}$/;
 
               //   << name validation  >>
-                if(!/^[a-zA-Z][a-zA-Z0-9]*$/.test(name)){
+                if(!/^[a-zA-Z\s][a-zA-Z0-9\s]*$/.test(name)){
                 document.getElementById('valid-message').innerHTML ="Please Enter a Valid Name"
 
                 return false

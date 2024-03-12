@@ -236,8 +236,8 @@
                                                 <input type="hidden" id="ProductID" value="<%= item.product._id %>">
                                                 <input type="hidden" id="userId" value="<%=  userId %>">
                                                 
-                                                <input type="number" min="1" value="<%= item.quantity %>"
-                                                    max="<%= item.product.Stock %>"
+                                                <input type="number" min="1" value="<%= item.quantity %>" id="quantity+<%= i %>"
+                                                    max="<%= item.product.Stock +1%>"
                                                     data-product-id="<%= item.product._id %>"
                                                     data-user-id="<%= userId %>" data-index="<%= i %>"
                                                     data-product-stock="<%= item.product.Stock %>"
@@ -248,7 +248,6 @@
                                         </td>
                                         <td>
                                             <h5>$<%= item.product.Price * item.quantity %>
-
 
                                             </h5>
                                         </td>
@@ -272,17 +271,21 @@
                                                 const userId = input.getAttribute('data-user-id');
                                                 const Index = input.getAttribute('data-index');
                                                 const stock = Number(input.getAttribute('data-product-stock'))
+                                                const id = input.id
                                                 console.log("stock :",stock,quantity);
                                                 console.log(typeof(stock));
                                                 console.log(typeof(quantity));
+                                                console.log("ID >>",id);
 
-                                                if (quantity >= stock) {
+                                                if (quantity > stock) {
                                                     document.getElementById('out-stock-msg').innerHTML = 'Out of Stock !!! Please purchase under the ' + stock
+                                                    document.getElementById(id).value = stock
                                                 } else if(quantity < 1){
                                                     document.getElementById('out-stock-msg').innerHTML = 'Please purchase atleast one product.'
+                                                    document.getElementById(id).value = "1"
                                                     setTimeout(function(){
                                                         document.getElementById('out-stock-msg').innerHTML = ' '
-                                                    },3000)
+                                                    },4000)
                                                 }else {
 
                                                     fetch(`/update-cart?id=${productId}&pr=${userId}&QA=${quantity}`)

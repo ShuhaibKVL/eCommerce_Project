@@ -782,12 +782,18 @@ const useCoupon = async (req, res) => {
             var totalAmountAfterDeduction = 0;
 
             if (discountType == "fixed") {
+                console.log("FIXED");
                 totalAmountAfterDeduction = totalAmount - discountAmount;
-                console.log(totalAmountAfterDeduction);
-                return res.status(200).json({ totalAmountAfterDeduction, couponDetails })
+                console.log(">>>",totalAmountAfterDeduction);
+                const discount = discountAmount
+                return res.status(200).json({ totalAmountAfterDeduction, couponDetails,discount })
             } else {
-                const discount = -1*(totalAmount / 100 * discountAmount)
+                console.log("PERCENTAGE");
+                const discount = (totalAmount / 100 * discountAmount)
+                console.log(discount);
+                console.log(totalAmount);
                 totalAmountAfterDeduction = totalAmount - discount
+                console.log(">>>",totalAmountAfterDeduction);
                 return res.status(200).json({ totalAmountAfterDeduction, couponDetails ,discount})
             }
 

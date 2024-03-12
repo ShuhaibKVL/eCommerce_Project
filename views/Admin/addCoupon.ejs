@@ -285,10 +285,11 @@
                                                                 <td id="bg-table">
                                                                     <a id="deleteCoupon"
                                                                         data-coupon-id="<%= coupon[i]._id %>"
-                                                                        class="tm-product-delete-link dlete-coupon">
+                                                                        class="tm-product-delete-link delete-coupon">
                                                                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                                     </a>
                                                                 </td>
+                                                                
                                                                 <td id="bg-table">
                                                                     <a href="#" class="tm-product-delete-link edit-coupon-button"
                                                                     data-coupon-id="<%= coupon[i]._id %>">
@@ -332,13 +333,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body" style="padding: 10px;">
-                                        <form action="addNewCoupon" id="editCouponForm" method="post">
+                                    <div class="modal-body" style="padding:editCouponForm 10px;">
+                                        <form action="addNewCoupon" onsubmit="validateForm()"  method="post">
+                                            <p id="error_gorm" style="color: red; background-color: white; width: fit-content; border-radius: 5px;"></p>
                                             <div class="mb-3">
                                                 <label for="couponName" class="form-label" style="color: white;">Coupon
                                                     Name</label>
                                                 <input type="text" class="form-control" id="couponName" name="name"
-                                                    required style="background-color: #5c81b6; color: white;">
+                                                    required pattern="^[^\s]*$" style="background-color: #5c81b6; color: white;" >
                                             </div>
                                             
                                             <div class="mb-3">
@@ -354,13 +356,13 @@
                                             <div class="mb-3">
                                                 <label for="discount" class="form-label"
                                                     style="color: white;">Discount</label>
-                                                <input type="number" class="form-control" id="discount" name="discount"
-                                                    required style="background-color: #5c81b6; color: white;">
+                                                <input type="number" class="form-control" id="discount" name="discount" min="1" max="99"
+                                                    required pattern="^[^\s]*$"  style="background-color: #5c81b6; color: white;">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="instruction" class="form-label"
                                                     style="color: white;">Instruction</label>
-                                                <textarea class="form-control" id="instruction" name="instruction" required
+                                                <textarea class="form-control" id="instruction" name="instruction" required pattern="^[^\s]*$"
                                                     style="background-color: #5c81b6; color: white;"></textarea>
                                             </div>
                                             <div class="mb-3">
@@ -392,18 +394,18 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="padding: 10px;">
-                                        <form action="editCoupon" id="editCouponForm" method="post">
+                                        <form action="editCoupon" onsubmit="validateFormEdit()" method="post">
+                                            <p id="error_editcoupon" style="color: red; background-color: white; width: fit-content; border-radius: 5px;"></p>
                                             <div class="mb-3">
                                                 
                                                 <!-- for sendind coupon id to server -->
                                                 <input type="hidden" name="_id" id="_id">
-
                                                 <input type="hidden" name="editCoupenCode" id="editCoupenCode">
 
                                                 <label for="couponName" class="form-label" style="color: white;">Coupon
                                                     Name</label>
                                                 <input type="text" class="form-control" id="editcouponName" name="editname"
-                                                    required style="background-color: #5c81b6; color: white;" value="">
+                                                    required pattern="^[^\s]*$" style="background-color: #5c81b6; color: white;" value="">
                                             </div>
                                             
                                             <div class="mb-3">
@@ -425,7 +427,7 @@
                                             <div class="mb-3">
                                                 <label for="instruction" class="form-label"
                                                     style="color: white;">Instruction</label>
-                                                <textarea class="form-control" id="editinstruction" name="editinstruction"
+                                                <textarea class="form-control" id="editinstruction" name="editinstruction" pattern="^[^\s]*$" required
                                                     style="background-color: #5c81b6; color: white;"></textarea>
                                             </div>
                                             <div class="mb-3">
@@ -442,18 +444,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- End Edit Modal -->
-
-
                         <!--start overlay-->
                         <div class="overlay toggle-menu"></div>
                         <!--end overlay-->
-
             </div>
             <!-- End container-fluid-->
-
-
 
         </div><!--End content-wrapper-->
         <!--Start Back To Top Button-->
@@ -548,31 +543,65 @@
     </script>
 
     <script>
+        function validateForm(){
+            console.log("INVOKEDDDDDDDD");
+            const expireDateinput = document.getElementById('expireDate').value
+            const expireDate = new Date(expireDateinput)
+            const date = new Date()
+            console.log("<<>>",expireDateinput,"<<>>",expireDate ,"<<>>",date);
+            if(expireDate < date){
+                event.preventDefault()
+                document.getElementById('error_gorm').innerHTML = "Please Enter a Validate Date."
+                setTimeout(function () {
+                    document.getElementById('error_gorm').innerHTML = " "
+                },3000)
+                return false
+            }else{
+                return true
+            }
+        }
+    </script>
+
+<script>
+    function validateFormEdit(){
+        console.log("INVOKEDDDDDDDD");
+        const expireDateinput = document.getElementById('editExpireDate').value
+        const expireDate = new Date(expireDateinput)
+        const date = new Date()
+        console.log("<<>>",expireDateinput,"<<>>",expireDate ,"<<>>",date);
+        if(expireDate < date){
+            event.preventDefault()
+            document.getElementById('error_editcoupon').innerHTML = "Please Enter a Validate Date."
+            setTimeout(function () {
+                document.getElementById('error_editcoupon').innerHTML = " "
+            },3000)
+            return false
+        }else{
+            return true
+        }
+    }
+</script>
+
+    <script>
         function DeleteCoupon(couponId){
             console.log(couponId);
-
             fetch(`/admin/DeleteCoupon?id=${couponId}`)
             .then(Response => Response.json())
             .then(data => {
                 console.log(data);
-
                 $('#reloadDiv').load('/admin/loadCoupon #reloadDiv');
-
             })
             .catch(error => console.error("Error on fetch API of deleteCoupon :",error))
         }
-
-
-
-    document.querySelectorAll('.dlete-coupon').forEach(button => {
+    document.querySelectorAll('#deleteCoupon').forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const couponId = this.getAttribute('data-coupon-id');
             DeleteCoupon(couponId)
         })
     })
-
     </script>
+
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -586,13 +615,11 @@
             })
             .then(data => {
                 populateEditCouponForm(data)
-                // document.getElementById('editCouponModal').style.display = 'block'
                 console.log("ugsdfdsgfjhdgbfh");
                 $('#editCouponModal').modal('show');
             })
             .catch(error => console.error('Error fetching coupon details:', error))
         }
-
         function populateEditCouponForm(couponDetails) {
             // Populate the form fields with the fetched coupon details
             document.getElementById('editcouponName').value = couponDetails.name;
@@ -603,10 +630,6 @@
             document.getElementById('editCoupenCode').value = couponDetails.couponCode;
             document.getElementById('editExpireDate').value = couponDetails.expireDate;
             console.log(couponDetails.expireDate);
-            
-
-            console.log("couponDetails reached on client side populateEditCouponForm FUNCTION : ",couponDetails);
-            
         }
         document.querySelectorAll('.edit-coupon-button').forEach(button => {
             button.addEventListener('click', function(event) {
@@ -618,5 +641,4 @@
     });
     </script>
 </body>
-
 </html>

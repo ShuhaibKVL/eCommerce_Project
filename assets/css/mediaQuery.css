@@ -1,5 +1,6 @@
+
 @media screen and (max-width:560px){
-    #heartDiv a{
+    #heartDiv{
         display: none;
     }
     #iconsButton{
@@ -7,10 +8,4 @@
     }
 }
 
-#iconsButton{
-    display: none;
-}
-#iconesAneme{
-    display: none;
-}
 
