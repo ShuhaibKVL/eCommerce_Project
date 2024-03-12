@@ -194,7 +194,9 @@ const Add_Product = async (req, res, next) => {
                 Image: req.files.map((file) => file.filename)
 
             })
+            console.log("the product to add :",newProduct);
             await newProduct.save()
+            console.log("after save : ",newProduct);
 
             res.redirect('Product')
         }
