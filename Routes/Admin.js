@@ -93,4 +93,6 @@ AdmiNRoute.get('/loadSalesReport',adminAuth.isLogout,Admincontroll.loadSalesRepo
 
 AdmiNRoute.get('/filter-sales_report',adminAuth.isLogout,Admincontroll.filter_sales_report)
 
+AdmiNRoute.post('/deleteImage',Admincontroll.deleteImage)
+
 module.exports = AdmiNRoute;

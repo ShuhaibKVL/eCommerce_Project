@@ -46,6 +46,9 @@
     <!--  SweetAlert2 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+      <!-- Jquery / Ajax -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body class="bg-theme bg-theme1">
@@ -100,11 +103,11 @@
         </li>
 
 
-       <li>
+      <li>
         <a href="register.html" target="_blank">
           <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
         </a>
-      </li> -->
+      </li>
 
 
       </ul>
@@ -185,16 +188,16 @@
 
     <div class="clearfix"></div>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="existingImagePreviews">
       <div class="container-fluid" style="margin-top: 70dvh;">
 
         <!--End Row-->
 
-
+      <div >
         <div class="container tm-mt-big tm-mb-big">
           <div class="row">
             <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-              <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+              <div class="tm-bg-primary-dark tm-block tm-block-h-auto" >
                 <div class="row">
                   <div class="col-12">
                     <h2 class="tm-block-title d-inline-block">EIDT PRODUCT </h2>
@@ -261,52 +264,46 @@
                   </div>
                 </div>
                 <div class="col-12">
+                  <input type="text" value="<%= Product.Image %>" name="existImage" id="existImage" style="display: none;" >
 
                   <div class="tm-product-img-dummy mx-auto" style="background-color: rgba(240, 248, 255, 0.214);">
                     
-                    <!-- Inside the <div class="tm-product-img-dummy mx-auto"> -->
-                      <div class="tm-product-img-dummy mx-auto" style="background: transparent;" id="imagePreviews">
-                        <% if(Product.Image.length > 0) {%>
-                          <% Product.Image.forEach((Image,index) =>{ %>
-                            <div class="div">
-                            <img src="/assets/uploads/<%= Image %>" id="image<%=index %>" alt="Image Preview" width="100" height="100">
-                            <button type="button" class="btn btn-danger mt-2" onclick="removeImage(index)"  style="border: none; background-color:#dc3545 ; color: white; font-size: 12px; padding: 5px 10px;">Remove</button>
-                            <input type="file" style="display:none;" onchange="updateImage(index, this)" accept="image/*" />
-                            <button type="button" class="btn mt-2" onclick="addImage()" style="border: none; background-color: #01557ce2; color: white; font-size: 12px; padding: 5px 10px;">Add New Image</button>
-                          </div>
+                  <!-- newly added start-->
+                    <div  class="tm-product-img-dummy mx-auto" style="background: transparent;">
+                      <% if(Product.Image.length > 0) { %>
+                          <% Product.Image.forEach((Image, index) => { %>
+                              <div class="div">
+                                  <img src="/assets/uploads/<%= Image %>" id="existingImage<%= index %>" alt="Image Preview" width="100" height="100">
+                                  <button type="button" class="btn btn-danger mt-2" onclick="removeExistingImage('<%= index %>','<%= Product._id %>')"  style="border: none; background-color:#dc3545; color: white; font-size: 12px; padding: 5px 10px;">Remove</button>
+                              </div>
+                          <% }) %>
+                      <% } %>
+                      
+                    </div>
 
-                            <% }) %>
-                        <% } %>
-                        <input type="hidden" value="<%= Product.Image %>" name="existImage" id="existImage">
-                      </div>
-
-                  </div>
-                  
-                  <div class="custom-file mt-3 mb-3 ">
-                    <% console.log("IMages >>",Product.Image); %>
-                    <input id="fileInput"   type="file" name="image" style="display:none;" multiple maxlength="4" accept="image/*" />
-                    <input type="button" class="btn btn-primary btn-block mx-auto" style="align-self: center; width: fit-content; border-radius: 10px;" value="UPLOAD NEW IMAGES"
-                      onclick="document.getElementById('fileInput').click();" />
+                      <!-- New images -->
+                    <div class="tm-product-img-dummy mx-auto" style="background: transparent;" id="newImagePreviews">
+                      <!-- New images will be added dynamically -->
+                    </div>
+              
+                    <input type="file" style="display:none;"  name="image" id="fileInput" onchange="handleFileSelect(event)" accept="image/*" multiple>
+                    <button type="button" class="btn mt-2" onclick="document.getElementById('fileInput').click()" style="border: none; background-color: #01557ce2; color: white; font-size: 12px; padding: 5px 10px;">Add New Image</button>
+                  <!-- newly added END -->
                   </div>
                   
                   <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Product</button>
-                  
                 </div>
-                </form>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
-
-        <!--End Row-->
-
-        <!--End Dashboard Content-->
+      </div>
+    </div>
+  </div>
 
         <!--start overlay-->
         <div class="overlay toggle-menu"></div>
         <!--end overlay-->
-
       </div>
       <!-- End container-fluid-->
     </div><!--End content-wrapper-->
@@ -396,27 +393,33 @@
 
   <!-- https://getbootstrap.com/ -->
 
-<script>
-  function validateForm() {
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    
-    const name = document.getElementById('name').value.trim()
-    const description = document.getElementById('description').value.trim()
-    const price = document.getElementById('price').value;
-    const Price = Number(price)
-    const Size = document.getElementById('Size').value;
-    const stock = document.getElementById('stock').value;
-    const Stock = Number(stock)
-    const category = document.getElementById('category').value;
-    const fileInput = document.getElementById('fileInput')
-    const sss = document.getElementById('existImage').value
-    console.log("Existing Images :> ",sss);
-    
 
-    // Check the number of selected images
-    const selectedImagesCount = fileInput.files.length;
-    console.log("Selected Images :>",selectedImagesCount);
-    
+  <script>
+    document.getElementById('editProductForm').addEventListener('submit', function(event) {
+        if (!validateForm()) {
+            event.preventDefault();
+        }
+    });
+
+    function validateForm() {
+        
+      const name = document.getElementById('name').value.trim()
+      const description = document.getElementById('description').value.trim()
+      const price = document.getElementById('price').value;
+      const Price = Number(price)
+      const Size = document.getElementById('Size').value;
+      const stock = document.getElementById('stock').value;
+      const Stock = Number(stock)
+      const category = document.getElementById('category').value;
+      const fileInput = document.getElementById('fileInput')
+      const existImages = document.getElementById('existImage').value
+      const existImagesArray = existImages.split(',');
+      console.log("existImagesArray :> ",existImagesArray,existImagesArray.length);
+
+        // Example validation to ensure four images are selected
+      const selectedImagesCount = fileInput.files.length;
+      console.log("selected Images :",selectedImagesCount);
+      
 
     if (name.length > 12  || name.length < 2 ) {
       document.getElementById('error_message_name').innerHTML = "Name Should contain at least 2 character, and should  not exceed more than 14 letter"
@@ -468,48 +471,98 @@
 
       return false
 
-    }else if(sss.length < 3){
-      if (selectedImagesCount < 3 ) {
+    }else if(existImagesArray.length === 4 && selectedImagesCount === 0){
+      console.log("images validation >> dfdsgdsg");
+      return true
+
+    }else if (existImagesArray.length < 4 && selectedImagesCount !== 4) {
       console.log("images validation >> ");
-      document.getElementById('error_message_name').innerHTML = 'Please select at least 3 images ';
+      document.getElementById('error_message_name').innerHTML = 'Please select exactly 4 new images ';
 
       setTimeout(function () {
         document.getElementById('error_message_name').innerHTML = ''
       }, 3000)
 
       return false
+
     }
+    else if (existImagesArray.length + selectedImagesCount !== 5) {
+      console.log("<<>>>",existImagesArray.length + selectedImagesCount);
+      document.getElementById('error_message_name').innerHTML = 'Please select exactly 4 new images';
+
+      setTimeout(function () {
+        document.getElementById('error_message_name').innerHTML = ''
+      }, 3000)
+
+      return false
+
     }
     else {
       console.log("hgdfhsdj");
       document.getElementById('error_message_name').innerHTML = '';
       return true
     }
-  }
-
-  const forms = document.getElementById('editProductForm')
-  forms.addEventListener('submit', function (event) {
-    // event.preventDefault();
-    console.log(!validateForm());
-    if (!validateForm()) {
-      event.preventDefault();
     }
-  })
-</script>
 
-<script>
-  document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+    // Function to remove an existing image
+    function removeExistingImage(index, productId) {
 
-  function handleFileSelect(event) {
-      const fileInput = document.getElementById('fileInput');
-      const selectedFiles = fileInput.files;
+            fetch('/admin/deleteImage', {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ productId: productId, index: index })
+            })
 
-      // Check if the number of selected files exceeds 4 or is less than 3
-      if (selectedFiles.length > 4 || selectedFiles.length < 3) {
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // Parse the JSON response
+                } else {
+                    throw new Error('Failed to delete image');
+                }
+            })
+            .then(data => {
+                console.log("Data reached on browser:", data.message, data.productId, data.imageLatestUpdate);
+                
+                // Optionally, update the UI based on the received data
+                const existingImagePreview = document.getElementById('existingImagePreviews');
+                const previewToRemove = existingImagePreview.querySelector(`.div:nth-child(${parseInt(index) + 1})`);
+                previewToRemove.parentNode.removeChild(previewToRemove);
+
+                 // Update the value of the hidden input field
+                const existImageInput = document.getElementById('existImage');
+                existImageInput.value = data.imageLatestUpdate.join(',');
+
+                // const editProductURL = `/admin/EditProduct?id=${data.productId}`;
+                
+                
+                // $('#existingImagePreviews').load(editProductURL +'#existingImagePreviews');
+            })
+            .catch(error => {
+                // Handle network errors
+                console.error('Network error:', error);
+            });
+
+    }
+
+    // Function to handle file selection for new images
+    function handleFileSelect(event) {
+        const files = event.target.files;
+        const selectedFiles =files.length
+        console.log("The selected",files,selectedFiles);
+        const previewContainer = document.getElementById('newImagePreviews');
+        const existImages = document.getElementById('existImage').value
+        const existImagesArray = existImages.split(',');
+        const newImagesWanted = 4 - existImagesArray.length
+        console.log("newImagesWanted :",newImagesWanted);
+
+        // Check if the number of selected files exceeds 4 or is less than 3
+      if (selectedFiles !== 4) {
           Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Please select at least 3 images and only up to 4 images.',
+              text: 'Please select exact 4 images.',
           });
 
           // Clear the file input to prevent exceeding the limit
@@ -517,56 +570,25 @@
           return;
       }
 
-      const previewContainer = document.getElementById('imagePreviews');
-      previewContainer.innerHTML = '';
+        for (let i = 0; i < files.length; i++) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.createElement('div');
+                preview.classList.add('div');
+                preview.innerHTML = `
+                    <img src="${e.target.result}" alt="Image Preview" width="100" height="100">
+                    <button type="button" class="btn btn-danger mt-2" onclick="removeNewImage(this.parentNode)"  style="border: none; background-color:#dc3545 ; color: white; font-size: 12px; padding: 5px 10px;">Remove</button>
+                `;
+                previewContainer.appendChild(preview);
+            };
+            reader.readAsDataURL(files[i]);
+        }
+    }
 
-      const files = event.target.files;
-      for (let i = 0; i < files.length; i++) {
-          createPreview(files[i], i);
-      }
-  }
-
-  function createPreview(file, index) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-          const preview = document.createElement('div');
-          preview.classList.add('preview');
-          preview.innerHTML = `
-              <img src="${e.target.result}" alt="Image Preview" width="100" height="100">
-              <button type="button" class="btn btn-danger mt-2" onclick="removeImage(${index})"  style="border: none; background-color:#dc3545 ; color: white; font-size: 12px; padding: 5px 10px;">Remove</button>
-              <input type="file" style="display:none;" onchange="updateImage(${index}, this)" />
-              <button type="button" class="btn mt-2" onclick="addNewImage(${index})" style="border: none; background-color: #01557ce2; color: white; font-size: 12px; padding: 5px 10px;">Add New Image</button>
-          `;
-          document.getElementById('imagePreviews').appendChild(preview);
-      };
-      reader.readAsDataURL(file);
-  }
-
-  function removeImage(index) {
-      const previewContainer = document.getElementById('imagePreviews');
-      const previewToRemove = previewContainer.querySelector(`.preview:nth-child(${index + 1})`);
-      previewToRemove.parentNode.removeChild(previewToRemove);
-  }
-
-  function updateImage(index, input) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = function (e) {
-          const previewContainer = document.getElementById('imagePreviews');
-          const previewToUpdate = previewContainer.querySelector(`.preview:nth-child(${index + 1})`);
-          const image = previewToUpdate.querySelector('img');
-          image.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-  }
-
-  function addNewImage(index) {
-      const previewContainer = document.getElementById('imagePreviews');
-      const previewToAddNewImage = previewContainer.querySelector(`.preview:nth-child(${index + 1})`);
-      const inputElement = previewToAddNewImage.querySelector('input[type="file"]');
-      inputElement.click();
-  }
+    // Function to remove a newly added image
+    function removeNewImage(preview) {
+        preview.parentNode.removeChild(preview);
+    }
 </script>
 </body>
-
 </html>

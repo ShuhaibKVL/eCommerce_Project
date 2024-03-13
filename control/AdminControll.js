@@ -255,10 +255,11 @@ const EditProduct = async (req, res) => {
     const Product_ID = req.body.id;
     let Image = req.files.map((file) => file.filename)
     const existImages = req.body.existImage
+    const existImagesArray = existImages.split(',');
+
     
-    if(existImages){
-        console.log("existImage :",existImages);
-        const existImagesArray = existImages.split(',');
+    if(existImagesArray.length === 4){
+        
         console.log(existImagesArray);
         
         const ProductDataToUpdate = {
@@ -285,7 +286,9 @@ const EditProduct = async (req, res) => {
             ProductDataToUpdate.Image = req.files.map((file) => file.filename)
         }
         const updateProduct = await ProductSchema.findByIdAndUpdate(Product_ID, ProductDataToUpdate, { new: true });
+        console.log("Form Edit Product :",updateProduct,ProductDataToUpdate);
     }
+    
     
     res.redirect('Product');
     } catch (error) {
@@ -857,6 +860,34 @@ const filter_sales_report = async(req,res) => {
     }
 }
 
+const deleteImage = async(req,res) => {
+    try {
+        const productId = req.body.productId
+        const index = req.body.index
+        console.log("<<<>>>>",productId,index);
+
+        const product = await ProductSchema.findById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        product.Image.splice(index, 1);
+
+        await product.save();
+
+        const Product = await ProductSchema.findById(productId)
+        const imageLatestUpdate = [...Product.Image]
+        console.log("imageLatestUpdate  :",imageLatestUpdate);
+
+        console.log('Image deleted successfully');
+        res.status(200).json({ message: 'Image deleted successfully',productId,imageLatestUpdate });
+
+    } catch (error) {
+        console.log("ERROR ON deleteImage controller :",error);
+    }
+}
+
 
 module.exports = {
     DashBoard,
@@ -889,5 +920,6 @@ module.exports = {
     chart_data,
     filter_chart,
     loadSalesReport,
-    filter_sales_report
+    filter_sales_report,
+    deleteImage
 }
