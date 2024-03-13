@@ -741,7 +741,10 @@ const LoadChekout = async (req, res) => {
 
 const loadCouponDetails = async (req, res) => {
     try {
-        const coupons = await couponModel.find()
+        const currentDate = new Date();
+
+        const coupons = await couponModel.find({expireDate:{$gt :currentDate}})
+        console.log(coupons);
 
         if (coupons) {
             res.json(coupons)
@@ -775,13 +778,17 @@ const useCoupon = async (req, res) => {
         else if (isUsed) {
             console.log("The coupon used once ..!");
             return res.status(200).json({ isUse: true })
-        } else {
+        }
+        else {
 
             req.session.couponId = couponId
 
             var totalAmountAfterDeduction = 0;
 
             if (discountType == "fixed") {
+                if(totalAmount <= discountAmount ){
+                    return res.status(200).json({ isValid: true })
+                }
                 console.log("FIXED");
                 totalAmountAfterDeduction = totalAmount - discountAmount;
                 console.log(">>>",totalAmountAfterDeduction);
@@ -792,6 +799,9 @@ const useCoupon = async (req, res) => {
                 const discount = (totalAmount / 100 * discountAmount)
                 console.log(discount);
                 console.log(totalAmount);
+                if(totalAmount <= discount ){
+                    return res.status(200).json({ isValid: true })
+                }
                 totalAmountAfterDeduction = totalAmount - discount
                 console.log(">>>",totalAmountAfterDeduction);
                 return res.status(200).json({ totalAmountAfterDeduction, couponDetails ,discount})

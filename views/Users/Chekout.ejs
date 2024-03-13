@@ -914,7 +914,14 @@
                         setTimeout(function () {
                             document.getElementById('errormsg_coupon').innerHTML = ''
                         }, 3000)
-                    } else {
+                    }else if(response.isValid){
+                        document.getElementById('errormsg_coupon').innerHTML = 'Coupon Not Valid...!'
+
+                        setTimeout(function () {
+                            document.getElementById('errormsg_coupon').innerHTML = ''
+                        }, 3000)
+                    }
+                    else {
                         const Total = response.totalAmountAfterDeduction;
                         const coupon = response.couponDetails;
                         const discoundAmount = response.discount
