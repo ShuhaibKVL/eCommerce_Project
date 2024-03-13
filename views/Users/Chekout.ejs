@@ -368,13 +368,14 @@
 
 
                 <div class="subb" id="Addressdiv" style="display: none;  ">
+                    <div style="display: flex; align-items: center; justify-content: center; height: 30px;"><p id="F_name" style=" color: red; font-size: 14px;"></p></div>
 
                     <form class="row contact_form" style="line-height: 0.5 !important;" action="checkout_add_address"
-                        method="post" novalidate="novalidate" onsubmit="">
+                        method="post" novalidate="novalidate" onsubmit=" return address_Validation()">
                         <!-- Custom Address Input Form -->
                         <div class="col-md-6 form-group p_star">
-                            <label for="first">First Name</label>
-                            <input type="text" class="form-control" id="first" name="firstname" />
+                            <label for="">First Name</label>
+                            <input type="text" class="form-control" id="first" name="firstname" required />
                         </div>
 
                         <div class="col-md-6 form-group p_star">
@@ -383,49 +384,49 @@
                         </div>
 
                         <div class="col-md-6 form-group p_star">
-                            <label for="number">Phone Number</label>
+                            <label for="">Phone Number</label>
                             <input type="text" class="form-control" id="number" name="number" />
                         </div>
 
                         <div class="col-md-6 form-group p_star">
-                            <label for="email">Email</label>
+                            <label for="">Email</label>
                             <input type="text" class="form-control" id="email" name="email" />
                         </div>
 
                         <div class="col-md-12 form-group p_star " style="display: flex;">
                             <div class="col-md-6 form-group p_star">
                                 <label for="email">Country</label>
-                                <input type="text" class="form-control" id="email" name="Country" />
+                                <input type="text" class="form-control" id="Country" name="Country" required />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <label for="email">State</label>
-                                <input type="text" class="form-control" id="email" name="State" />
+                                <input type="text" class="form-control" id="State" name="State" required />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <label for="email">District</label>
-                                <input type="text" class="form-control" id="email" name="District" />
+                                <input type="text" class="form-control" id="District" name="District" required />
                             </div>
                         </div>
 
                         <div class="col-md-12 form-group p_star">
                             <label for="add1">Flat, House no., Building, Company, Apartment</label>
-                            <input type="text" class="form-control" id="add1" name="add1" />
+                            <input type="text" class="form-control" id="add1" name="add1" required />
                         </div>
 
                         <div class="col-md-12 form-group p_star">
                             <label for="add2">Area, Street, Sector, Village</label>
-                            <input type="text" class="form-control" id="add2" name="add2" />
+                            <input type="text" class="form-control" id="add2" name="add2"required />
                         </div>
 
                         <div class="col-md-12 form-group p_star">
                             <label for="city">Town / City</label>
-                            <input type="text" class="form-control" id="city" name="city" />
+                            <input type="text" class="form-control" id="city" name="city" required />
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label for="pincode">Pincode</label>
-                            <input type="text" class="form-control" id="pincode" name="pincode"
-                                placeholder="Postcode/ZIP" />
+                            <input type="text" class="form-control" id="pincode" name="pincode" max="6"
+                                placeholder="Postcode/ZIP" required />
                         </div>
 
                         <div style="display: flex; justify-content: center;">
@@ -1165,6 +1166,129 @@
             }
         
     </script>
+
+    
+<script>
+    function address_Validation(){
+        console.log("Address_Validion function invoked ");
+        var F_name = document.getElementById('first').value;
+        var L_name = document.getElementById('last').value;
+        var phoneNumber = document.getElementById('number').value;
+        var email = document.getElementById('email').value;
+        var Country = document.getElementById('Country').value
+        var State = document.getElementById('State').value
+        var District = document.getElementById('District').value
+        var add1 = document.getElementById('add1').value
+        var add2 = document.getElementById('add2').value
+        var city = document.getElementById('city').value
+        var pincode = document.getElementById('pincode').value
+        
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.[a-zA-Z]{2,4}$/;
+        
+        if(!/^[a-zA-Z][a-zA-Z0-9]*$/.test(F_name)){
+            document.getElementById('F_name').innerHTML ="Please Enter a Valid Name"
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+
+            return false
+        }else if (!/^[a-zA-Z][a-zA-Z0-9]*$/.test(L_name)) {
+            document.getElementById('F_name').innerHTML ="Please Enter a Valid Name Last name"
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+
+            return false
+        }else if(!/^\d+$/.test(phoneNumber)){
+            document.getElementById('F_name').innerHTML ="Please Enter a  valid Phone Number"
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }else if(phoneNumber.length !== 10){
+            document.getElementById('F_name').innerHTML = "Enter a Valid Phone Number"
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }else if(/^(\d)\1+$/.test(phoneNumber)){
+            document.getElementById('F_name').innerHTML = "Invalid mobile number. It should not consist of the same digit."
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }else if(!emailRegex.test(email)){
+            document.getElementById('F_name').innerHTML = "Write a valid email"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!Country){
+            document.getElementById('F_name').innerHTML = "Write a Country name"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!State){
+            document.getElementById('F_name').innerHTML = "Write a State"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!District){
+            document.getElementById('F_name').innerHTML = "Write a District"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!add1){
+            document.getElementById('F_name').innerHTML = "Write a add1 "
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!add2){
+            document.getElementById('F_name').innerHTML = "Write a add2"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!city){
+            document.getElementById('F_name').innerHTML = "Write a city "
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!pincode){
+            document.getElementById('F_name').innerHTML = "Write a pincode "
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else{
+            return true
+        }
+
+    }
+
+
+</script>
 
 </body>
 

@@ -219,19 +219,19 @@
                     </div>
 
                     <div class="col-md-12 form-group p_star " style="display: flex;">
-                        <select class="country_select" name="Country">
+                        <select class="country_select" name="Country"  id="Country">
                             <option value="India">India</option>
                             <option value="USA">USA</option>
                             <option value="Caneda">Caneda</option>
                         </select>
 
-                        <select class="country_select" name="State">
+                        <select class="country_select" name="State" id="State">
                             <option value="Kerala">Kerala</option>
                             <option value="Tamil Nadu">Tamil Nadu</option>
                             <option value="Karnadaka">Karnadaka</option>
                         </select>
 
-                        <select class="country_select" name="District">
+                        <select class="country_select" name="District" id="District">
                             <option value="Palakkad">Palakkad</option>
                             <option value="Malappuram">Malappuam</option>
                             <option value="Kozhikod">Kozhikod</option>
@@ -254,25 +254,9 @@
                         <!-- <span class="placeholder" data-placeholder="Town/City"></span> -->
                     </div>
 
-                    <!-- <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">Kerala</option>
-                  <option value="2">Tamil Nadu</option>
-                  <option value="4">Karnadaka</option>
-                </select>
-              </div> -->
-
-                    <!-- <div class="col-md-12 form-group p_star">
-                <select class="country_select">
-                  <option value="1">Palakkad</option>
-                  <option value="2">Malappuam</option>
-                  <option value="4">Kozhikod</option>
-                </select>
-              </div> -->
-
                     <label for="">Pincode</label>
                     <div class="col-md-12 form-group">
-                        <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Postcode/ZIP" />
+                        <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Postcode/ZIP" max="6" />
                     </div>
                     <!-- <div class="col-md-12 form-group">
                 <div class="creat_account">
@@ -441,8 +425,6 @@
 
 
     <script>
-
-
         function address_Validation(){
             console.log("Address_Validion function invoked ");
             var F_name = document.getElementById('first').value;
@@ -450,6 +432,13 @@
             var phoneNumber = document.getElementById('number').value;
             var email = document.getElementById('email').value;
             var pincode = document.getElementById('pincode').value;
+            var Country = document.getElementById('Country').value
+        var State = document.getElementById('State').value
+        var District = document.getElementById('District').value
+        var add1 = document.getElementById('add1').value
+        var add2 = document.getElementById('add2').value
+        var city = document.getElementById('city').value
+
             
             const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.[a-zA-Z]{2,4}$/;
             
@@ -493,6 +482,62 @@
                 }, 3000);
                 return false
             }
+            else if(!Country){
+            document.getElementById('F_name').innerHTML = "Write a Country name"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!State){
+            document.getElementById('F_name').innerHTML = "Write a State"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!District){
+            document.getElementById('F_name').innerHTML = "Write a District"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!add1){
+            document.getElementById('F_name').innerHTML = "Write a add1 "
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!add2){
+            document.getElementById('F_name').innerHTML = "Write a add2"
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!city){
+            document.getElementById('F_name').innerHTML = "Write a city "
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
+        else if(!pincode){
+            document.getElementById('F_name').innerHTML = "Write a pincode "
+            
+            setTimeout(function() {
+                document.getElementById('F_name').innerHTML = "";
+            }, 3000);
+            return false
+        }
             else{
                 return true
             }
