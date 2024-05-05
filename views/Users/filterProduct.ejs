@@ -159,47 +159,47 @@
 
                         <aside class="left_widgets p_filter_widgets">
                             <div class="l_w_title">
-                                <!-- <h3>Product filters</h3> -->
+                                <h3>Product filters</h3>
                             </div>
                             <div class="widgets_inner" style="border-bottom: 1px dotted rgba(89, 89, 89, 0.6);">
-                                <!-- <ul class="list">
+                                <ul class="list">
                                     <li>
-                                        <a href="#">Apple</a>
+                                        <a href="#">Wood Land</a>
                                     </li>
                                     <li>
-                                        <a href="#">Asus</a>
+                                        <a href="#">Adidas</a>
                                     </li>
                                     <li class="active">
-                                        <a href="#">Gionee</a>
+                                        <a href="#">Nike</a>
                                     </li>
                                     <li>
-                                        <a href="#">Micromax</a>
+                                        <a href="#">Allen Solly</a>
                                     </li>
                                     <li>
-                                        <a href="#">Samsung</a>
+                                        <a href="#">Staud</a>
                                     </li>
                                 </ul>
                                 <ul class="list">
                                     <li>
-                                        <a href="#">Apple</a>
+                                        <a href="#">Everlane</a>
                                     </li>
                                     <li>
-                                        <a href="#">Asus</a>
+                                        <a href="#">Ciao Lucia</a>
                                     </li>
                                     <li class="active">
-                                        <a href="#">Gionee</a>
+                                        <a href="#">Zara</a>
                                     </li>
                                     <li>
-                                        <a href="#">Micromax</a>
+                                        <a href="#">Bur Berry</a>
                                     </li>
                                     <li>
-                                        <a href="#">Samsung</a>
+                                        <a href="#">Prada</a>
                                     </li>
-                                </ul> -->
+                                </ul>
                             </div>
                         </aside>
 
-                        <!-- <aside class="left_widgets p_filter_widgets">
+                        <aside class="left_widgets p_filter_widgets">
                             <div class="l_w_title">
                                 <h3>Color Filter</h3>
                             </div>
@@ -222,7 +222,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </aside> -->
+                        </aside>
 
                         <!-- <aside class="left_widgets p_filter_widgets price_rangs_aside">
                             <div class="l_w_title">
@@ -277,14 +277,14 @@
                                 </div>
                                 <!-- search section end-->
 
-                                <!-- <div class="single_product_menu d-flex">
+                                <div class="single_product_menu d-flex">
                                     <h5>short by : </h5>
                                     <select>
                                         <option data-display="Select">name</option>
                                         <option value="1">price</option>
                                         <option value="2">product</option>
                                     </select>
-                                </div> -->
+                                </div>
                                 <!-- <div class="single_product_menu d-flex">
                                     <h5>show :</h5>
                                     <div class="top_pageniation">
@@ -315,7 +315,6 @@
                                             <img class="product-image" src="/assets/uploads/<%= product.Image[0] %>" alt="">
                                             </a>
                                             <div class="single_product_text">
-                                                <!-- <a id="heart" href="/addToWhishList?id=<%= product._id %>"><i  class="ti-heart"></i></a> -->
                                                 <% if(whishList) {%>
                                                     <% whishList.Product.some(elements =>{ %>
                                                     <% }) %>
@@ -329,7 +328,7 @@
                                             <% } %>
                                             
                                                 <h4><%= product.Name %></h4>
-                                                <h3><%= product.Price %></h3>
+                                                <h3>$ <%= product.Price %></h3>
                                                 <% if(product.Stock >0){ %>
                                                     <a  href="/AddToCart?id=<%= product._id %>" class="add_cart">+ add to cart</a>
                                                     <% }else{ %>

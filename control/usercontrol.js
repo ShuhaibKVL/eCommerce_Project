@@ -54,20 +54,22 @@ const Home = async (req, res) => {
 
         let Profile;
         let whishList;
+        var cartCount = 0
         if (req.session.user_id) {
             Profile = await User.findById({ _id: req.session.user_id })
             whishList = await whishListModel.findOne({UserId:req.session.user_id})
-            console.log("found WhishList >>",whishList);
+            var cartCount =  Profile.cart.length
         }
         const ProductData = await ProductModel.find()
         const MenData = await ProductModel.find({ Category: 'Men' })
         const WomenData = await ProductModel.find({ Category: 'Women' })
         const KidsData = await ProductModel.find({ Category: 'Kids' })
+        
 
         const flashMessage = req.flash('error');
         console.log("flash Message is : ", flashMessage);
 
-        res.render('home', { whishList,Profile: Profile, Product: ProductData, Men: MenData, Women: WomenData, Kids: KidsData, error: flashMessage })
+        res.render('home', { whishList,Profile: Profile, Product: ProductData, Men: MenData, Women: WomenData, Kids: KidsData,cartCount:cartCount , error: flashMessage })
     } catch (error) {
         console.log("Error on Home Rendering ", error)
     }
@@ -1215,6 +1217,14 @@ const loadSalesReport = async (req, res) => {
     }
 }
 
+const Internal_server_error = async(req,res) => {
+    try {
+        res.render('500_error')
+    } catch (error) {
+        
+    }
+}
+
 
 
 module.exports = {
@@ -1258,5 +1268,6 @@ module.exports = {
     verifyRazorpayPayment,
     orderDetails,
     download_invoice,
-    loadSalesReport
+    loadSalesReport,
+    Internal_server_error
 }

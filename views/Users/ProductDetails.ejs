@@ -199,7 +199,12 @@
     <!-- Header part end-->
 
     <!--================Single Product Area =================-->
+    
     <div class="product_image_area section_padding">
+        <div id="audioPopUp" style="display: none !important; width: 70px; height: 50px;border: 1px solid orange; border-radius: 45px; position: absolute; right: 0;top: 50; z-index: 900px; display: flex !important; justify-content: center !important; align-items: center !important;">
+            <i id="pauseAudio" style="color: rgb(255, 182, 25);" class="fa-solid fa-pause fa-beat"></i>
+        </div>
+        
         <div class="container">
             <div class="row s_product_inner justify-content-between">
                 <div class="col-lg-7 col-xl-7">
@@ -915,7 +920,33 @@
         })
     </script>
 
+    <script>
+        // Function to periodically check if audio playback is active
+function checkAudioPlayback() {
+    var isAudioPlaying = sessionStorage.getItem('audioPlaying');
+    if (isAudioPlaying === 'true') {
+        
+        // Display a popup
+        document.getElementById('audioPopUp').style.display = 'block'
+    }
+}
+
+// Periodically check if audio playback is active (e.g., every 5 seconds)
+    setInterval(checkAudioPlayback, 1000);
+    // checkAudioPlayback()
+
+    document.getElementById('pauseAudio').addEventListener('click',function(){
+
+        // Update the 'audioPlaying' value in localStorage to 'false'
+    sessionStorage.setItem('audioPlaying', 'false');
+
+    window.speechSynthesis.pause();
+
+        document.getElementById('audioPopUp').style.display = 'none'
+    })
+    </script>
+
 
 </body>
 
-</html>/assets/
+</html>

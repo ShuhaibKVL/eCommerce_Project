@@ -121,21 +121,16 @@ UserRoute.get('/searchInput',UserAuth.IsBlocked,filterProductController.searchIn
 UserRoute.post('/filterProducts',UserAuth.IsBlocked,filterProductController.filterProducts)
 
     // wallet
-
 UserRoute.get('/LoadWallet',UserAuth.isLogin,UserAuth.IsBlocked,walletController.LoadWallet)
 
    // INvoice download
 UserRoute.get('/download-invoice',UserAuth.isLogin,UserAuth.IsBlocked,Usercontrol.download_invoice)
 
-// UserRoute.get('/loadSalesReport',Usercontrol.loadSalesReport)
-
-
+UserRoute.get('/500_error',Usercontrol.Internal_server_error)
 
 UserRoute.get('/Prd',(req,res) => {
     res.render('PrD')
 })
-
-
 
 UserRoute.get('/test',(req,res) => {
         res.render('test')
